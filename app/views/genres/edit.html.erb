@@ -1,0 +1,7 @@
+<h3>ジャンル編集</h3>
+<br>
+<%= form_with model:@genre, url: genre_path(@genre), local:true do |f| %>
+  <div class="form-group">
+    <p>ジャンル名  <%= f.text_field :name, autofocus: true, placeholder:"",class:"form-control" %> <%= f.submit "Update Book",class: "btn btn-success" %></p>
+  </div>
+<% end %>

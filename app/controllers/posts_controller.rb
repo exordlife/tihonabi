@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 
+
     def new
         @new_post=Post.new
     end
@@ -23,6 +24,6 @@ class PostsController < ApplicationController
 
     private
     def post_params
-        params.require(:post).permit(:title, :content, :image)
+        params.require(:post).permit(:title, :content, :image, :genre_id)
     end
 end

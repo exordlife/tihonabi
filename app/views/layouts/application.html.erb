@@ -31,6 +31,9 @@
                 <li>
                   <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
                 </li>
+                <li>
+                  <%= link_to "ジャンル", genres_path, class: "navbar-brand"%>
+                </li>
               <% else %>
                 <li>
                   <%= link_to "Tippy", root_path, class: "navbar-brand"%>
