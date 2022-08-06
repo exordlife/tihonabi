@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -14,7 +14,11 @@
     <header>
       <% if user_signed_in? %>
         <li>
-          <%= link_to "Tippy", root_path%>
+          aiueoiaue
+          
+          <%= link_to root_path do%>
+          Tippy<i class="fas fa-home"></i>
+          <% end %>
         </li>
         <li>
           <%= link_to "投稿画面", new_post_path,class: "navbar-brand" %>
