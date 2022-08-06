@@ -2,6 +2,11 @@ class Post < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   belongs_to :genre
+  
+  def self.search(keyword)
+    where(["title like? OR content like?", "%#{keyword}%", "%#{keyword}%"])
+  end
+  
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/sample.png')
