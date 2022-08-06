@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
 
-
+    
+    def index
+        @posts = Post.search(params[:keyword])
+        @keyword = params[:keyword]
+        render "index"
+    end
+    
     def new
         @new_post=Post.new
     end
