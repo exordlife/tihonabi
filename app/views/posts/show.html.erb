@@ -1,0 +1,6 @@
+<div>
+  <%= image_tag @post.get_image(500,500) %>
+  <p>タイトル：<%= @post.title %></p>
+  <p>説明：<%= @post.content %></p>
+  <p>ユーザーネーム：<%= @post.user.name %></p>
+</div>
