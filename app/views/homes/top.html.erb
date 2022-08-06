@@ -1,7 +1,39 @@
-<% @posts.each do |post| %>
-  <%= image_tag post.get_image(500,500) %>
-  <p>タイトル：<%= post.title %></p>
-  <p>説明：<%= post.content %></p>
-  <p>ユーザーネーム：<%= post.user.name %></p>
-  <%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
-<% end %>
+<div class="container px-5 px-sm-0">
+  <div class="row mt-3">
+    <%= image_tag 'kokonihon', size: "1200x500" %>
+  </div>
+  <div class="row">
+      <h2>Users</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>title</th>
+            <th>content</th>
+            <th colspan="1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+            <tr>
+              <td>
+                <%= image_tag post.get_image(300,300) %>
+              </td>
+              <td>
+                <%= post.title %>
+              </td>
+              <td>
+                <%= post.content %>
+              </td>
+              <td>
+                <%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
+
+
+

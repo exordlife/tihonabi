@@ -12,35 +12,53 @@
 
   <body>
     <header>
-      <% if user_signed_in? %>
-        <li>
-          aiueoiaue
-          
-          <%= link_to root_path do%>
-          Tippy<i class="fas fa-home"></i>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to "投稿画面", new_post_path,class: "navbar-brand" %>
-        </li>
-        <li>
-          <%= link_to "マイページ", user_path(current_user),class: "navbar-brand" %>
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "Tippy", root_path%>
-        </li>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path %>
-        </li>
-      <% end %>
+      
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a href="/" class="navbar-brand">Tippy</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to "投稿画面", new_post_path,class: "navbar-brand" %>
+                </li>
+                <li>
+                  <%= link_to "マイページ", user_path(current_user),class: "navbar-brand" %>
+                </li>
+                <li>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to "Tippy", root_path, class: "navbar-brand"%>
+                </li>
+                <li>
+                  <%= link_to "新規登録", new_user_registration_path, class: "navbar-brand" %>
+                </li>
+                <li>
+                  <%= link_to "ログイン", new_user_session_path, class: "navbar-brand" %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>  
+      </nav>
     </header>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
+ 
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight tippy.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
