@@ -1,17 +1,14 @@
 class Post < ApplicationRecord
-  has_one_attached :image
+  has_many_attached :image
   belongs_to :user
   belongs_to :genre
+  
+  with_options presence: true do
+    validates :image
+  end
   
   def self.search(keyword)
     where(["title like? OR content like?", "%#{keyword}%", "%#{keyword}%"])
   end
   
-  def get_image(width, height)
-    unless image.attached?
-      file_path = Rails.root.join('app/assets/images/sample.png')
-      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
-    end
-    image.variant(resize_to_limit: [width, height]).processed
-  end
 end

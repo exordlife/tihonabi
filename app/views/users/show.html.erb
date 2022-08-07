@@ -22,13 +22,17 @@
   <% end %>
  
   <% @posts.each do |post| %>
-    <%= image_tag post.get_image(500,500) %>
-    <p><%= post.genre.name %></p>
-    <p>タイトル：<%= post.title %></p>
-    <p>説明：<%= post.content %></p>
-    <p>ユーザーネーム：<%= post.user.name %></p>
-    <% if post.user==current_user %>
-    <p><%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></p>
+    <%= link_to post_path(post) do %>
+      <% post.image.each do |image| %>
+        <%= image_tag image,size: "200x200" %>
+      <% end %>
+      <p><%= post.genre.name %></p>
+      <p>タイトル：<%= post.title %></p>
+      <p>説明：<%= post.content %></p>
+      <p>ユーザーネーム：<%= post.user.name %></p>
+      <% if post.user==current_user %>
+      <p><%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></p>
+      <% end %>
     <% end %>
   <% end %>
 </div>

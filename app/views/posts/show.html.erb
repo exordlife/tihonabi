@@ -1,5 +1,7 @@
 <div>
-  <%= image_tag @post.get_image(500,500) %>
+  <% @post.image.each do |image| %>
+    <%= image_tag image,size: "200x200" %>
+  <% end %>
   <p><%= @post.genre.name %></p>
   <p>タイトル：<%= @post.title %></p>
   <p>説明：<%= @post.content %></p>

@@ -24,7 +24,9 @@
           <% @posts.each do |post| %>
             <tr>
               <td>
-                <%= image_tag post.get_image(300,300) %>
+                <% post.image.each do |image| %>
+                  <%= image_tag image,size: "200x200" %>
+                <% end %>
               </td>
               <td>
                 <%= post.title %>
