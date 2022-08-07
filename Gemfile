@@ -62,3 +62,5 @@ gem 'net-pop'
 
 #deviseの追加
 gem 'devise'
+
+gem 'jquery-rails'
