@@ -4,9 +4,8 @@ class UsersController < ApplicationController
     @user=User.find(params[:id])
     @genres=Genre.all
     if params[:genre_id] # 検索したいジャンルのidがあるなら...
-      @genre = @genres.find(params[:genre_id]) # ジャンルを検索する
-      @posts = @genre.posts# ジャンルに紐づく投稿を全て取得する。
-
+      @genre = Genre.find(params[:genre_id]) # ジャンルを検索する
+      @posts = @genre.posts.where(user_id: current_user.id)# ジャンルに紐づく投稿を全て取得する。
       # 上記の2行を以下の様に1行でも書くことができます。
       # @posts = Post.where(genre_id: params[:genre_id])
     else

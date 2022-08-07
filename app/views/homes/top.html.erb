@@ -36,15 +36,19 @@
               <td>
                 <%= post.content %>
               </td>
+              <% if user_signed_in? %>
               <td>
-                <%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+                <% if post.user==current_user %>
+                  <%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+                <% end %>
               </td>
+              
               <td class="favorite_buttons_<%= post.id %>">
 　　          　<%= render "favorites/favorites", post: post %>
               <td>
                 <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
               </td>
-              
+              <% end %>
             </tr>
           <% end %>
         </tbody>
