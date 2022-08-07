@@ -1,0 +1,2 @@
+$('.comments_table').html("<%= j(render "post_comments/comments", post: @post) %>");
+$('.form_table').html("<%= j(render "post_comments/form", post: @post, post_comment: @new_comment) %>");
