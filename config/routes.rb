@@ -8,5 +8,5 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
   end
   resources :users, only: [:show, :edit, :update]
-  resources :genres, only:[:index, :create, :destroy, :update, :edit]
+  resources :genres, only:[:index, :create, :destroy, :update, :edit, :show]
 end

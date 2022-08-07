@@ -1,4 +1,10 @@
 class GenresController < ApplicationController
+  
+  def show
+    @genre=Genre.find(params[:id])
+    @posts=@genre.posts
+  end
+  
   def index
     @new_genre=Genre.new
     @genres=Genre.all

@@ -5,7 +5,7 @@
       <%= f.submit "検索" %>
     <% end %>
   </div>
-  
+
   <div class="row mt-3">
     <%= image_tag 'kokonihon', size: "1200x500" %>
   </div>
@@ -35,6 +35,9 @@
               </td>
               <td>
                 <%= post.content %>
+                <%= link_to genre_path(post.genre) do %>
+                  <%= post.genre.name %>
+                <% end %>
               </td>
               <% if user_signed_in? %>
               <td>
@@ -42,7 +45,7 @@
                   <%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
                 <% end %>
               </td>
-              
+
               <td class="favorite_buttons_<%= post.id %>">
 　　          　<%= render "favorites/favorites", post: post %>
               <td>
