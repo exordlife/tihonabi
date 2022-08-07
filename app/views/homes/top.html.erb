@@ -17,15 +17,17 @@
             <th>image</th>
             <th>title</th>
             <th>content</th>
-            <th colspan="1"></th>
+            <th colspan="2"></th>
           </tr>
         </thead>
         <tbody>
           <% @posts.each do |post| %>
             <tr>
               <td>
-                <% post.image.each do |image| %>
-                  <%= image_tag image,size: "200x200" %>
+                <%= link_to post_path(post) do %>
+                  <% post.image.each do |image| %>
+                    <%= image_tag image,size: "200x200" %>
+                  <% end %>
                 <% end %>
               </td>
               <td>
@@ -37,6 +39,10 @@
               <td>
                 <%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
               </td>
+              <td>
+                <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
+              </td>
+              
             </tr>
           <% end %>
         </tbody>
