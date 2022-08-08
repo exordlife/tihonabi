@@ -1,7 +1,10 @@
+<li>
+          <%= link_to "Tippy", root_path, class: "navbar-brand"%>
+        </li>
 <div class="container px-5 px-sm-0">
   <div class="jumbotron">
     <h4 class="display-5">マイページ</h4>
-    
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
     
     <hr class="my-4">
     <p><%= image_tag @user.get_profile_image(50,500) %></p>
@@ -36,3 +39,8 @@
     <% end %>
   <% end %>
 </div>
+<% if current_user.id==1 %>
+<li>
+  <%= link_to "ジャンル", genres_path, class: "navbar-brand"%>
+</li>
+<% end %>
