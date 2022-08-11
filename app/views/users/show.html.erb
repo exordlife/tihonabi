@@ -12,6 +12,8 @@
     <strong><%= @user.name %></strong><br>
     <br>
     
+    <h4>レベル<%= @user.exp_sum.floor %></h4>
+    
     <% if @user==current_user %>
       <strong>メールアドレス</strong><br>
       <strong><%= @user.email %></strong><br>
