@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2022_08_11_095645) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -56,15 +56,18 @@ ActiveRecord::Schema.define(version: 2022_08_11_095645) do
   create_table "post_comments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "post_id"
-    t.string "comment"
+    t.string "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.text "content"
     t.integer "user_id"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "genre_id"
