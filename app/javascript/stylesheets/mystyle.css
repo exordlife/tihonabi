@@ -4,3 +4,10 @@
 .back-color2{
   background-color:	#DDFFFF;
 }
+
+.image_size{
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+
+}

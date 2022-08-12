@@ -64,3 +64,5 @@ gem 'net-pop'
 gem 'devise'
 
 gem 'jquery-rails'
+
+gem 'dotenv-rails'

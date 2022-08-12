@@ -1,9 +1,9 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-
+      
       <%= link_to root_path do%>
-        <%= image_tag 'Tippy', size: "150x70" %>
+        <%= image_tag 'Tippy' , size: "150x70"%>
       <% end %>
       <% if user_signed_in? %>
       <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
@@ -17,7 +17,7 @@
             <% end %>
           </div>
           <div>
-            <%= link_to user_path(current_user) do %>
+            <%= link_to user_path(current_user), class: "image" do %>
               <%= image_tag 'image1', size: "70x70" %>
             <% end %>
           </div>
@@ -38,17 +38,79 @@
 </header>
 
 <div class="container px-5 px-sm-0">
-  <div class="row mt-3">
-    <%= image_tag 'map', size: "1200x500" %>
-  </div>
+  <h2>gmap</h2>
+
+
+<input id="address" type="textbox" value="GeekSalon">
+<input type="button" value="Encode" onclick="codeAddress()">
+
+<div id="display">何かが表示される、、、、！</div>
+
+<div id='map'></div>
+
+<style>
+#map {
+  height: 600px;
+  width: 100%;
+}
+</style>
+
+<script>
+let map
+
+ const display = document.getElementById('display')
+
+function initMap(){
+
+　// 位置情報を取得する
+  navigator.geolocation.getCurrentPosition(function (position) {
+    LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+　// 取得した位置情報を中心に表示
+   map = new google.maps.Map(document.getElementById('map'), {
+        center: LatLng,
+        zoom: 15
+      });
+
+　// マーカーを立てる
+      var marker = new google.maps.Marker({
+              map : map,         
+              position : LatLng   
+            });
+    });
+}
+
+
+let geocoder
+
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+      display.textContent = "検索結果：" + results[ 0 ].geometry.location
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });   
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
   <div class="row">
+    
 
       <% @posts.each do |post| %>
       <div class="col-4">
-        <div class="card back-color2 mt-3 pt-3">
+        <div class="card back-color2 mt-3 pt-3 imaging">
           <%= link_to post_path(post) do %>
             <% post.image.each do |image| %>
-              <%= image_tag image,size: "300x400", class: "d-block mx-auto" %>
+              <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
             <% end %>
           <% end %>
           <div class="card-body">
@@ -77,6 +139,4 @@
 
   </div>
 </div>
-
-
 
