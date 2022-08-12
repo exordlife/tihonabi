@@ -19,11 +19,17 @@ class PostsController < ApplicationController
     def create
         @post = Post.new(post_params)
         @post.user_id = current_user.id
-        @exp=current_user.exp_sum
-        @exp=@exp+(0.9**@exp)
-        current_user.update(exp_sum: @exp)
-        @post.save
-        redirect_to post_path(@post)
+        if @post.save
+            @exp=current_user.exp_sum
+            @exp=@exp+(0.9**@exp)
+            current_user.update(exp_sum: @exp)
+          redirect_to post_path(@post)
+        else
+          flash[:notice] = '画像を選択してください'
+          @new_post=Post.new
+          redirect_to new_post_path
+        end  
+        
     end
 
     def destroy
