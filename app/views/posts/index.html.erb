@@ -1,3 +1,42 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      
+      <%= link_to root_path do%>
+        <%= image_tag 'Tippy' , size: "150x70"%>
+      <% end %>
+      <% if user_signed_in? %>
+      <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
+        <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
+        <%= f.submit "検索", class: "btn btn-outline-success" %>
+      <% end %>
+      <span class="d-flex">
+          <div class="mr-5">
+            <%= link_to new_post_path ,class: "mr-0" do%>
+              <%= image_tag 'image', size: "70x70" %>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to user_path(current_user), class: "image" do %>
+              <%= image_tag 'image1', size: "70x70" %>
+            <% end %>
+          </div>
+      </span>
+      <% else %>
+        <li>
+          <%= link_to "Tippy", root_path, class: "navbar-brand"%>
+        </li>
+        <li>
+          <%= link_to "新規登録", new_user_registration_path, class: "navbar-brand" %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_user_session_path, class: "navbar-brand" %>
+        </li>
+      <% end %>
+    </div>
+  </nav>
+</header>
+
 <div class="container px-5 px-sm-0">
   <div class="search-form">
     <%= form_with url: posts_path, method: :get, local: true do |f| %>
@@ -24,7 +63,9 @@
           <% @posts.each do |post| %>
             <tr>
               <td>
-                <%= image_tag post.get_image(300,300) %>
+                <% post.image.each do |image| %>
+                  <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                <% end %>
               </td>
               <td>
                 <%= post.title %>

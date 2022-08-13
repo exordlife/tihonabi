@@ -14,6 +14,7 @@ class PostsController < ApplicationController
     def show
         @post=Post.find(params[:id])
         @post_comment = PostComment.new
+        gon.post=@post
     end
 
     def create
@@ -28,8 +29,8 @@ class PostsController < ApplicationController
           flash[:notice] = '画像を選択してください'
           @new_post=Post.new
           redirect_to new_post_path
-        end  
-        
+        end
+
     end
 
     def destroy
@@ -40,6 +41,6 @@ class PostsController < ApplicationController
 
     private
     def post_params
-        params.require(:post).permit(:title, :content, :genre_id, image: [])
+        params.require(:post).permit(:title, :content, :genre_id ,:address, :latitude, :longitude, image: [])
     end
 end

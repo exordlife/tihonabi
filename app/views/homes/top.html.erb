@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      
+
       <%= link_to root_path do%>
         <%= image_tag 'Tippy' , size: "150x70"%>
       <% end %>
@@ -38,13 +38,7 @@
 </header>
 
 <div class="container px-5 px-sm-0">
-  <h2>gmap</h2>
-
-
-<input id="address" type="textbox" value="GeekSalon">
-<input type="button" value="Encode" onclick="codeAddress()">
-
-<div id="display">何かが表示される、、、、！</div>
+  <h2>map</h2>
 
 <div id='map'></div>
 
@@ -58,52 +52,60 @@
 <script>
 let map
 
- const display = document.getElementById('display')
+let marker = []; // マーカーを複数表示させたいので、配列化
+let infoWindow = []; // 吹き出しを複数表示させたいので、配列化
+const posts = gon.posts; // コントローラーで定義したインスタンス変数を変数に代入
 
 function initMap(){
-
-　// 位置情報を取得する
-  navigator.geolocation.getCurrentPosition(function (position) {
+  // 現在位置の特定
+  navigator.geolocation.getCurrentPosition(function (position){
+    // LatLngに位置座標を代入
     LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-　// 取得した位置情報を中心に表示
-   map = new google.maps.Map(document.getElementById('map'), {
-        center: LatLng,
-        zoom: 15
-      });
-
-　// マーカーを立てる
-      var marker = new google.maps.Marker({
-              map : map,         
-              position : LatLng   
-            });
+    // mapの初期位置設定
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: LatLng,
+      //倍率はお好みで
+      zoom: 13
     });
-}
+    // map.setCenterで地図が初期位置に移動
+    map.setCenter(LatLng);
 
-
-let geocoder
-
-function codeAddress(){
-  let inputAddress = document.getElementById('address').value;
-
-  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-    if (status == 'OK') {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
+    // forは繰り返し処理
+    // 変数iを0と定義し、
+    // その後gonで定義したstudios分繰り返し加える処理を行う
+    for (let i = 0; i < posts.length; i++){
+      // studios[i]は変数iのユーザーを取得している
+      marker[i] = new google.maps.Marker({
+        map: map,
+        position: {
+          // DBに保存してある、緯度・経度を呼び出す
+          lat: posts[i].latitude,
+          lng: posts[i].longitude
+        }
       });
-      display.textContent = "検索結果：" + results[ 0 ].geometry.location
-    } else {
-      alert('該当する結果がありませんでした：' + status);
-    }
-  });   
-}
 
+      // 変数iを変数idに代入
+      let id = posts[i]['id']
+
+      // infoWindowは吹き出し
+      infoWindow[i] = new google.maps.InfoWindow({
+        // contentで中身を指定
+        // 今回は文字にリンクを貼り付けた形で表示
+        content: `<a href='/posts/${id}'>${posts[i].title}</a>`
+      });
+      // markerがクリックされた時、
+      marker[i].addListener("click", function(){
+        // infoWindowを表示
+        infoWindow[i].open(map, marker[i]);
+      });
+    }
+  });
+}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
   <div class="row">
-    
+
 
       <% @posts.each do |post| %>
       <div class="col-4">

@@ -21,3 +21,46 @@
     <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
   </div>
 </div>
+
+
+<div class="container px-5 px-sm-0">
+<div id='map'></div>
+
+<style>
+#map {
+  height: 600px;
+  width: 100%;
+}
+</style>
+
+<div id="map"></div>
+
+
+<script>
+  let map;
+
+  function initMap() {
+    // geocoderを初期化
+    geocoder = new google.maps.Geocoder()
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      // コントローラーで定義した変数から緯度経度を呼び出し、マップの中心に表示
+      center: {
+        lat: gon.post.latitude,
+        lng: gon.post.longitude
+      },
+      // マップの倍率はお好みで
+      zoom: 17,
+    });
+
+    marker = new google.maps.Marker({
+      // コントローラーで定義した変数から緯度経度を呼び出し、マーカーを立てる
+      position: {
+        lat: gon.post.latitude,
+        lng: gon.post.longitude
+      },
+      map: map
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
