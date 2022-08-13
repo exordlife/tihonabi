@@ -35,37 +35,60 @@
       <% end %>
     </div>
   </nav>
+  
 </header>
 
 <div class="container px-5 px-sm-0">
-  <div class="row">
-    <div class="col-6">
-      <div>
-        <% @post.image.each do |image| %>
-          <%= image_tag image,size: "200x200" %>
-        <% end %>
-        <p><%= @post.genre.name %></p>
-        <p>タイトル：<%= @post.title %></p>
-        <p>説明：<%= @post.content %></p>
-        <p>ユーザーネーム：<%= @post.user.name %></p>
-      </div>
-      <div class="favorite_buttons_<%= @post.id %>">
-    　　  <%= render "favorites/favorites", post: @post %>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="comments_table">
-        <%= render "post_comments/comments", post: @post %>
-      </div>
-      <div class="form_table">
-        <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+  <div class="d-flex justify-content-center">
+    <div class="card back-color2 mt-10 pt-10 imaging">
+      <div class="card-body">
+        <div class="row">
+          
+          <div class="col">
+            <div>
+              <% @post.image.each do |image| %>
+                <%= image_tag image,size: "400x400"%>
+              <% end %>
+            </div>
+          </div>
+            
+          <div class="col">
+            
+            <!--タイトル、ユーザーネーム-->
+              <div class="form_table">
+                <div class="d-flex justify-content-between">
+                  <div class="p-2 me-auto bd-highlight"><%= @post.title %></div>
+                  <p><%= %></p>
+                  <div class="bd-highlight"><%= @post.user.name %></div>
+                </div>
+                <!--説明-->
+                <div class="mt-4"><%= @post.content %></div>
+                <!--ハッシュタグ-->
+                <p><%= @post.genre.name %></p>
+                
+              </div>
+            
+            
+            <!--コメント欄-->
+            <%= render "post_comments/form", post: @post, post_comment: @post_comment %> 
+            
+            <!--いいねボタン-->
+            <div class="favorite_buttons_<%= @post.id %>">  
+        　　    <%= render "favorites/favorites", post: @post %>
+            </div>
+            
+            <!--コメント件数-->
+            <div class="comments_table">  
+              <%= render "post_comments/comments", post: @post %>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
-  
-  
 </div>
 
 
-
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
+
