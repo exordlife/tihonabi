@@ -1,66 +1,72 @@
-<li>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+
+      <%= link_to root_path do%>
+        <%= image_tag 'Tippy' , size: "150x70"%>
+      <% end %>
+      <% if user_signed_in? %>
+      <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
+        <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
+        <%= f.submit "検索", class: "btn btn-outline-success" %>
+      <% end %>
+      <span class="d-flex">
+          <div class="mr-5">
+            <%= link_to new_post_path ,class: "mr-0" do%>
+              <%= image_tag 'image', size: "70x70" %>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to user_path(current_user), class: "image" do %>
+              <%= image_tag 'image1', size: "70x70" %>
+            <% end %>
+          </div>
+      </span>
+      <% else %>
+        <li>
           <%= link_to "Tippy", root_path, class: "navbar-brand"%>
         </li>
+        <li>
+          <%= link_to "新規登録", new_user_registration_path, class: "navbar-brand" %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_user_session_path, class: "navbar-brand" %>
+        </li>
+      <% end %>
+    </div>
+  </nav>
+</header>
+
 <div class="container px-5 px-sm-0">
-  <div>
-    <% @post.image.each do |image| %>
-      <%= image_tag image,size: "200x200" %>
-    <% end %>
-    <p><%= @post.genre.name %></p>
-    <p>タイトル：<%= @post.title %></p>
-    <p>説明：<%= @post.content %></p>
-    <p>ユーザーネーム：<%= @post.user.name %></p>
+  <div class="row">
+    <div class="col-6">
+      <div>
+        <% @post.image.each do |image| %>
+          <%= image_tag image,size: "200x200" %>
+        <% end %>
+        <p><%= @post.genre.name %></p>
+        <p>タイトル：<%= @post.title %></p>
+        <p>説明：<%= @post.content %></p>
+        <p>ユーザーネーム：<%= @post.user.name %></p>
+      </div>
+      <div class="favorite_buttons_<%= @post.id %>">
+    　　  <%= render "favorites/favorites", post: @post %>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="comments_table">
+        <%= render "post_comments/comments", post: @post %>
+      </div>
+      <div class="form_table">
+        <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+      </div>
+    </div>
+    
   </div>
-  <div class="favorite_buttons_<%= @post.id %>">
-　　  <%= render "favorites/favorites", post: @post %>
-  </div>
-  <div class="comments_table">
-    <%= render "post_comments/comments", post: @post %>
-  </div>
-  <div class="form_table">
-    <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
-  </div>
+  
+  
 </div>
 
 
-<div class="container px-5 px-sm-0">
-<div id='map'></div>
 
-<style>
-#map {
-  height: 600px;
-  width: 100%;
-}
-</style>
-
-<div id="map"></div>
-
-
-<script>
-  let map;
-
-  function initMap() {
-    // geocoderを初期化
-    geocoder = new google.maps.Geocoder()
-
-    map = new google.maps.Map(document.getElementById('map'), {
-      // コントローラーで定義した変数から緯度経度を呼び出し、マップの中心に表示
-      center: {
-        lat: gon.post.latitude,
-        lng: gon.post.longitude
-      },
-      // マップの倍率はお好みで
-      zoom: 17,
-    });
-
-    marker = new google.maps.Marker({
-      // コントローラーで定義した変数から緯度経度を呼び出し、マーカーを立てる
-      position: {
-        lat: gon.post.latitude,
-        lng: gon.post.longitude
-      },
-      map: map
-    });
-  }
-</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
