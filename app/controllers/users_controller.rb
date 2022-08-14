@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     @user.update(user_params)
-    flash[:notice] ="更新しました"
+    flash[:notice1] ="更新しました"
     redirect_to user_path(current_user)
   end
 

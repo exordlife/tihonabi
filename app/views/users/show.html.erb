@@ -1,48 +1,146 @@
-<li>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+
+      <%= link_to root_path do%>
+        <%= image_tag 'Tippy' , size: "150x55"%>
+      <% end %>
+      <% if user_signed_in? %>
+      <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
+        <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
+        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+          <i class="fa fa-search"></i>
+        <% end %>
+      <% end %>
+      <span class="d-flex">
+          <div class="mr-5">
+            <%= link_to new_post_path ,class: "mr-0" do%>
+              <%= image_tag 'image', size: "70x70" %>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to user_path(current_user), class: "image" do %>
+              <%= image_tag 'image1', size: "70x70" %>
+            <% end %>
+          </div>
+      </span>
+      <% else %>
+        <li>
           <%= link_to "Tippy", root_path, class: "navbar-brand"%>
         </li>
-<div class="container px-5 px-sm-0">
-  <div class="jumbotron">
-    <h4 class="display-5">マイページ</h4>
-    <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
-    
-    <hr class="my-4">
-    <p><%= image_tag @user.get_profile_image(50,500) %></p>
-    <strong>ユーザネーム</strong><br>
-    <strong><%= @user.name %></strong><br>
-    <br>
-    
-    <h4>レベル<%= @user.exp_sum.floor %></h4>
-    
-    <% if @user==current_user %>
-      <strong>メールアドレス</strong><br>
-      <strong><%= @user.email %></strong><br>
-      <div class="mt-3"><%= link_to "編集する", edit_user_path,class: "btn btn-outline-info" %></div>
+        <li>
+          <%= link_to "新規登録", new_user_registration_path, class: "navbar-brand" %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_user_session_path, class: "navbar-brand" %>
+        </li>
+      <% end %>
+    </div>
+  </nav>
+</header>
+<div class="container px-5 px-sm-0 mt-5">
+  <div class="mb-3">
+    <% if @posts.count!=0 %>
+      <%= link_to "全て", user_path(@user) %>
+      <% @genres.each do |genre| %>
+        <%= link_to genre.name, user_path(genre_id: genre.id) %>
+      <% end %>
     <% end %>
   </div>
-  <h3>種類一覧</h3>
-   <p><%= link_to "全て", user_path(@user) %></p>
-  <% @genres.each do |genre| %>
-    <p><%= link_to genre.name, user_path(genre_id: genre.id) %></p>
-  <% end %>
- 
-  <% @posts.each do |post| %>
-    <%= link_to post_path(post) do %>
-      <% post.image.each do |image| %>
-        <%= image_tag image,size: "200x200" %>
-      <% end %>
-      <p><%= post.genre.name %></p>
-      <p>タイトル：<%= post.title %></p>
-      <p>説明：<%= post.content %></p>
-      <p>ユーザーネーム：<%= post.user.name %></p>
-      <% if post.user==current_user %>
-      <p><%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></p>
-      <% end %>
-    <% end %>
-  <% end %>
+
+
+  <div class="row">
+    <div class="col-8">
+      <div class="row">
+        <% if @posts.count==0 %>
+          <div class="mt-5 ml-5">
+            <strong>投稿はまだありません。</strong>
+            <% if @user==current_user %>
+            <strong><%= link_to "自慢写真をアップしましょう", new_post_path %></strong>
+            <% end %>
+          </div>
+        <% end %>
+        <% @posts.each do |post| %>
+        <div class="col-6 my-2">
+          <div class="card back-color2 imaging h-100 pt-3">
+              <div class="a">
+                <% post.image.each do |image| %>
+                  <%= link_to post_path(post) do %>
+                    <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                  <% end %>
+                <% end %>
+              </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= post.content %>
+                <div>
+                  <%= link_to genre_path(post.genre) do %>
+                    <%= post.genre.name %>
+                  <% end %>
+                  </div>
+
+              </h5>
+              <% if user_signed_in? %>
+                <div class="favorite_buttons_<%= post.id %>">
+                <%= render "favorites/favorites", post: post %>
+                </div>
+                <%= link_to post_path(post) ,class: "mr-0" do%>
+                  <%= image_tag 'comment', size: "30x20" %>
+                <% end %>
+                <%= link_to post_path(post) ,class: "mr-0" do%>
+                  <%= image_tag 'shosai', size: "30x20" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+
+    </div>
+    <div class="col-4">
+      <div class="mb-3">
+         <%= image_tag @user.get_profile_image(250,250) , class: "profile_img d-block mx-auto"%>
+      </div>
+
+
+      <div class="jumbotron back-color2">
+        <h4 class="display-5">マイページ</h4>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
+
+        <hr class="my-4">
+
+        <strong>ユーザネーム</strong>
+        <h4><%= @user.name %> Lv<%= @user.exp_sum.floor %> </h4>
+        <%= link_to "レベルを上げるには？", edit_user_path %>
+        <br>
+        <br>
+        <br>
+
+        <% if @user==current_user %>
+          <strong>メールアドレス</strong><br>
+          <h4><%= @user.email %></h4><br>
+          <div class="mt-3"><%= link_to "編集する", edit_user_path,class: "btn btn-outline-info" %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 <% if current_user.id==1 %>
 <li>
   <%= link_to "ジャンル", genres_path, class: "navbar-brand"%>
 </li>
 <% end %>
+
+
+<script>
+  // オプションを指定してSkipprの実行
+$(function() {
+    $('.a').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+    });
+
+});
+</script>

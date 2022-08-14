@@ -3,7 +3,7 @@
     <div class="container">
 
       <%= link_to root_path do%>
-        <%= image_tag 'Tippy' , size: "170x70"%>
+        <%= image_tag 'Tippy' , size: "150x55"%>
       <% end %>
       <% if user_signed_in? %>
       <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
@@ -43,7 +43,7 @@
       <div class="d-flex justify-content-evenly">
         
         <div class="img_prever col-4 ml-5">
-          <%= flash[:notice] %>
+          <%= flash[:notice1] %>
          <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
           
           <div class="d-flex justify-content-start">

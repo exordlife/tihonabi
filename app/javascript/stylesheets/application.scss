@@ -1,6 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+.profile_img {
+    border-radius: 50%;  /*角を丸くする指定*/
+    width: 300px;  /*横幅*/
+    height: 300px;  /*縦幅*/
+}
+
+
 //カメラの画像押したとき
 .img_prever:hover {
   cursor: pointer;
