@@ -20,3 +20,4 @@ import '../stylesheets/mystyle.css'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+

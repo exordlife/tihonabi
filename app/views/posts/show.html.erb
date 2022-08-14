@@ -67,13 +67,29 @@
                 <p><%= @post.genre.name %></p>
 
               </div>
-
-            <!--コメント欄-->
-            <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
-
-            <!--いいねボタン-->
-            <div class="favorite_buttons_<%= @post.id %>">
-        　　    <%= render "favorites/favorites", post: @post %>
+  
+            <!--コメント欄,いいねボタン-->
+            <div class="container">
+                <div class="row">
+                    <div class="d-flex flex-row bd-highlight mb-3">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#testModal">コメント</button>
+                        <div class="favorite_buttons_<%= @post.id %> ml-3">
+                    　　    <%= render "favorites/favorites", post: @post %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+         
+            <!-- ボタン・リンククリック後に表示される画面の内容 -->
+            <div class="modal fade bd-example-modal-sm" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content mb-5">
+                        <div class="modal-body d-flex justify-content-center">
+                           <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!--コメント件数-->
