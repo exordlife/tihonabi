@@ -35,7 +35,7 @@
       <% end %>
     </div>
   </nav>
-  
+
 </header>
 
 <div class="container px-5 px-sm-0">
@@ -43,7 +43,7 @@
     <div class="card back-color2 mt-10 pt-10 imaging">
       <div class="card-body">
         <div class="row">
-          
+
           <div class="col">
             <div>
               <% @post.image.each do |image| %>
@@ -51,9 +51,9 @@
               <% end %>
             </div>
           </div>
-            
+
           <div class="col">
-            
+
             <!--タイトル、ユーザーネーム-->
               <div class="form_table">
                 <div class="d-flex justify-content-between">
@@ -65,20 +65,20 @@
                 <div class="mt-4"><%= @post.content %></div>
                 <!--ハッシュタグ-->
                 <p><%= @post.genre.name %></p>
-                
+
               </div>
-            
-            
+
+
             <!--コメント欄-->
-            <%= render "post_comments/form", post: @post, post_comment: @post_comment %> 
-            
+            <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+
             <!--いいねボタン-->
-            <div class="favorite_buttons_<%= @post.id %>">  
+            <div class="favorite_buttons_<%= @post.id %>">
         　　    <%= render "favorites/favorites", post: @post %>
             </div>
-            
+
             <!--コメント件数-->
-            <div class="comments_table">  
+            <div class="comments_table">
               <%= render "post_comments/comments", post: @post %>
             </div>
           </div>
