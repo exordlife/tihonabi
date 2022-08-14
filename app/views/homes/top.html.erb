@@ -110,11 +110,13 @@ function initMap(){
       <% @posts.each do |post| %>
       <div class="col-4">
         <div class="card back-color2 mt-3 pt-3 imaging">
-          <%= link_to post_path(post) do %>
-            <% post.image.each do |image| %>
-              <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
-            <% end %>
-          <% end %>
+            <div class="a">
+              <% post.image.each do |image| %>
+                <%= link_to post_path(post) do %>
+                  <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                <% end %>
+              <% end %>
+            </div>
           <div class="card-body">
             <h5 class="card-title">
               <%= post.title %>
@@ -138,7 +140,18 @@ function initMap(){
         </div>
       <% end %>
 
-
   </div>
 </div>
 
+
+<script>
+  // オプションを指定してSkipprの実行
+$(function() {
+    $('.a').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+    });
+    
+});
+</script>
