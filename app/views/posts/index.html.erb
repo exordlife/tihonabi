@@ -37,48 +37,77 @@
   </nav>
 </header>
 
-<div class="container px-5 px-sm-0">
-  <div class="search-form">
-    <%= form_with url: posts_path, method: :get, local: true do |f| %>
-      <%= f.text_field :keyword, value: @keyword %>
-      <%= f.submit "検索" %>
-    <% end %>
-  </div>
-  
-  <div class="row mt-3">
-    <%= image_tag 'kokonihon', size: "1200x500" %>
-  </div>
-  <div class="row">
-      <h2>Users</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>image</th>
-            <th>title</th>
-            <th>content</th>
-            <th colspan="1"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @posts.each do |post| %>
-            <tr>
-              <td>
-                <% post.image.each do |image| %>
-                  <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
-                <% end %>
-              </td>
-              <td>
-                <%= post.title %>
-              </td>
-              <td>
-                <%= post.content %>
-              </td>
-              <td>
-                <%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+<h4>検索結果</h4>
+  <% @posts.each do |post| %>
+  <div class="container px-5 px-sm-0">
+  <div class="d-flex justify-content-center">
+    <div class="card back-color2 imaging" style="height:450px">
+      <div class="card-body">
+        
+        <div class="row" style="height:450px">
+
+          <div class="col-5" style="height:400px">
+            
+            <div>
+              <%= link_to post_path(post) do %>
+              <% post.image.each do |image| %>
+                <%= image_tag image,size: "400x400"%>
+              <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="col-5">
+            <div class="d-flex align-items-start flex-column bd-highlight mb-3" style="width: 500px;">
+            <div class="p-2 bd-highlight">  
+            <!--タイトル、ユーザーネーム-->
+              <div class="form_table" style="width: 500px">
+                <div class="d-flex justify-content-between">
+                  <div class="p-2 me-auto bd-highlight"><%= post.title %></div>
+                  <p></p>
+                  <div class="bd-highlight"><%= post.user.name %></div>
+                </div>
+                <!--説明-->
+                <div class="mt-4" style="height: 200px"><%= post.content %></div>
+              </div>
+              <!--ハッシュタグ-->
+              <p><%= post.genre.name %></p>
+            <div>
+            
+            <div class="mt-auto p-2 bd-highlight" style="width:600px">
+              <div class="d-flex bd-highlight mb-3">
+                <div class="col">
+                <!--コメント欄,いいねボタン-->
+                  <div class="d-flex">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#testModal">コメント</button>
+                    <div class="favorite_buttons_<%= post.id %> ml-3"></div>
+                    <%= render "favorites/favorites", post: post %>
+                  </div>
+                  <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                  <div class="modal fade bd-example-modal-sm" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-sm">
+                      <div class="modal-content mb-5">
+                        <div class="modal-body d-flex justify-content-center">
+                          <%#= render "post_comments/form", post: post, post_comment: @post_comment %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col">
+                  <!--コメント件数-->
+                  <div class="comments_table ms-auto p-2 bd-highlight">
+                    <%= render "post_comments/comments", post: post %>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+<%end%>
