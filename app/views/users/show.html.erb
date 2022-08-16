@@ -144,3 +144,30 @@ $(function() {
 
 });
 </script>
+
+<div class="tab_wrap">
+
+
+	<div class="tab_area">
+		<label class="tab_label active" for="tab1">tab1</label>
+		<label class="tab_label" for="tab2">tab2</label>
+	</div>
+	<div class="panel_area">
+		<div id="panel1" class="tab_panel active">
+			<p>panel1</p>
+		</div>
+		<div id="panel2" class="tab_panel">
+			<p>panel2</p>
+		</div>
+	</div>
+</div>
+
+<script>
+$(".tab_label").on("click",function(){
+	var $th = $(this).index();
+	$(".tab_label").removeClass("active");
+	$(".tab_panel").removeClass("active");
+	$(this).addClass("active");
+	$(".tab_panel").eq($th).addClass("active");
+});
+</script>
