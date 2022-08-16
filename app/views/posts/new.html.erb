@@ -1,32 +1,113 @@
-<%= flash[:notice] %>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
 
-<div class="container px-5 px-sm-0">
-  <%= form_with model: @new_post do |f| %>
-    <h4>画像</h4>
-      <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
-      <%= image_tag 'camera', size: "200x200", onClick: "$('.img_field').click()", class: 'center-block img-thumbnail img-responsive img_prev'%>
-    <h4>タイトル</h4>
-      <%= f.text_field :title %>
-    <h4>説明</h4>
-      <%= f.text_area :content %>
-    <h4>住所</h4>
-      <%= f.text_field :address %>
-    <h4>ジャンル  </h4>
-      <%= f.collection_select :genre_id, Genre.all, :id, :name %>
-    <%= f.submit '投稿' %>
-  <% end %>
+      <%= link_to root_path do%>
+        <%= image_tag 'Tippy' , size: "150x55"%>
+      <% end %>
+      <% if user_signed_in? %>
+      <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
+        <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
+        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+          <i class="fa fa-search"></i>
+        <% end %>
+      <% end %>
+      <span class="d-flex">
+          
+          <div>
+            <%= link_to user_path(current_user), class: "image" do %>
+              <%= image_tag 'image1', size: "70x70" %>
+            <% end %>
+          </div>
+      </span>
+      <% else %>
+        <li>
+          <%= link_to "Tippy", root_path, class: "navbar-brand"%>
+        </li>
+        <li>
+          <%= link_to "新規登録", new_user_registration_path, class: "navbar-brand" %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_user_session_path, class: "navbar-brand" %>
+        </li>
+      <% end %>
+    </div>
+  </nav>
+</header>
+
+
+<div class="container px-5 px-sm-0 mt-5">
+
+
+    <%= form_with model: @new_post do |f| %>
+      <div class="d-flex justify-content-evenly">
+        
+        <div class="img_prever col-4 ml-5">
+          <%= flash[:notice1] %>
+         <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
+          
+          <div class="d-flex justify-content-start">
+            <%= image_tag 'cameraA', size: "250x250", onClick: "$('.img_field').click()", class: 'img_prev'%>
+            <%= image_tag 'cameraB', size: "250x250", onClick: "$('.img_field').click()",  class: 'img_pre '%>
+          </div>
+          <div class="d-flex justify-content-start">
+            <%= image_tag 'cameraC', size: "250x250", onClick: "$('.img_field').click()", class: 'img_pr'%>
+            <%= image_tag 'cameraD', size: "250x250", onClick: "$('.img_field').click()",  class: 'img_p'%>
+          </div>
+        </div>  
+        
+        <div class="col-2"></div>
+
+        <div class="col-5">
+          <div class="my-3">
+            <h4>自慢ポイント</h4>
+            <%= f.text_area :content, class: "m-form-textarea" %>
+          </div>
+          <div class="my-3">
+            <h4>住所</h4>
+            <%= f.text_field :address,class: "m-form-text" %>
+          </div>
+          <div class="my-3">
+            <h4>ハッシュタグ</h4>
+            <%= f.collection_select :genre_id, Genre.all, :id, :name, class: "m-form-select" %>
+          </div>
+          <div class="d-grid gap-2">
+            <%= f.submit '投稿',class: "btn btn-outline-info"%>
+          </div>
+            
+          </div>
+          
+        </div>
+
+      </div>
+    <% end %>
+
 </div>
+
 
 
 <script>
 $(function () {
   function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('.img_prev').attr('src', e.target.result);
+    for (let i = 0; i < input.files.length; i++){
+      if (input.files && input.files[i]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          if (i==0){
+            $('.img_prev').attr('src', e.target.result);
+          }
+          if (i==1){
+            $('.img_pre').attr('src', e.target.result);
+          }
+          if (i==2){
+            $('.img_pr').attr('src', e.target.result);
+          }
+          if (i==3){
+            $('.img_p').attr('src', e.target.result);
+          }
+        }
+        reader.readAsDataURL(input.files[i]);
       }
-      reader.readAsDataURL(input.files[0]);
     }
   }
 

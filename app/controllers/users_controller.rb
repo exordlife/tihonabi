@@ -6,10 +6,12 @@ class UsersController < ApplicationController
     if params[:genre_id] # 検索したいジャンルのidがあるなら...
       @genre = Genre.find(params[:genre_id]) # ジャンルを検索する
       @posts = @genre.posts.where(user_id: current_user.id)# ジャンルに紐づく投稿を全て取得する。
+      @genre_post=@posts
       # 上記の2行を以下の様に1行でも書くことができます。
       # @posts = Post.where(genre_id: params[:genre_id])
     else
       @posts=@user.posts
+      @genre_post=@posts
     end
   end
 
@@ -24,7 +26,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     @user.update(user_params)
-    flash[:notice] ="更新しました"
+    flash[:notice1] ="更新しました"
     redirect_to user_path(current_user)
   end
 
