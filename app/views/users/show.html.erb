@@ -46,13 +46,20 @@
         <%= link_to genre.name, user_path(genre_id: genre.id) %>
       <% end %>
     <% end %>
+    <% if @posts.count==0 && request.url.include?('?') %>
+      <%= link_to "全て", user_path(@user) %>
+      <% @genres.each do |genre| %>
+        <%= link_to genre.name, user_path(genre_id: genre.id) %>
+      <% end %>
+    <% end %>
+    
   </div>
 
 
   <div class="row">
     <div class="col-8">
-      <div class="row">
-        <% if @posts.count==0 %>
+      
+        <% if @posts.count==0 && !request.url.include?('?') %>
           <div class="mt-5 ml-5">
             <strong>投稿はまだありません。</strong>
             <% if @user==current_user %>
@@ -60,41 +67,55 @@
             <% end %>
           </div>
         <% end %>
-        <% @posts.each do |post| %>
-        <div class="col-6 my-2">
-          <div class="card back-color2 imaging h-100 pt-3">
-              <div class="a">
-                <% post.image.each do |image| %>
-                  <%= link_to post_path(post) do %>
-                    <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
-                  <% end %>
-                <% end %>
-              </div>
-            <div class="card-body">
-              <h5 class="card-title">
-                <%= post.content %>
-                <div>
-                  <%= link_to genre_path(post.genre) do %>
-                    <%= post.genre.name %>
-                  <% end %>
+        <div class="tab_area">
+        		<label class="tab_label active" for="tab1">投稿</label>
+        		<label class="tab_label" for="tab2">いいね</label>
+        	</div>
+        <div class="panel_area col-12">
+        	<div id="panel1" class="tab_panel active">
+        	  <div class="row">
+        	    <% @posts.each do |post| %>
+              <div class="col-6 my-2">
+                <div class="card back-color2 imaging h-100 pt-3">
+                    <div class="a">
+                      <% post.image.each do |image| %>
+                        <%= link_to post_path(post) do %>
+                          <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <%= post.content %>
+                      <div>
+                        <%= link_to genre_path(post.genre) do %>
+                          <%= post.genre.name %>
+                        <% end %>
+                      </div>
+                    </h5>
+                    <% if user_signed_in? %>
+                      <div class="favorite_buttons_<%= post.id %>">
+                      <%= render "favorites/favorites", post: post %>
+                      </div>
+                      <%= link_to post_path(post) ,class: "mr-0" do%>
+                        <%= image_tag 'comment', size: "30x20" %>
+                      <% end %>
+                      <%= link_to post_path(post) ,class: "mr-0" do%>
+                        <%= image_tag 'shosai', size: "30x20" %>
+                      <% end %>
+                    <% end %>
                   </div>
-
-              </h5>
-              <% if user_signed_in? %>
-                <div class="favorite_buttons_<%= post.id %>">
-                <%= render "favorites/favorites", post: post %>
                 </div>
-                <%= link_to post_path(post) ,class: "mr-0" do%>
-                  <%= image_tag 'comment', size: "30x20" %>
-                <% end %>
-                <%= link_to post_path(post) ,class: "mr-0" do%>
-                  <%= image_tag 'shosai', size: "30x20" %>
-                <% end %>
+              </div>
               <% end %>
-            </div>
-          </div>
-        </div>
-        <% end %>
+        	  </div>
+        		
+        	</div>
+        	<div id="panel2" class="tab_panel">
+        		
+        	</div>
+       
+        
       </div>
 
     </div>
@@ -145,22 +166,6 @@ $(function() {
 });
 </script>
 
-<div class="tab_wrap">
-
-
-	<div class="tab_area">
-		<label class="tab_label active" for="tab1">tab1</label>
-		<label class="tab_label" for="tab2">tab2</label>
-	</div>
-	<div class="panel_area">
-		<div id="panel1" class="tab_panel active">
-			<p>panel1</p>
-		</div>
-		<div id="panel2" class="tab_panel">
-			<p>panel2</p>
-		</div>
-	</div>
-</div>
 
 <script>
 $(".tab_label").on("click",function(){
