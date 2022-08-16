@@ -138,15 +138,16 @@ function initMap(){
                   <% end %>
                 </h5>
                 <% if user_signed_in? %>
-                  <div class="favorite_buttons_<%= post.id %>">
-                  <%= render "favorites/favorites", post: post %>
-                  </div>
+                  
                   <%= link_to post_path(post) ,class: "mr-0" do%>
                     <%= image_tag 'comment', size: "30x20" %>
                   <% end %>
                   <%= link_to post_path(post) ,class: "mr-0" do%>
                     <%= image_tag 'shosai', size: "30x20" %>
                   <% end %>
+                  <div class="favorite_buttons_<%= post.id %>">
+                  <%= render "favorites/favorites", post: post %>
+                  </div>
                 <% end %>
               </div>
             </div>
@@ -176,15 +177,16 @@ function initMap(){
                   <% end %>
                 </h5>
                 <% if user_signed_in? %>
-                  <div class="favorite_buttons_<%= post.id %>">
-                  <%= render "favorites/favorites", post: post %>
-                  </div>
+                  
                   <%= link_to post_path(post) ,class: "mr-0" do%>
                     <%= image_tag 'comment', size: "30x20" %>
                   <% end %>
                   <%= link_to post_path(post) ,class: "mr-0" do%>
                     <%= image_tag 'shosai', size: "30x20" %>
                   <% end %>
+                  <div class="favorite_buttons_<%= post.id %>">
+                  <%= render "favorites/favorites", post: post %>
+                  </div>
                 <% end %>
               </div>
             </div>

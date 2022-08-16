@@ -2,7 +2,7 @@ class GenresController < ApplicationController
   
   def show
     @genre=Genre.find(params[:id])
-    @posts=@genre.posts
+    @posts=@genre.posts.order("created_at DESC")
   end
   
   def index
