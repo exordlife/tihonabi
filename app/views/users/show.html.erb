@@ -44,120 +44,105 @@
   </nav>
 </header>
 <div class="container px-5 px-sm-0 mt-5">
-  <div class="mb-3">
-    <% if @posts.count!=0 %>
-      <%= link_to "全て", user_path(@user) %>
-      <% @genres.each do |genre| %>
-        <%= link_to genre.name, user_path(genre_id: genre.id) %>
-      <% end %>
-    <% end %>
-    <% if @posts.count==0 && request.url.include?('?') %>
-      <%= link_to "全て", user_path(@user) %>
-      <% @genres.each do |genre| %>
-        <%= link_to genre.name, user_path(genre_id: genre.id) %>
-      <% end %>
-    <% end %>
-    
-  </div>
-
-
   <div class="row">
     <div class="col-8">
-      
-        <% if @posts.count==0 && !request.url.include?('?') %>
-          <div class="mt-5 ml-5">
-            <strong>投稿はまだありません。</strong>
-            <% if @user==current_user %>
-            <strong><%= link_to "自慢写真をアップしましょう", new_post_path %></strong>
-            <% end %>
-          </div>
-        <% end %>
-        <div class="tab_area">
+      <div class="tab_area">
         		<label class="tab_label active" for="tab1">投稿</label>
         		<label class="tab_label" for="tab2">いいね</label>
-        	</div>
-        <div class="panel_area col-12">
-        	<div id="panel1" class="tab_panel active">
-        	  <div class="row">
-        	    <% @posts.each do |post| %>
-              <div class="col-6 my-2">
-                <div class="card back-color2 imaging h-100 pt-3">
-                    <div class="a">
-                      <% post.image.each do |image| %>
-                        <%= link_to post_path(post) do %>
-                          <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
-                        <% end %>
-                      <% end %>
-                    </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <%= post.content %>
-                      <div>
-                        <%= link_to genre_path(post.genre) do %>
-                          <%= post.genre.name %>
-                        <% end %>
-                      </div>
-                    </h5>
-                    <% if user_signed_in? %>
-                      <div class="favorite_buttons_<%= post.id %>">
-                      <%= render "favorites/favorites", post: post %>
-                      </div>
-                      <%= link_to post_path(post) ,class: "mr-0" do%>
-                        <%= image_tag 'comment', size: "30x20" %>
-                      <% end %>
-                      <%= link_to post_path(post) ,class: "mr-0" do%>
-                        <%= image_tag 'shosai', size: "30x20" %>
-                      <% end %>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-              <% end %>
-        	  </div>
-        		
-        	</div>
-        	<div id="panel2" class="tab_panel">
-        		<div class="row">
-        	    <% @favorite_posts.each do |post| %>
-              <div class="col-6 my-2">
-                <div class="card back-color2 imaging h-100 pt-3">
-                    <div class="a">
-                      <% post.image.each do |image| %>
-                        <%= link_to post_path(post) do %>
-                          <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
-                        <% end %>
-                      <% end %>
-                    </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <%= post.content %>
-                      <div>
-                        <%= link_to genre_path(post.genre) do %>
-                          <%= post.genre.name %>
-                        <% end %>
-                      </div>
-                    </h5>
-                    <% if user_signed_in? %>
-                      <div class="favorite_buttons_<%= post.id %>">
-                      <%= render "favorites/favorites", post: post %>
-                      </div>
-                      <%= link_to post_path(post) ,class: "mr-0" do%>
-                        <%= image_tag 'comment', size: "30x20" %>
-                      <% end %>
-                      <%= link_to post_path(post) ,class: "mr-0" do%>
-                        <%= image_tag 'shosai', size: "30x20" %>
-                      <% end %>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-              <% end %>
-        	  </div>
-        	</div>
-       
-        
       </div>
-
+      <div class="panel_area col-12">
+      	<div id="panel1" class="tab_panel active">
+      	  <div class="row">
+      	     <% if @posts.count==0 %>
+                <div class="mt-5 ml-5">
+                  <strong>投稿はまだありません。</strong>
+                  <% if @user==current_user %>
+                  <strong><%= link_to "自慢写真をアップしましょう", new_post_path %></strong>
+                  <% end %>
+                </div>
+              <% end %>
+      	    <% @posts.each do |post| %>
+            <div class="col-6 my-2">
+              <div class="card back-color2 imaging h-100 pt-3">
+                  <div class="a">
+                    <% post.image.each do |image| %>
+                      <%= link_to post_path(post) do %>
+                        <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= post.content %>
+                    <div>
+                      <%= link_to genre_path(post.genre) do %>
+                        <%= post.genre.name %>
+                      <% end %>
+                    </div>
+                  </h5>
+                  <% if user_signed_in? %>
+                    <div class="favorite_buttons_<%= post.id %>">
+                    <%= render "favorites/favorites", post: post %>
+                    </div>
+                    <%= link_to post_path(post) ,class: "mr-0" do%>
+                      <%= image_tag 'comment', size: "30x20" %>
+                    <% end %>
+                    <%= link_to post_path(post) ,class: "mr-0" do%>
+                      <%= image_tag 'shosai', size: "30x20" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+      	  </div>
+      	</div>
+      	<div id="panel2" class="tab_panel">
+      		<div class="row">
+      		  <% if @favorite_posts.count==0 %>
+                <div class="mt-5 ml-5">
+                  <strong>いいねした投稿はまだありません。</strong>
+                  <% if @user==current_user %>
+                  <% end %>
+                </div>
+              <% end %>
+      	    <% @favorite_posts.each do |post| %>
+            <div class="col-6 my-2">
+              <div class="card back-color2 imaging h-100 pt-3">
+                  <div class="a">
+                    <% post.image.each do |image| %>
+                      <%= link_to post_path(post) do %>
+                        <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= post.content %>
+                    <div>
+                      <%= link_to genre_path(post.genre) do %>
+                        <%= post.genre.name %>
+                      <% end %>
+                    </div>
+                  </h5>
+                  <% if user_signed_in? %>
+                    <div class="favorite_buttons_<%= post.id %>">
+                    <%= render "favorites/favorites", post: post %>
+                    </div>
+                    <%= link_to post_path(post) ,class: "mr-0" do%>
+                      <%= image_tag 'comment', size: "30x20" %>
+                    <% end %>
+                    <%= link_to post_path(post) ,class: "mr-0" do%>
+                      <%= image_tag 'shosai', size: "30x20" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+      	  </div>
+      	</div>
+      </div>
     </div>
     <div class="col-4">
       <div class="mb-3">
