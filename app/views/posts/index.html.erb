@@ -1,14 +1,16 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      
+
       <%= link_to root_path do%>
-        <%= image_tag 'Tippy' , size: "150x70"%>
+        <%= image_tag 'Tippy' , size: "150x55"%>
       <% end %>
       <% if user_signed_in? %>
       <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
         <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
-        <%= f.submit "検索", class: "btn btn-outline-success" %>
+        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+          <i class="fa fa-search"></i>
+        <% end %>
       <% end %>
       <span class="d-flex">
           <div class="mr-5">
@@ -16,11 +18,30 @@
               <%= image_tag 'image', size: "70x70" %>
             <% end %>
           </div>
-          <div>
+          <div class="mr-5">
             <%= link_to user_path(current_user), class: "image" do %>
               <%= image_tag 'image1', size: "70x70" %>
             <% end %>
           </div>
+          <a data-toggle="modal" data-target="#exampleModal" data-backdrop="static"><%= image_tag 'hatena', size: "70x70" %></a>
+          <!-- ボタン・リンククリック後に表示される画面の内容 -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">レベルを上げるには?</h5>
+                </div>
+                <div class="modal-body">
+                  <p>おっはー</p>
+                </div
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
       </span>
       <% else %>
         <li>
@@ -37,67 +58,88 @@
   </nav>
 </header>
 
-<h4>検索結果</h4>
-  <% @posts.each do |post| %>
-  <div class="container px-5 px-sm-0">
-  <div class="d-flex justify-content-center">
-    <div class="card back-color2 imaging" style="height:450px">
-      <div class="card-body">
-        
-        <div class="row" style="height:450px">
-
-          <div class="col-5" style="height:400px">
-            
-            <div>
-              <%= link_to post_path(post) do %>
-              <% post.image.each do |image| %>
-                <%= image_tag image,size: "400x400"%>
+<div class="container mt-5">
+  <h4>検索結果:<%= @keyword %></h4>
+  <div class="row">
+        <% @posts.each do |post| %>
+        <div class="col-4 my-2">
+          <div class="card back-color2 mt-3 pt-3 imaging h-100">
+            <div class="d-flex mb-1 ml-3">
+              <%= link_to user_path(post.user) do %>
+                <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
               <% end %>
+              <strong class="ml-2  my-auto"><%= post.user.name %></strong>
+
+            </div>
+            <div class="d-flex mb-3 m-3">
+
+            </div>
+              <div class="a">
+                <% post.image.each do |image| %>
+                  <%= link_to post_path(post) do %>
+                    <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                  <% end %>
+                <% end %>
+              </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <div>
+                  <%= post.content %>
+                </div>
+                <%= link_to genre_path(post.genre) do %>
+                  <%= post.genre.name %>
+                <% end %>
+              </h5>
+              <% if user_signed_in? %>
+              <div class="d-flex justify-content-between">
+                <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
+                <%= render "favorites/favorites", post: post %>
+                </div>
+                <div></div>
+                <div class="pull-right">
+                  <a href="#" data-toggle="modal" data-target="#examodal" data-backdrop="static"><%= image_tag 'modal', size: "45x35" %></a>
+                  <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                  <div class="modal fade" id="examodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <div class="a">
+                            <% post.image.each do |image| %>
+                              <%= link_to post_path(post) do %>
+                                <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                              <% end %>
+                            <% end %>
+                          </div>
+                        </div>
+          
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
               <% end %>
             </div>
           </div>
-
-          <div class="col-5">
-            <div class="d-flex align-items-start flex-column bd-highlight mb-3" style="width: 500px;">
-            <div class="p-2 bd-highlight">  
-            <!--タイトル、ユーザーネーム-->
-              <div class="form_table" style="width: 500px">
-                <div class="d-flex justify-content-between">
-                  <p></p>
-                  <div class="bd-highlight"><%= post.user.name %></div>
-                </div>
-                <!--説明-->
-                <div class="mt-4" style="height: 200px"><%= post.content %></div>
-              </div>
-              <!--ハッシュタグ-->
-              <p><%= post.genre.name %></p>
-            <div>
-            
-            <div class="mt-auto p-2 bd-highlight" style="width:600px">
-              <div class="d-flex bd-highlight mb-3">
-                <div class="col">
-                <!--コメント欄,いいねボタン-->
-                  <div class="d-flex">
-                    
-                    <div class="favorite_buttons_<%= post.id %> ml-3"></div>
-                    <%= render "favorites/favorites", post: post %>
-                  </div>
-                  
-                </div>
-                
-                <div class="col">
-                  <!--コメント件数-->
-                  <div class="comments_table ms-auto p-2 bd-highlight">
-                    <%= render "post_comments/comments", post: post %>
-                  </div>
-                </div>
-              </div>
-            
           </div>
-        
-        </div>
-      </div>
+        <% end %>
+
     </div>
   </div>
 </div>
-<%end%>
+
+<script>
+  // オプションを指定してSkipprの実行
+$(function() {
+    $('.a').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+    });
+
+});
+</script>

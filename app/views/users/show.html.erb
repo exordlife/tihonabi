@@ -23,11 +23,27 @@
               <%= image_tag 'image1', size: "70x70" %>
             <% end %>
           </div>
-          <div>
-            <%= link_to user_path(current_user), class: "image" do %>
-              <%= image_tag 'hatena', size: "70x70" %>
-            <% end %>
+          <a data-toggle="modal" data-target="#exampleModal" data-backdrop="static"><%= image_tag 'hatena', size: "70x70" %></a>
+          <!-- ボタン・リンククリック後に表示される画面の内容 -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <h5 class="modal-title">Tippyとは?</h5>
+                </div>
+
+                <div class="modal-body">
+                  <p>おっはー</p>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                </div>
+              </div>
+            </div>
           </div>
+
       </span>
       <% else %>
         <li>
@@ -146,7 +162,7 @@
     </div>
     <div class="col-4">
       <div class="mb-3">
-         <%= image_tag @user.get_profile_image(250,250) , class: "profile_img d-block mx-auto"%>
+         <%= image_tag @user.profile_image , class: "profile_img d-block mx-auto"%>
       </div>
 
 
@@ -158,7 +174,26 @@
 
         <strong>ユーザネーム</strong>
         <h4><%= @user.name %> Lv<%= @user.exp_sum.floor %> </h4>
-        <%= link_to "レベルを上げるには？", edit_user_path %>
+        <a href="#" data-toggle="modal" data-target="#exampleModal" data-backdrop="static">レベルを上げるには?</a>
+        <!-- ボタン・リンククリック後に表示される画面の内容 -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5 class="modal-title">レベルを上げるには?</h5>
+              </div>
+
+              <div class="modal-body">
+                <p>おっはー</p>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <br>
         <br>
         <br>
