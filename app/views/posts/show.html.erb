@@ -3,12 +3,14 @@
     <div class="container">
 
       <%= link_to root_path do%>
-        <%= image_tag 'Tippy' , size: "150x70"%>
+        <%= image_tag 'Tippy' , size: "150x55"%>
       <% end %>
       <% if user_signed_in? %>
       <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
         <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
-        <%= f.submit "検索", class: "btn btn-outline-success" %>
+        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+          <i class="fa fa-search"></i>
+        <% end %>
       <% end %>
       <span class="d-flex">
           <div class="mr-5">
@@ -16,9 +18,14 @@
               <%= image_tag 'image', size: "70x70" %>
             <% end %>
           </div>
-          <div>
+          <div class="mr-5">
             <%= link_to user_path(current_user), class: "image" do %>
               <%= image_tag 'image1', size: "70x70" %>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to user_path(current_user), class: "image" do %>
+              <%= image_tag 'hatena', size: "70x70" %>
             <% end %>
           </div>
       </span>
@@ -37,6 +44,7 @@
   </nav>
 
 </header>
+
 
 <div class="container px-5 px-sm-0">
   <div class="d-flex justify-content-center">

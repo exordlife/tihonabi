@@ -3,12 +3,14 @@
     <div class="container">
 
       <%= link_to root_path do%>
-        <%= image_tag 'Tippy' , size: "150x70"%>
+        <%= image_tag 'Tippy' , size: "150x55"%>
       <% end %>
       <% if user_signed_in? %>
       <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
         <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
-        <%= f.submit "何でも検索", class: "btn btn-outline-success" %>
+        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+          <i class="fa fa-search"></i>
+        <% end %>
       <% end %>
       <span class="d-flex">
           <div class="mr-5">
@@ -16,9 +18,14 @@
               <%= image_tag 'image', size: "70x70" %>
             <% end %>
           </div>
-          <div>
+          <div class="mr-5">
             <%= link_to user_path(current_user), class: "image" do %>
               <%= image_tag 'image1', size: "70x70" %>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to user_path(current_user), class: "image" do %>
+              <%= image_tag 'hatena', size: "70x70" %>
             <% end %>
           </div>
       </span>
@@ -108,16 +115,20 @@ function initMap(){
 
 
       <% @posts.each do |post| %>
-      <div class="col-4">
-        <div class="card back-color2 mt-3 pt-3 imaging">
-          <%= link_to post_path(post) do %>
-            <% post.image.each do |image| %>
-              <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
-            <% end %>
-          <% end %>
+      <div class="col-4 my-2">
+        <div class="card back-color2 mt-3 pt-3 imaging h-100">
+            <div class="a">
+              <% post.image.each do |image| %>
+                <%= link_to post_path(post) do %>
+                  <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                <% end %>
+              <% end %>
+            </div>
           <div class="card-body">
             <h5 class="card-title">
-              <%= post.title %>
+              <div>
+                <%= post.content %>
+              </div>
               <%= link_to genre_path(post.genre) do %>
                 <%= post.genre.name %>
               <% end %>
@@ -138,7 +149,18 @@ function initMap(){
         </div>
       <% end %>
 
-
   </div>
 </div>
 
+
+<script>
+  // オプションを指定してSkipprの実行
+$(function() {
+    $('.a').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+    });
+
+});
+</script>

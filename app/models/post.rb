@@ -15,7 +15,7 @@ class Post < ApplicationRecord
 
 
   def self.search(keyword)
-    where(["title like? OR content like?", "%#{keyword}%", "%#{keyword}%"])
+    where(["content like?","%#{keyword}%"])
   end
 
   def favorited_by?(user)

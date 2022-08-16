@@ -1,2 +1,70 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.profile_img {
+    border-radius: 50%;  /*角を丸くする指定*/
+    width: 300px;  /*横幅*/
+    height: 300px;  /*縦幅*/
+}
+
+
+//カメラの画像押したとき
+.img_prever:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transform: scale(1.01, 1.01);
+}
+
+//自慢ポイントテキストエリア
+.m-form-item-textarea textarea {
+    height: 300px;
+}
+
+.m-form-textarea {
+    display: block;
+    width: 100%;
+    padding: 4px 16px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 0 0 1px #ccc inset;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    resize: vertical;
+}
+
+.m-form-textarea:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
+}
+
+//住所
+
+.m-form-text {
+    height: 2.4em;
+    width: 100%;
+    padding: 0 16px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 0 0 1px #ccc inset;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.m-form-text:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
+}
+
+
+.tab_area label.active{background:#fff; color:#000;}
+.tab_panel.active{display:block;}
+
+.tab_wrap{width:470px; margin:80px auto;}
+.tab_area{font-size:0; padding:0 55px;}
+.tab_area label{width:110px; display:inline-block; padding:14px 0 12px; color:#fff; background:#90c9cc; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity; border-top-left-radius:10px; border-top-right-radius:10px; vertical-align:bottom; transition:ease 0.2s; margin:10px 5px 0;}
+.tab_area label:hover{opacity:0.5;}
+.tab_panel{width:100%; padding:80px 0; display:none;}
+.tab_panel p{font-size:14px; letter-spacing:1px; text-align:center;}
+.panel_area{background:#ffffff; border-bottom-right-radius:10px; border-bottom-left-radius:10px; border-top:8px solid #d7e9ea;}
