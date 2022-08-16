@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   def show
     @user=User.find(params[:id])
     @genres=Genre.all
+    favorites= Favorite.where(user_id: @user.id).pluck(:post_id)
+    @favorite_posts = Post.find(favorites)
     if params[:genre_id] # 検索したいジャンルのidがあるなら...
       @genre = Genre.find(params[:genre_id]) # ジャンルを検索する
       @posts = @genre.posts.where(user_id: current_user.id)# ジャンルに紐づく投稿を全て取得する。
@@ -12,6 +14,7 @@ class UsersController < ApplicationController
     else
       @posts=@user.posts
       @genre_post=@posts
+      
     end
   end
 

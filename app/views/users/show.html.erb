@@ -18,9 +18,14 @@
               <%= image_tag 'image', size: "70x70" %>
             <% end %>
           </div>
-          <div>
+          <div class="mr-5">
             <%= link_to user_path(current_user), class: "image" do %>
               <%= image_tag 'image1', size: "70x70" %>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to user_path(current_user), class: "image" do %>
+              <%= image_tag 'hatena', size: "70x70" %>
             <% end %>
           </div>
       </span>
@@ -112,7 +117,42 @@
         		
         	</div>
         	<div id="panel2" class="tab_panel">
-        		
+        		<div class="row">
+        	    <% @favorite_posts.each do |post| %>
+              <div class="col-6 my-2">
+                <div class="card back-color2 imaging h-100 pt-3">
+                    <div class="a">
+                      <% post.image.each do |image| %>
+                        <%= link_to post_path(post) do %>
+                          <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <%= post.content %>
+                      <div>
+                        <%= link_to genre_path(post.genre) do %>
+                          <%= post.genre.name %>
+                        <% end %>
+                      </div>
+                    </h5>
+                    <% if user_signed_in? %>
+                      <div class="favorite_buttons_<%= post.id %>">
+                      <%= render "favorites/favorites", post: post %>
+                      </div>
+                      <%= link_to post_path(post) ,class: "mr-0" do%>
+                        <%= image_tag 'comment', size: "30x20" %>
+                      <% end %>
+                      <%= link_to post_path(post) ,class: "mr-0" do%>
+                        <%= image_tag 'shosai', size: "30x20" %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+        	  </div>
         	</div>
        
         
