@@ -1,5 +1,10 @@
 <%= form_with model: [post, post_comment], local: false do |f| %>
+<div class="modal-body" >
   <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-  <%= f.submit "送信する" %>
-  <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+  <%= f.submit "送信する" ,class: "btn btn-primary"%>
+</div>
 <% end %>
