@@ -111,44 +111,90 @@ function initMap(){
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
-  <div class="row">
-
-
-      <% @posts.each do |post| %>
-      <div class="col-4 my-2">
-        <div class="card back-color2 mt-3 pt-3 imaging h-100">
-            <div class="a">
-              <% post.image.each do |image| %>
-                <%= link_to post_path(post) do %>
-                  <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+    <div class="tab_area">
+        		<label class="tab_label active" for="tab1">投稿</label>
+        		<label class="tab_label" for="tab2">いいね</label>
+    </div>
+    <div class="panel_area col-12">
+      <div id="panel1" class="tab_panel active">
+        <div class="row">
+        <% @posts.each do |post| %>
+          <div class="col-4 my-2">
+            <div class="card back-color2 mt-3 pt-3 imaging h-100">
+                <div class="a">
+                  <% post.image.each do |image| %>
+                    <%= link_to post_path(post) do %>
+                      <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <div>
+                    <%= post.content %>
+                  </div>
+                  <%= link_to genre_path(post.genre) do %>
+                    <%= post.genre.name %>
+                  <% end %>
+                </h5>
+                <% if user_signed_in? %>
+                  
+                  <%= link_to post_path(post) ,class: "mr-0" do%>
+                    <%= image_tag 'comment', size: "30x20" %>
+                  <% end %>
+                  <%= link_to post_path(post) ,class: "mr-0" do%>
+                    <%= image_tag 'shosai', size: "30x20" %>
+                  <% end %>
+                  <div class="favorite_buttons_<%= post.id %>">
+                  <%= render "favorites/favorites", post: post %>
+                  </div>
                 <% end %>
-              <% end %>
+              </div>
             </div>
-          <div class="card-body">
-            <h5 class="card-title">
-              <div>
-                <%= post.content %>
-              </div>
-              <%= link_to genre_path(post.genre) do %>
-                <%= post.genre.name %>
-              <% end %>
-            </h5>
-            <% if user_signed_in? %>
-              <div class="favorite_buttons_<%= post.id %>">
-              <%= render "favorites/favorites", post: post %>
-              </div>
-              <%= link_to post_path(post) ,class: "mr-0" do%>
-                <%= image_tag 'comment', size: "30x20" %>
-              <% end %>
-              <%= link_to post_path(post) ,class: "mr-0" do%>
-                <%= image_tag 'shosai', size: "30x20" %>
-              <% end %>
-            <% end %>
           </div>
+        <% end %>
         </div>
+      </div>
+      <div id="panel2" class="tab_panel">
+        <div class="row">
+        <% @favorite_sort.each do |post| %>
+          <div class="col-4 my-2">
+            <div class="card back-color2 mt-3 pt-3 imaging h-100">
+                <div class="a">
+                  <% post.image.each do |image| %>
+                    <%= link_to post_path(post) do %>
+                      <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <div>
+                    <%= post.content %>
+                  </div>
+                  <%= link_to genre_path(post.genre) do %>
+                    <%= post.genre.name %>
+                  <% end %>
+                </h5>
+                <% if user_signed_in? %>
+                  
+                  <%= link_to post_path(post) ,class: "mr-0" do%>
+                    <%= image_tag 'comment', size: "30x20" %>
+                  <% end %>
+                  <%= link_to post_path(post) ,class: "mr-0" do%>
+                    <%= image_tag 'shosai', size: "30x20" %>
+                  <% end %>
+                  <div class="favorite_buttons_<%= post.id %>">
+                  <%= render "favorites/favorites", post: post %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
         </div>
-      <% end %>
-
+      </div>
+    </div>
   </div>
 </div>
 
@@ -162,5 +208,16 @@ $(function() {
         autoplaySpeed: 5000,
     });
 
+});
+</script>
+
+
+<script>
+$(".tab_label").on("click",function(){
+	var $th = $(this).index();
+	$(".tab_label").removeClass("active");
+	$(".tab_panel").removeClass("active");
+	$(this).addClass("active");
+	$(".tab_panel").eq($th).addClass("active");
 });
 </script>

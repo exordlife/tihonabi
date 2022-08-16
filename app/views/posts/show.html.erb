@@ -82,6 +82,7 @@
                 <div class="col">
                 <!--コメント欄,いいねボタン-->
                   <div class="d-flex">
+
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-backdrop="static">コメント</button>
                     <div class="favorite_buttons_<%= @post.id %> ml-3">
                     <%= render "favorites/favorites", post: @post %>
@@ -92,6 +93,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-sm">
                       <div class="modal-content mb-5">
                           <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+
                       </div>
                     </div>
                   </div>
@@ -106,6 +108,7 @@
               </div>
               
             </div>
+            
           </div>
 
         </div>
@@ -114,8 +117,11 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 <<<<<<<<< saved version
 
 =========
 
 >>>>>>>>> local version
+=======
+>>>>>>> origin/develop
