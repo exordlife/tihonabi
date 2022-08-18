@@ -97,31 +97,13 @@
                 </div>
                 <div></div>
                 <div class="pull-right">
-                  <a href="#" data-toggle="modal" data-target="#examodal" data-backdrop="static"><%= image_tag 'modal', size: "45x35" %></a>
+                  <%= link_to post_path(post) do %>
+                    <%= image_tag 'modal', size: "45x35" %>
+                  <% end %>
                   <!-- ボタン・リンククリック後に表示される画面の内容 -->
-                  <div class="modal fade" id="examodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                      <div class="modal-content">
-                        <div class="modal-body">
-                          <div class="a">
-                            <% post.image.each do |image| %>
-                              <%= link_to post_path(post) do %>
-                                <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
-                              <% end %>
-                            <% end %>
-                          </div>
-                        </div>
-          
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
-
-
               <% end %>
             </div>
           </div>

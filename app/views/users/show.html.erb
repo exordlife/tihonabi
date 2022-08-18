@@ -123,8 +123,8 @@
                 </div>
               <% end %>
       	    <% @favorite_posts.each do |post| %>
-            <div class="col-6 my-2">
-              <div class="card back-color2 imaging h-100 pt-3">
+            <div class="col-6 my-2  h-100">
+              <div class="card back-color2 imaging pt-3">
                   <div class="a">
                     <% post.image.each do |image| %>
                       <%= link_to post_path(post) do %>
@@ -216,13 +216,11 @@
 
 <script>
   // オプションを指定してSkipprの実行
-$(function() {
-    $('.a').slick({
-        dots: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
-    });
-
+$(document).on('turbolinks:load', function(){
+  $('.a').slick({
+    autoplay:true, // 自動再生
+    autoplaySpeed: 3000 // 再生速度（ミリ秒）
+  });
 });
 </script>
 
@@ -236,3 +234,4 @@ $(".tab_label").on("click",function(){
 	$(".tab_panel").eq($th).addClass("active");
 });
 </script>
+

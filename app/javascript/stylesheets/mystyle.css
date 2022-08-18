@@ -12,6 +12,13 @@
 
 }
 
+.image_size2{
+  width: 600px;
+  height: 600px;
+  object-fit: contain;
+
+}
+
 input[type="text"] {
         width: 300px;
         height: 40px;

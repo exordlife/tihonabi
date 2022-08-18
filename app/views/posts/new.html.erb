@@ -50,11 +50,12 @@
 
     <%= form_with model: @new_post do |f| %>
       <div class="d-flex justify-content-evenly">
-        
+
         <div class="img_prever col-4 ml-5">
           <%= flash[:notice1] %>
+          <strong class="ml-3">最大4枚まで投稿できます</strong>
          <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
-          
+
           <div class="d-flex justify-content-start">
             <%= image_tag 'cameraA', size: "250x250", onClick: "$('.img_field').click()", class: 'img_prev'%>
             <%= image_tag 'cameraB', size: "250x250", onClick: "$('.img_field').click()",  class: 'img_pre '%>
@@ -63,8 +64,9 @@
             <%= image_tag 'cameraC', size: "250x250", onClick: "$('.img_field').click()", class: 'img_pr'%>
             <%= image_tag 'cameraD', size: "250x250", onClick: "$('.img_field').click()",  class: 'img_p'%>
           </div>
-        </div>  
+        </div>
         
+
         <div class="col-2"></div>
 
         <div class="col-5">
@@ -83,9 +85,9 @@
           <div class="d-grid gap-2">
             <%= f.submit '投稿',class: "btn btn-outline-info"%>
           </div>
-            
+
           </div>
-          
+
         </div>
 
       </div>

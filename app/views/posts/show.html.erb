@@ -46,72 +46,76 @@
 </header>
 
 
-<div class="container px-5 px-sm-0 mt-5">
-  <div class="d-flex justify-content-center">
-    <div class="card back-color2 imaging" style="height:450px">
-      <div class="card-body">
-        <div class="row">
-
-          <div class="col" style="height:400px">
+<div class="container mt-5">
+  <div class="card back-color2 mt-3 pt-3 imaging h-100 d-flex">
+    <div class="row">
+      <div class="col-7">
+        <div class="a">
+          <% @post.image.each do |image| %>
+            <%= link_to post_path(@post) do %>
+              <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size2" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="card-body">
+          <div class="d-flex">
+            <%= link_to user_path(@post.user) do %>
+              <%= image_tag @post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+            <% end %>
+            <strong class="ml-2  my-auto"><%= @post.user.name %></strong>
+          </div>
+          <h5 class="card-title">
             <div>
-              <% @post.image.each do |image| %>
-                <%= image_tag image,size: "400x400"%>
-              <% end %>
+              <%= @post.content %>
             </div>
-          </div>
-
-          <div class="col">
-            <div class="d-flex align-items-start flex-column bd-highlight mb-3" style="width: 500px;">
-            <div class="p-2 bd-highlight">
-            <!--タイトル、ユーザーネーム-->
-              <div class="form_table" style="width:500px">
-                <div class="d-flex justify-content-between">
-                  <p></p>
-                  <div class="bd-highlight"><%= @post.user.name %></div>
-                </div>
-                <!--説明-->
-                <div class="mt-4" style="height: 200px"><%= @post.content %></div>
-              </div>
-              <!--ハッシュタグ-->
-              <p><%= @post.genre.name %></p>
+            <%= link_to genre_path(@post.genre) do %>
+              <%= @post.genre.name %>
+            <% end %>
+          </h5>
+          <% if user_signed_in? %>
+            <div class="favorite_buttons_<%= @post.id %> ml-2 mt-2">
+              <%= render "favorites/favorites", post: @post %>
             </div>
-
-            <div class="mt-auto p-2 bd-highlight" style="width:600px">
-              <div class="d-flex bd-highlight mb-3">
-                <div class="col">
-                <!--コメント欄,いいねボタン-->
-                  <div class="d-flex">
-
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-backdrop="static">コメント</button>
-                    <div class="favorite_buttons_<%= @post.id %> ml-3">
-                    <%= render "favorites/favorites", post: @post %>
-                    </div>
-                  </div>
-                  <!-- ボタン・リンククリック後に表示される画面の内容 -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-sm">
-                      <div class="modal-content mb-5">
-                          <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div class="form_table">
+              <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+            </div>
+            <div class="comments_table">
+              <%= render "post_comments/comments", post: @post %>
+            </div>
+          <% end %>
               
-                <div class="col">
-                  <!--コメント件数-->
-                  <div class="comments_table ms-auto p-2 bd-highlight">
-                    <%= render "post_comments/comments", post: @post %>
-                  </div>
-                </div>
-              </div>
               
-            </div>
-            
-          </div>
-
         </div>
       </div>
     </div>
   </div>
 </div>
+
+        
+      
+<script>
+  // オプションを指定してSkipprの実行
+$(function() {
+    $('.a').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+    });
+
+});
+</script>
+
+
+<script>
+  // オプションを指定してSkipprの実行
+$(function() {
+    $('.a').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+    });
+
+});
+</script>
