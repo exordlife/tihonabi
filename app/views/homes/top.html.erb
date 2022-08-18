@@ -24,30 +24,31 @@
             <% end %>
           </div>
           <div>
-            <a data-toggle="modal" data-target="#exampleModal" data-backdrop="static"><%= image_tag 'hatena', size: "70x70" %></a>
-            
+
+            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-backdrop="static"><%= image_tag 'hatena', size: "60x60" %></button>
+
             <!-- ボタン・リンククリック後に表示される画面の内容 -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
-                  
+
                   <div class="modal-header">
                     <h5 class="modal-title">Tippyとは？</h5>
                   </div>
-                  
+
                   <div class="modal-body">
                     <p>おっはー</p>
                   </div>
-                  
+
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
                   </div>
-                  
+                
                 </div>
               </div>
             </div>
+       
           </div>
-          
       </span>
       <% else %>
         <li>
@@ -158,16 +159,13 @@ function initMap(){
                   <% end %>
                 </h5>
                 <% if user_signed_in? %>
-                  
+
                   <%= link_to post_path(post) ,class: "mr-0" do%>
                     <%= image_tag 'comment', size: "30x20" %>
                   <% end %>
                   <%= link_to post_path(post) ,class: "mr-0" do%>
                     <%= image_tag 'shosai', size: "30x20" %>
                   <% end %>
-                  <div class="favorite_buttons_<%= post.id %>">
-                  <%= render "favorites/favorites", post: post %>
-                  </div>
                 <% end %>
               </div>
             </div>
@@ -197,7 +195,7 @@ function initMap(){
                   <% end %>
                 </h5>
                 <% if user_signed_in? %>
-                  
+
                   <%= link_to post_path(post) ,class: "mr-0" do%>
                     <%= image_tag 'comment', size: "30x20" %>
                   <% end %>

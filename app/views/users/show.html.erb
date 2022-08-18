@@ -23,11 +23,27 @@
               <%= image_tag 'image1', size: "70x70" %>
             <% end %>
           </div>
-          <div>
-            <%= link_to user_path(current_user), class: "image" do %>
-              <%= image_tag 'hatena', size: "70x70" %>
-            <% end %>
+          <a data-toggle="modal" data-target="#exampleModal" data-backdrop="static"><%= image_tag 'hatena', size: "70x70" %></a>
+          <!-- ボタン・リンククリック後に表示される画面の内容 -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <h5 class="modal-title">Tippyとは?</h5>
+                </div>
+
+                <div class="modal-body">
+                  <p>おっはー</p>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                </div>
+              </div>
+            </div>
           </div>
+
       </span>
       <% else %>
         <li>
@@ -107,8 +123,8 @@
                 </div>
               <% end %>
       	    <% @favorite_posts.each do |post| %>
-            <div class="col-6 my-2">
-              <div class="card back-color2 imaging h-100 pt-3">
+            <div class="col-6 my-2  h-100">
+              <div class="card back-color2 imaging pt-3">
                   <div class="a">
                     <% post.image.each do |image| %>
                       <%= link_to post_path(post) do %>
@@ -146,7 +162,7 @@
     </div>
     <div class="col-4">
       <div class="mb-3">
-         <%= image_tag @user.get_profile_image(250,250) , class: "profile_img d-block mx-auto"%>
+         <%= image_tag @user.profile_image , class: "profile_img d-block mx-auto"%>
       </div>
 
 
@@ -158,7 +174,26 @@
 
         <strong>ユーザネーム</strong>
         <h4><%= @user.name %> Lv<%= @user.exp_sum.floor %> </h4>
-        <%= link_to "レベルを上げるには？", edit_user_path %>
+        <a href="#" data-toggle="modal" data-target="#exampleModal" data-backdrop="static">レベルを上げるには?</a>
+        <!-- ボタン・リンククリック後に表示される画面の内容 -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5 class="modal-title">レベルを上げるには?</h5>
+              </div>
+
+              <div class="modal-body">
+                <p>おっはー</p>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <br>
         <br>
         <br>
@@ -181,13 +216,11 @@
 
 <script>
   // オプションを指定してSkipprの実行
-$(function() {
-    $('.a').slick({
-        dots: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
-    });
-
+$(document).on('turbolinks:load', function(){
+  $('.a').slick({
+    autoplay:true, // 自動再生
+    autoplaySpeed: 3000 // 再生速度（ミリ秒）
+  });
 });
 </script>
 
@@ -201,3 +234,4 @@ $(".tab_label").on("click",function(){
 	$(".tab_panel").eq($th).addClass("active");
 });
 </script>
+

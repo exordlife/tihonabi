@@ -7,6 +7,20 @@
     height: 300px;  /*縦幅*/
 }
 
+.profile_img2 {
+    border-radius: 50%;  /*角を丸くする指定*/
+    width: 35px;  /*横幅*/
+    height: 35px;  /*縦幅*/
+}
+
+//コメントのところ
+.profile_img3 {
+    border-radius: 50%;  /*角を丸くする指定*/
+    width: 20px;  /*横幅*/
+    height: 20px;  /*縦幅*/
+}
+
+
 
 //カメラの画像押したとき
 .img_prever:hover {
