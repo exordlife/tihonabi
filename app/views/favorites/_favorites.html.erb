@@ -2,12 +2,20 @@
   <p>
     <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
       <%= image_tag 'heart2', size: "40x35" %>
+      
     <% end %>
+    <strong>
+      <%= post.favorites.count %>
+    </strong>
   </p>
   <% else %>
   <p>
     <%= link_to post_favorites_path(post), method: :post, remote: true do %>
       <%= image_tag 'heart1', size: "35x30" %>
+      
     <% end %>
+    <strong>
+      <%= post.favorites.count %>
+    </strong>
   </p>
 <% end %>

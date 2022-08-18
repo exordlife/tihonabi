@@ -1,70 +1,3 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-
-      <%= link_to root_path do%>
-        <%= image_tag 'Tippy' , size: "150x55"%>
-      <% end %>
-      <% if user_signed_in? %>
-      <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
-        <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
-        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
-          <i class="fa fa-search"></i>
-        <% end %>
-      <% end %>
-      <span class="d-flex mt-1">
-          <div class="mr-5">
-            <%= link_to new_post_path ,class: "mr-0" do%>
-              <%= image_tag 'image', size: "70x70" %>
-            <% end %>
-          </div>
-          <div class="mr-5">
-            <%= link_to user_path(current_user), class: "image" do %>
-              <%= image_tag 'image1', size: "70x70" %>
-            <% end %>
-          </div>
-          <div>
-
-            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-backdrop="static"><%= image_tag 'hatena', size: "60x60" %></button>
-
-            <!-- ボタン・リンククリック後に表示される画面の内容 -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-
-                  <div class="modal-header">
-                    <h5 class="modal-title">Tippyとは？</h5>
-                  </div>
-
-                  <div class="modal-body">
-                    <p>おっはー</p>
-                  </div>
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                  </div>
-                
-                </div>
-              </div>
-            </div>
-       
-          </div>
-      </span>
-      <% else %>
-        <li>
-          <%= link_to "Tippy", root_path, class: "navbar-brand"%>
-        </li>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path, class: "navbar-brand" %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path, class: "navbar-brand" %>
-        </li>
-      <% end %>
-    </div>
-  </nav>
-</header>
-
 <div class="container px-5 px-sm-0">
   <h2>map</h2>
 
@@ -94,8 +27,10 @@ function initMap(){
     map = new google.maps.Map(document.getElementById('map'), {
       center: LatLng,
       //倍率はお好みで
-      zoom: 13
+      zoom: 9
+      
     });
+    
     // map.setCenterで地図が初期位置に移動
     map.setCenter(LatLng);
 
@@ -120,7 +55,7 @@ function initMap(){
       infoWindow[i] = new google.maps.InfoWindow({
         // contentで中身を指定
         // 今回は文字にリンクを貼り付けた形で表示
-        content: `<a href='/posts/${id}'>${posts[i].title}</a>`
+        content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
       });
       // markerがクリックされた時、
       marker[i].addListener("click", function(){
@@ -134,7 +69,9 @@ function initMap(){
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
     <div class="tab_area">
         		<label class="tab_label active" for="tab1">投稿</label>
-        		<label class="tab_label" for="tab2">いいね</label>
+        		<% if user_signed_in? %>
+        		<label class="tab_label" for="tab2">いいねランキング</label>
+        		<% end %>
     </div>
     <div class="panel_area col-12">
       <div id="panel1" class="tab_panel active">
@@ -142,6 +79,16 @@ function initMap(){
         <% @posts.each do |post| %>
           <div class="col-4 my-2">
             <div class="card back-color2 mt-3 pt-3 imaging h-100">
+              <div class="d-flex mb-1 ml-3">
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+                <% end %>
+                <strong class="ml-2  my-auto"><%= post.user.name %></strong>
+  
+              </div>
+              <div class="d-flex mb-3 m-3">
+  
+              </div>
                 <div class="a">
                   <% post.image.each do |image| %>
                     <%= link_to post_path(post) do %>
@@ -159,25 +106,41 @@ function initMap(){
                   <% end %>
                 </h5>
                 <% if user_signed_in? %>
-
-                  <%= link_to post_path(post) ,class: "mr-0" do%>
-                    <%= image_tag 'comment', size: "30x20" %>
-                  <% end %>
-                  <%= link_to post_path(post) ,class: "mr-0" do%>
-                    <%= image_tag 'shosai', size: "30x20" %>
-                  <% end %>
+                <div class="d-flex justify-content-between">
+                  <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
+                  <%= render "favorites/favorites", post: post %>
+                  </div>
+                  <div></div>
+                  <div class="pull-right">
+                    <%= link_to post_path(post) do %>
+                      <%= image_tag 'modal', size: "45x35" %>
+                    <% end %>
+                    <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                  </div>
+                </div>
                 <% end %>
               </div>
             </div>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
+      <% if user_signed_in? %>
       <div id="panel2" class="tab_panel">
         <div class="row">
         <% @favorite_sort.each do |post| %>
           <div class="col-4 my-2">
             <div class="card back-color2 mt-3 pt-3 imaging h-100">
+              <div class="d-flex mb-1 ml-3">
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+                <% end %>
+                <strong class="ml-2  my-auto"><%= post.user.name %></strong>
+  
+              </div>
+              <div class="d-flex mb-3 m-3">
+  
+              </div>
                 <div class="a">
                   <% post.image.each do |image| %>
                     <%= link_to post_path(post) do %>
@@ -195,23 +158,26 @@ function initMap(){
                   <% end %>
                 </h5>
                 <% if user_signed_in? %>
-
-                  <%= link_to post_path(post) ,class: "mr-0" do%>
-                    <%= image_tag 'comment', size: "30x20" %>
-                  <% end %>
-                  <%= link_to post_path(post) ,class: "mr-0" do%>
-                    <%= image_tag 'shosai', size: "30x20" %>
-                  <% end %>
-                  <div class="favorite_buttons_<%= post.id %>">
+                <div class="d-flex justify-content-between">
+                  <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
                   <%= render "favorites/favorites", post: post %>
                   </div>
+                  <div></div>
+                  <div class="pull-right">
+                    <%= link_to post_path(post) do %>
+                      <%= image_tag 'modal', size: "45x35" %>
+                    <% end %>
+                    <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                  </div>
+                </div>
                 <% end %>
               </div>
             </div>
-          </div>
+            </div>
         <% end %>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
 </div>

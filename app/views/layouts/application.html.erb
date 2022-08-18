@@ -16,6 +16,101 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </head>
   <body class="back-color">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+    
+          <%= link_to root_path do%>
+            <%= image_tag 'Tippy' , size: "150x55"%>
+          <% end %>
+          <% if user_signed_in? %>
+          <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
+            <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
+            <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+              <i class="fa fa-search"></i>
+            <% end %>
+          <% end %>
+          <span class="d-flex mt-1">
+              <div class="mr-5">
+    
+                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-backdrop="static"><%= image_tag 'hatena', size: "50x50" %></button>
+    
+                <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+    
+                      <div class="modal-header">
+                        <h5 class="modal-title">Tippyとは？</h5>
+                      </div>
+    
+                      <div class="modal-body">
+                        <p>おっはー</p>
+                      </div>
+    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                      </div>
+                    
+                    </div>
+                  </div>
+                </div>
+           
+              </div>
+              <div class="mr-5">
+                <%= link_to new_post_path ,class: "mr-0" do%>
+                  <%= image_tag 'image', size: "70x70" %>
+                <% end %>
+              </div>
+              <div>
+                <%= link_to user_path(current_user), class: "image" do %>
+                  <%= image_tag 'image1', size: "70x70" %>
+                <% end %>
+              </div>
+              
+          </span>
+          <% else %>
+            <span class="d-flex mt-1">
+              <div class="mr-5">
+    
+                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-backdrop="static"><%= image_tag 'hatena', size: "50x50" %></button>
+    
+                <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+    
+                      <div class="modal-header">
+                        <h5 class="modal-title">Tippyとは？</h5>
+                      </div>
+    
+                      <div class="modal-body">
+                        <p>おっはー</p>
+                      </div>
+    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                      </div>
+                    
+                    </div>
+                  </div>
+                </div>
+           
+              </div>
+              <div class="mr-5">
+                <%= link_to user_session_path ,class: "mr-0" do%>
+                  <%= image_tag 'login', size: "70x70" %>
+                <% end %>
+              </div>
+              <div>
+    
+              </div>
+              
+          </span>
+          <% end %>
+        </div>
+      </nav>
+    </header>
       <%= yield %>
     <footer>
       <div class="container mt-5">

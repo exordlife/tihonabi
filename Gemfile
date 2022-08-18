@@ -69,3 +69,5 @@ gem 'dotenv-rails'
 
 gem 'gon'
 gem 'geocoder'
+
+gem 'devise-i18n'
