@@ -133,7 +133,7 @@
 
 
       <div class="jumbotron back-color2">
-        <h4 class="display-5">マイページ</h4>
+        <h4 class="display-5">マイページ <%= @user.favorites.count %></h4>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
 
         <hr class="my-4">
@@ -174,13 +174,13 @@
            
            
           <div class="hide-text">
-            
           <%= form_with model: @user, url: user_path(@user) ,local:true do |f| %>
+          
             <h4>ニックネーム</h4>
               <%= f.text_field :name %>
             <h4>ProfileImage</h4>
               <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png" %>
-            <%= f.submit '更新' %>
+            <%= f.submit '更新', class: "btn btn-outline-info mt-3"%>
           <% end %>
           </div>
            

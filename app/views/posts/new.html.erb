@@ -6,7 +6,9 @@
       <div class="d-flex justify-content-evenly">
 
         <div class="img_prever col-4 ml-5">
-          <%= flash[:notice1] %>
+          <div class="ml-3">
+            <%= flash[:notice1] %>
+          </div>
           <strong class="ml-3">最大4枚まで投稿できます</strong>
          <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
 
@@ -30,6 +32,12 @@
           </div>
           <div class="my-3">
             <h4>住所</h4>
+            <div>
+              例1)渋谷駅<br>
+              例2)東京都墨田区押上1-1-2<br>
+              例3)別府温泉
+              
+            </div>
             <%= f.text_field :address,class: "m-form-text" %>
           </div>
           <div class="my-3">
