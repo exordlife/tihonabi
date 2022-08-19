@@ -1,10 +1,8 @@
-
-
 <div class="container mt-5">
   <h4>検索結果:<%= @keyword %></h4>
   <div class="row">
         <% @posts.each do |post| %>
-        <div class="col-4 my-2">
+        <div class="col-lg-4 my-2">
           <div class="card back-color2 mt-3 pt-3 imaging h-100">
             <div class="d-flex mb-1 ml-3">
               <%= link_to user_path(post.user) do %>
@@ -32,8 +30,12 @@
                   <%= post.genre.name %>
                 <% end %>
               </h5>
+              <div class="text-right">
+                <%= image_tag 'modal', size: "45x35" %>
+                <%= post.address %>
+              </div>
               <% if user_signed_in? %>
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between mt-3">
                 <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
                 <%= render "favorites/favorites", post: post %>
                 </div>
@@ -43,7 +45,6 @@
                     <%= image_tag 'modal', size: "45x35" %>
                   <% end %>
                   <!-- ボタン・リンククリック後に表示される画面の内容 -->
-
                 </div>
               </div>
               <% end %>

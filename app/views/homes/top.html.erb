@@ -1,4 +1,4 @@
-<div class="container px-5 px-sm-0 mt-3">
+<div class="container-md">
   <h2>map</h2>
 
 <div id='map' class="googlemap mb-3"></div>
@@ -8,7 +8,21 @@
   height: 600px;
   width: 100%;
 }
+.image_size{
+  width: 90%;
+  height: 300px;
+  object-fit: contain;
+
+}
+
+.image_size2{
+  width: 600px;
+  height: 600px;
+  object-fit: contain;
+
+}
 </style>
+
 
 <script>
 let map
@@ -33,7 +47,7 @@ function initMap(){
       mapTypeControl: false,
       mapId: '36c981c5b4a8e2b0',
       navigationControl: false,
-      gestureHandling: "greedy"
+      gestureHandling: "auto"
 
 
     });
@@ -125,7 +139,7 @@ function initMap(){
       <div id="panel1" class="tab_panel active">
         <div class="row">
         <% @posts.each do |post| %>
-          <div class="col-4 my-2">
+          <div class="col-lg-4 my-2">
             <div class="card back-color2 mt-3 pt-3 imaging h-100">
               <div class="d-flex mb-1 ml-3">
                 <%= link_to user_path(post.user) do %>
@@ -177,11 +191,11 @@ function initMap(){
       <div id="panel2" class="tab_panel">
         <div class="row">
         <% @favorite_sort.each do |post| %>
-          <div class="col-4 my-2">
+          <div class="col-lg-4 my-2">
             <div class="card back-color2 mt-3 pt-3 imaging h-100">
               <div class="d-flex mb-1 ml-3">
                 <%= link_to user_path(post.user) do %>
-                  <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+                  <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto "%>
                 <% end %>
                 <strong class="ml-2  my-auto"><%= post.user.name %></strong>
 
