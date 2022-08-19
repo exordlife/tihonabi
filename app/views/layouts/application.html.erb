@@ -45,8 +45,8 @@
                       </div>
     
                       <div class="modal-body">
-                        <p>地元の自慢できることや旅行先で出会ったお気に入りの場所を</p>
-                        <p>みんなで共有できるアプリ</p>
+                        <p>地元の自慢できることや旅行先で出会ったお気に入りの場所をみんなで共有できるアプリ</p>
+                        <p></p>
                       </div>
     
                       <div class="modal-footer">
@@ -65,14 +65,14 @@
               </div>
               <div>
                 <%= link_to user_path(current_user), class: "image" do %>
-                  <%= image_tag 'image1', size: "70x70" %>
+                  <%= image_tag 'image1', size: "70x70"%>
                 <% end %>
               </div>
               
           </span>
           <% else %>
             <span class="d-flex mt-1">
-              <div class="mr-5">
+              <div class="mr-lg-5">
     
                 <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-backdrop="static"><%= image_tag 'hatena', size: "50x50" %></button>
     
@@ -86,8 +86,8 @@
                       </div>
     
                       <div class="modal-body">
-                        <p>地元の自慢できることや旅行先で出会ったお気に入りの場所を</p>
-                        <p>みんなで共有できるアプリ</p>
+                        <p>地元の自慢できることや、旅行先で出会ったお気に入りの場所をみんなで共有するアプリ</p>
+                        
                       </div>
     
                       <div class="modal-footer">
@@ -99,7 +99,7 @@
                 </div>
            
               </div>
-              <div class="mr-5">
+              <div class="mr-lg-5">
                 <%= link_to user_session_path ,class: "mr-0" do%>
                   <%= image_tag 'login', size: "70x70" %>
                 <% end %>
