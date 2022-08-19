@@ -81,3 +81,61 @@
 .tab_panel{padding:80px 0; display:none;}
 .tab_panel p{font-size:14px; letter-spacing:1px; text-align:center;}
 .panel_area{background:#ffffff; border-bottom-right-radius:10px; border-bottom-left-radius:10px; border-top:8px solid #d7e9ea;}
+
+p {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    line-height: 2.5;
+    margin: 0;
+}
+ 
+
+ 
+.hide-text {
+    display: none;
+}
+ 
+ 
+button.readmore {
+    position: relative;
+    height: 80px;
+    width: 90px;
+    margin: 40px auto;
+    display: block;
+    background-color: transparent;
+    color: #666;
+    padding-bottom: 40px;
+    border: none;
+    outline: 0;
+    transition: .5s;
+    -erbkit-transition: .5s;
+}
+ 
+button.readmore::after {
+    content: " ";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-top: solid 3px #666;
+    border-right: solid 3px #666;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    right: 28px;
+    top: 25px;
+    transition: .5s;
+    -erbkit-transition: .5s;
+}
+ 
+button.readmore:hover::after {
+    top: 40px;
+}
+ 
+.on-click {
+    color: transparent!important;
+}
+ 
+.on-click {
+    transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+}
