@@ -147,7 +147,7 @@
       </div>
 
 
-      <div class="jumbotron back-color2">
+      <div class="jumbotron back-color2 border">
         <h4 class="display-5">マイページ</h4>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
 
@@ -220,20 +220,33 @@
 
 
 <script>
+
   // オプションを指定してSkipprの実行
 $(document).on('turbolinks:load', function(){
-  $('.a').slick({
+  $('.a').css({height: ''}).slick({
     dots: true,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
+    
   });
 });
 </script>
 
+<style>
+
+.a{
+  width: 300px;
+  height: 300px;
+}
+
+
+</style>
 
 <script>
+
 $(".tab_label").on("click",function(){
 	var $th = $(this).index();
+
 	$(".tab_label").removeClass("active");
 	$(".tab_panel").removeClass("active");
 	$(this).addClass("active");
@@ -257,6 +270,8 @@ $(".tab_label").on("click",function(){
   display:none;
   }
 }
-
+.border{
+  border-radius: 10px;
 }
+
 </style>

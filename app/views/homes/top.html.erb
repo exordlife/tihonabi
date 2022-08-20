@@ -131,7 +131,7 @@ function initMap(){
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
     <div class="tab_area">
-        		<label class="tab_label active" for="tab1">投稿</label>
+        		<label class="tab_label active" for="tab1">新しい順</label>
         		<% if user_signed_in? %>
         		<label class="tab_label" for="tab2">いいねランキング</label>
         		<% end %>
