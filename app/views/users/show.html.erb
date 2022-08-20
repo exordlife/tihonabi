@@ -1,10 +1,10 @@
 
-<div class="container px-5 px-sm-0 mt-5">
+<div class="container-md  mt-5">
   <div class="row">
-    <div class="col-8">
+    <div class="col-lg-8">
       <div class="tab_area">
-        		<label class="tab_label active" for="tab1">投稿</label>
-        		<label class="tab_label" for="tab2">いいね</label>
+        <label class="tab_label active" for="tab1">投稿</label>
+        <label class="tab_label" for="tab2">いいね</label>
       </div>
       <div class="panel_area col-12">
       	<div id="panel1" class="tab_panel active">
@@ -18,7 +18,7 @@
                 </div>
               <% end %>
       	    <% @posts.each do |post| %>
-            <div class="col-6 my-2">
+            <div class="col-lg-6 my-2">
               <div class="card back-color2 mt-3 pt-3 imaging h-100">
                 <div class="d-flex mb-1 ml-3">
                   <div>
@@ -26,7 +26,7 @@
                     <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
                   <% end %>
                   </div>
-                  <strong class="ml-2  my-auto"><%= post.user.name %></strong>
+                  <strong class="ml-2 my-auto"><%= post.user.name %></strong>
                 </div>
 
                 <div class="d-flex mb-3 m-3">
@@ -81,22 +81,21 @@
       	<div id="panel2" class="tab_panel">
       		<div class="row">
       		  <% if @favorite_posts.count==0 %>
-                <div class="mt-5 ml-5">
+                <div class="mt-lg-5 ml-lg-5">
                   <strong>いいねした投稿はまだありません。</strong>
                   <% if @user==current_user %>
                   <% end %>
                 </div>
               <% end %>
       	    <% @favorite_posts.each do |post| %>
-            <div class="col-6 my-2">
+            <div class="col-lg-6 my-2">
               <div class="card back-color2 mt-3 pt-3 imaging h-100">
                 <div class="d-flex mb-1 ml-3">
                   <%= link_to user_path(post.user) do %>
                     <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
                   <% end %>
-                  <strong class="ml-2  my-auto"><%= post.user.name %></strong>
-
-                </div>
+                  <strong class="ml-2 my-auto"><%= post.user.name %></strong>
+                 </div>
                 <div class="d-flex mb-3 m-3">
 
                 </div>
@@ -142,7 +141,7 @@
       	</div>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-4 display_none">
       <div class="mb-3">
          <%= image_tag @user.profile_image , class: "profile_img d-block mx-auto"%>
       </div>
@@ -251,3 +250,13 @@ $(".tab_label").on("click",function(){
     });
 });
 </script>
+
+<style>
+@media screen and (max-width:425px) {
+  .display_none{
+  display:none;
+  }
+}
+
+}
+</style>
