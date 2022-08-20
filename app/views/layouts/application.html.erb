@@ -95,20 +95,30 @@
       <div class="height1"></div>
       <%= yield %>
       <% if user_signed_in? %>
-       <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center bottom-nav  list-group-flush" style="background-color:#EDFFF6;">
+       <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center bottom-nav  list-group-flush" style="background-color:#F8F8FF;">
         <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
           <%= link_to root_path do %>
-           <%= image_tag 'pin', size: "17x25"%>
+           <%= image_tag 'footer1', size: "28x25"%>
           <% end %>
         </button>
         <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
           <%= link_to new_post_path do %>
-          <%= image_tag 'image', size: "25x25" %>
+          <%= image_tag 'footer2', size: "22x22" %>
           <% end %>
         </button>
         <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
           <%= link_to user_path(current_user) do %>
-          <%= image_tag 'image1', size: "25x25" %>
+          <%= image_tag 'footer3', size: "25x25" %>
+          <% end %>
+        </button>
+        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+          <%= link_to new_post_path do %>
+          <%= image_tag 'footer4', size: "25x25" %>
+          <% end %>
+        </button>
+        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+          <%= link_to user_path(current_user) do %>
+          <%= image_tag 'footer5', size: "25x25" %>
           <% end %>
         </button>
       </ul>

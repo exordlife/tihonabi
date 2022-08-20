@@ -8,7 +8,7 @@
 }
 .back-color3{
   background-color:	#7FFFD4;
-}	
+}
 
 .image_size{
   width: 90%;
@@ -109,14 +109,14 @@ p {
     line-height: 2.5;
     margin: 0;
 }
- 
 
- 
+
+
 .hide-text {
     display: none;
 }
- 
- 
+
+
 button.readmore {
     position: relative;
     height: 80px;
@@ -131,7 +131,7 @@ button.readmore {
     transition: .5s;
     -erbkit-transition: .5s;
 }
- 
+
 button.readmore::after {
     content: " ";
     position: absolute;
@@ -146,15 +146,15 @@ button.readmore::after {
     transition: .5s;
     -erbkit-transition: .5s;
 }
- 
+
 button.readmore:hover::after {
     top: 40px;
 }
- 
+
 .on-click {
     color: transparent!important;
 }
- 
+
 .on-click {
     transform: rotate(-180deg);
     -webkit-transform: rotate(-180deg);
