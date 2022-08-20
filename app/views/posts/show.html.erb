@@ -5,10 +5,18 @@
 }
 
 </style>
-<div class="container mt-5">
-  
-  <!--<div id='map' class="googlemap mb-3"></div>-->
-  <div class="card back-color2 mt-3 pt-3 imaging h-100 d-flex">
+<div class="container">
+  <div id="text-wrap">
+    <div class="show-text">
+    </div>
+    <div class="hide-text">
+    <!--<div id='map' class="googlemap"></div>-->
+    </div>
+    <button class="readmore">地図</button>
+  </div>
+
+
+  <div class="card back-color2 pt-3 imaging h-100 d-flex">
     <div class="row">
       <div class="col-lg-7">
         <div class="a">
@@ -56,10 +64,11 @@
       </div>
     </div>
   </div>
+
 </div>
 
-        
-      
+
+
 <script>
   // オプションを指定してSkipprの実行
 $(function() {
@@ -82,6 +91,17 @@ $(function() {
         autoplaySpeed: 5000,
     });
 
+});
+
+
+</script>
+
+<script>
+  $(function(){
+    $(".readmore").on("click", function() {
+        $(this).toggleClass("on-click");
+        $(".hide-text").slideToggle(1000);
+    });
 });
 </script>
 
@@ -125,7 +145,7 @@ $(function() {
 //       }
 //     });
 
-  
+
 //   });
 
 // }
