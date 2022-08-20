@@ -115,9 +115,9 @@ function initMap(){
           //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
         });
       }
-      
+
       // infoWindowは吹き出し
-      
+
       // markerがクリックされた時、
       marker[i].addListener("click", function(){
         // infoWindowを表示
@@ -128,6 +128,7 @@ function initMap(){
 
 }
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
     <div class="tab_area">
         		<label class="tab_label active" for="tab1">投稿</label>
@@ -167,6 +168,10 @@ function initMap(){
                     <%= post.genre.name %>
                   <% end %>
                 </h5>
+                <div class="text-right">
+                  <%= image_tag 'pin', size: "25x35" %>
+                  <%= post.address %>
+                </div>
                 <% if user_signed_in? %>
                 <div class="d-flex justify-content-between">
                   <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
@@ -219,6 +224,10 @@ function initMap(){
                     <%= post.genre.name %>
                   <% end %>
                 </h5>
+                <div class="text-right">
+                  <%= image_tag 'pin', size: "25x35" %>
+                  <%= post.address %>
+                </div>
                 <% if user_signed_in? %>
                 <div class="d-flex justify-content-between">
                   <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">

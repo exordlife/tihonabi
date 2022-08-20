@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="card back-color2 mt-3 pt-3 imaging h-100 d-flex">
     <div class="row">
-      <div class="col-7">
+      <div class="col-lg-7">
         <div class="a">
           <% @post.image.each do |image| %>
             <%= link_to post_path(@post) do %>
@@ -10,7 +10,7 @@
           <% end %>
         </div>
       </div>
-      <div class="col-5">
+      <div class="col-lg-5">
         <div class="card-body">
           <div class="d-flex">
             <%= link_to user_path(@post.user) do %>
@@ -26,6 +26,10 @@
               <%= @post.genre.name %>
             <% end %>
           </h5>
+          <div class="text-right">
+            <%= image_tag 'pin', size: "25x35" %>
+            <%= post.address %>
+          </div>
           <% if user_signed_in? %>
             <div class="favorite_buttons_<%= @post.id %> ml-2 mt-2">
               <%= render "favorites/favorites", post: @post %>

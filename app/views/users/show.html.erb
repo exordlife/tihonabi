@@ -21,14 +21,16 @@
             <div class="col-6 my-2">
               <div class="card back-color2 mt-3 pt-3 imaging h-100">
                 <div class="d-flex mb-1 ml-3">
-                  <%= link_to user_path(post.user) do %>
+                  <div>
+                    <%= link_to user_path(post.user) do %>
                     <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
                   <% end %>
+                  </div>
                   <strong class="ml-2  my-auto"><%= post.user.name %></strong>
-    
                 </div>
+
                 <div class="d-flex mb-3 m-3">
-    
+
                 </div>
                   <div class="a">
                     <% post.image.each do |image| %>
@@ -46,6 +48,10 @@
                       <%= post.genre.name %>
                     <% end %>
                   </h5>
+                  <div class="text-right">
+                    <%= image_tag 'pin', size: "25x35" %>
+                    <%= post.address %>
+                  </div>
                   <% if user_signed_in? %>
                   <div class="d-flex justify-content-between">
                     <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
@@ -58,7 +64,13 @@
                       <% end %>
                       <!-- ボタン・リンククリック後に表示される画面の内容 -->
                     </div>
+
                   </div>
+                    <% if @user==current_user %>
+                    <div class="text-right">
+                      <%= link_to "削除", post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' }%>
+                    </div>
+                    <% end %>
                   <% end %>
                 </div>
               </div>
@@ -83,10 +95,10 @@
                     <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
                   <% end %>
                   <strong class="ml-2  my-auto"><%= post.user.name %></strong>
-    
+
                 </div>
                 <div class="d-flex mb-3 m-3">
-    
+
                 </div>
                   <div class="a">
                     <% post.image.each do |image| %>
@@ -104,6 +116,10 @@
                       <%= post.genre.name %>
                     <% end %>
                   </h5>
+                  <div class="text-right">
+                    <%= image_tag 'pin', size: "25x35" %>
+                    <%= post.address %>
+                  </div>
                   <% if user_signed_in? %>
                   <div class="d-flex justify-content-between">
                     <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
@@ -133,16 +149,16 @@
 
 
       <div class="jumbotron back-color2">
-        <h4 class="display-5">マイページ <%= @user.favorites.count %></h4>
+        <h4 class="display-5">マイページ</h4>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
 
         <hr class="my-4">
 
         <strong>ユーザネーム</strong>
         <h4><%= @user.name %> Lv<%= @user.exp_sum.floor %> </h4>
-        <a href="#" data-toggle="modal" data-target="#exampleModal" data-backdrop="static">レベルを上げるには?</a>
+        <a href="#" data-toggle="modal" data-target="#examModal" data-backdrop="static">レベルを上げるには?</a>
         <!-- ボタン・リンククリック後に表示される画面の内容 -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="examModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
@@ -151,7 +167,12 @@
               </div>
 
               <div class="modal-body">
-                <p>おっはー</p>
+                ①投稿する<br>
+                ②いいねをもらう<br>
+                ③投稿の近くまで行きマップからレベルアップする<br>
+
+                レベルアップしたらこんなにいいことが！？<br>
+                着せ替えができるようになる！
               </div>
 
               <div class="modal-footer">
@@ -168,14 +189,14 @@
           <strong>メールアドレス</strong><br>
           <h4><%= @user.email %></h4><br>
           <div id="text-wrap">
- 
+
           <div class="show-text">
           </div>
-           
-           
+
+
           <div class="hide-text">
           <%= form_with model: @user, url: user_path(@user) ,local:true do |f| %>
-          
+
             <h4>ニックネーム</h4>
               <%= f.text_field :name %>
             <h4>ProfileImage</h4>
@@ -183,10 +204,10 @@
             <%= f.submit '更新', class: "btn btn-outline-info mt-3"%>
           <% end %>
           </div>
-           
+
             <button class="readmore">編集する</button>
           </div>
-          
+
         <% end %>
       </div>
     </div>
@@ -203,8 +224,9 @@
   // オプションを指定してSkipprの実行
 $(document).on('turbolinks:load', function(){
   $('.a').slick({
-    autoplay:true, // 自動再生
-    autoplaySpeed: 3000 // 再生速度（ミリ秒）
+    dots: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
   });
 });
 </script>
@@ -227,5 +249,5 @@ $(".tab_label").on("click",function(){
         $(this).toggleClass("on-click");
         $(".hide-text").slideToggle(1000);
     });
-}); 
+});
 </script>
