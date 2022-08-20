@@ -24,9 +24,10 @@ class PostsController < ApplicationController
             @exp=current_user.exp_sum
             @exp=@exp+(0.9**@exp)
             current_user.update(exp_sum: @exp)
+            flash[:notice1] = '経験値を得ました。'
           redirect_to post_path(@post)
         else
-          flash[:notice1] = '※画像を選択してください'
+          flash[:notice2] = '※画像を選択してください'
           @new_post=Post.new
           redirect_to new_post_path
         end
