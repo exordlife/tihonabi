@@ -102,7 +102,29 @@ function initMap(){
 
       // 変数iを変数idに代入
       let id = posts[i]['id']
-      if(dist<3){
+      
+      if(gon.user==posts[i].user_id){
+        infoWindow[i] = new google.maps.InfoWindow({
+          // contentで中身を指定
+          // 今回は文字にリンクを貼り付けた形で表示
+          content: `<div class="custom-info">
+            <div class="custom-info-item name">
+             あなたの投稿です。
+            </div>
+            <strong class="custom-info-item name">
+            ${posts[i].content}
+            </strong>
+            <div class="custom-info-item address">
+            場所→${posts[i].address}
+            </div>
+            <div class="custom-info-item tel">
+            <a href='/congratulations'>詳細を見る</a>
+            </div>
+        </div>`,
+          //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
+        });
+      }
+      else if(dist<3&&gon.user!=posts[i].user_id){
         infoWindow[i] = new google.maps.InfoWindow({
           // contentで中身を指定
           // 今回は文字にリンクを貼り付けた形で表示
@@ -114,16 +136,16 @@ function initMap(){
             場所→${posts[i].address}
             </div>
             <div class="custom-info-item tel">
-            <a href='/posts/${id}'>詳細を見る</a>
+            <a href='/congratulations'>詳細を見る</a>
             </div>
             <div class="custom-info-item google-map">
-            <a href="#" target="_blank">レベルアップする</a>
+            <a href="/congratulations" target="_blank">レベルアップする</a>
             </div>
         </div>`,
           //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
         });
       }
-      if(dist>=3){
+      else{
         infoWindow[i] = new google.maps.InfoWindow({
           // contentで中身を指定
           // 今回は文字にリンクを貼り付けた形で表示

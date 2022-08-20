@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       # @posts = Post.where(genre_id: params[:genre_id])
     #else
     @posts=@user.posts.order("created_at DESC")
-      
+
     #end
   end
 
@@ -30,6 +30,12 @@ class UsersController < ApplicationController
     @user.update(user_params)
     flash[:notice1] ="更新しました"
     redirect_to user_path(current_user)
+  end
+
+  def congratulations
+    @pre_exp=current_user.exp_sum
+    @after_exp=@pre_exp+2
+    current_user.update(exp_sum: @after_exp)
   end
 
   private
