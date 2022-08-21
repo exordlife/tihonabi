@@ -1,30 +1,70 @@
-<% @posts.each do |post| %>
-  <tr>
-    <td>
-      <%= link_to post_path(post) do %>
-        <% post.image.each do |image| %>
-          <%= image_tag image,size: "200x200" %>
+<div class="container mt-5">
+  <h4><%= @genre.name %></h4>
+  <div class="row">
+        <% @posts.each do |post| %>
+        <div class="col-lg-4 my-2">
+            <div class="card back-color2 mt-3 pt-3 imaging h-100">
+              <div class="d-flex mb-1 ml-3">
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+                <% end %>
+                <strong class="ml-2  my-auto"><%= post.user.name %></strong>
+  
+              </div>
+              <div class="d-flex mb-3 m-3">
+  
+              </div>
+                <div class="a">
+                  <% post.image.each do |image| %>
+                    <%= link_to post_path(post) do %>
+                      <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <div>
+                    <%= post.content %>
+                  </div>
+                  <%= link_to genre_path(post.genre) do %>
+                    <%= post.genre.name %>
+                  <% end %>
+                </h5>
+                <div class="text-right">
+                  <%= image_tag 'pin', size: "25x35" %>
+                  <%= post.address %>
+                </div>
+                <% if user_signed_in? %>
+                <div class="d-flex justify-content-between">
+                  <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
+                  <%= render "favorites/favorites", post: post %>
+                  </div>
+                  <div></div>
+                  <div class="pull-right">
+                    <%= link_to post_path(post) do %>
+                      <%= image_tag 'modal', size: "45x35" %>
+                    <% end %>
+                    <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                  </div>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
         <% end %>
-      <% end %>
-    </td>
-    <td>
-      <%= post.title %>
-    </td>
-    <td>
-      <%= post.content %>
-      <%= post.genre.name %>
-    </td>
-    <% if user_signed_in? %>
-    <td>
-      <% if post.user==current_user %>
-        <%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
-      <% end %>
-    </
-    <td class="favorite_buttons_<%= post.id %>">
-    　<%= render "favorites/favorites", post: post %>
-    <td>
-      <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
-    </td>
-    <% end %>
-  </tr>
-<% end %>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // オプションを指定してSkipprの実行
+$(function() {
+    $('.a').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+    });
+
+});
+</script>

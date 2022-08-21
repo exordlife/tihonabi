@@ -1,34 +1,59 @@
-<h2>登録</h2>
+<style>
+  .gradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #2af598 0%, #009efd 100%);
+}
+</style>
+<div class="gradient">
+<div class="container px-5 px-sm-0 mt-5 back">
 
-<%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+  <div class="row d-lg-flex">
 
-  <div class="actions">
-    <%= f.submit "登録完了" %>
-  </div>
-<% end %>
+    <div class="col-lg-6  d-lg-flex align-items-center">
+        <div class="mr-lg-5 mb-3">
+          <%= image_tag 'Tippylogo', class:"img-fluid"%>
+        </div>
+      </div>
+    <div class="col-lg-5">
+      <div class="d-flex justify-content-center">
+        <%= image_tag 'Sign up', size:"120x50"%>
+      </div>
 
-<%= render "devise/shared/links" %>
+      <div class="d-flex justify-content-center">
+        <div>
+          <%= form_with model: @user, url: user_registration_path do |f| %>
+            <div class="field mt-3">
+              <strong>ユーザ名</strong><br>
+              <%= f.text_field :name , :class => "form-control" %>
+            </div>
+            <div class="field mt-3">
+              <strong>メールアドレス</strong><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control" %>
+            </div>
+            <div class="field mt-3">
+              <strong>パスワード</strong>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %>文字以上)</em>
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "new-password" , :class => "form-control"%>
+            </div>
+            <div class="field mt-3">
+              <strong>パスワード確認</strong><br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control" %>
+            </div>
+            <div class="actions mt-3">
+              <%= f.submit "登録完了",class: "btn btn-outline-success" %>
+            </div>
+            <div class="mt-2">
+              <%= render "devise/shared/links" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

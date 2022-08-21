@@ -1,32 +1,98 @@
-<%= flash[:notice] %>
+<style>
+@media screen and (max-width:425px) {
+  .img_size{
+  width: 120px;
+  height: 120px;
+  }
+}
 
-<div class="container px-5 px-sm-0">
-  <%= form_with model: @new_post do |f| %>
-    <h4>画像</h4>
-      <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
-      <%= image_tag 'camera', size: "200x200", onClick: "$('.img_field').click()", class: 'center-block img-thumbnail img-responsive img_prev'%>
-    <h4>タイトル</h4>
-      <%= f.text_field :title %>
-    <h4>説明</h4>
-      <%= f.text_area :content %>
-    <h4>住所</h4>
-      <%= f.text_field :address %>
-    <h4>ジャンル  </h4>
-      <%= f.collection_select :genre_id, Genre.all, :id, :name %>
-    <%= f.submit '投稿' %>
-  <% end %>
+</style>
+
+
+<div class="container px-5 px-sm-0 mt-5 mb-5">
+
+
+    <%= form_with model: @new_post do |f| %>
+      <div class="d-lg-flex justify-content-evenly">
+
+        <div class="img_prever col-lg-4 ml-lg-5">
+          <div class="ml-3">
+            <%= flash[:notice2] %>
+          </div>
+          <strong class="ml-3">最大4枚まで投稿できます</strong>
+         <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
+
+          <div class="d-flex justify-content-start">
+            <%= image_tag 'cameraA', size: "250x250", onClick: "$('.img_field').click()", class: 'img_prev img_size'%>
+            <%= image_tag 'cameraB', size: "250x250", onClick: "$('.img_field').click()",  class: 'img_pre img_size'%>
+          </div>
+          <div class="d-flex justify-content-start">
+            <%= image_tag 'cameraC', size: "250x250", onClick: "$('.img_field').click()", class: 'img_pr img_size'%>
+            <%= image_tag 'cameraD', size: "250x250", onClick: "$('.img_field').click()",  class: 'img_p img_size'%>
+          </div>
+        </div>
+
+
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-5">
+          <div class="my-3">
+            <div class="field mt-3">
+              <h4>自慢ポイント</h4>
+              <%= f.text_area :content , :class => "form-control" %>
+            </div>
+          </div>
+          <div class="my-3">
+            <div class="field mt-3">
+            <h4>住所</h4>
+            <div>
+              例1)渋谷駅<br>
+              例2)東京都墨田区押上1-1-2<br>
+              例3)別府温泉
+
+            </div>
+            <%= f.text_field :address , :class => "form-control" %>
+            </div>
+          </div>
+          <div class="my-3">
+            <h4>ハッシュタグ</h4>
+            <%= f.collection_select :genre_id, Genre.all, :id, :name, class: "m-form-select " %>
+          </div>
+          <div class="d-grid gap-2">
+            <%= f.submit '投稿',class: "btn btn-outline-info"%>
+          </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    <% end %>
+
 </div>
-
 
 <script>
 $(function () {
   function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('.img_prev').attr('src', e.target.result);
+    for (let i = 0; i < input.files.length; i++){
+      if (input.files && input.files[i]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          if (i==0){
+            $('.img_prev').attr('src', e.target.result);
+          }
+          if (i==1){
+            $('.img_pre').attr('src', e.target.result);
+          }
+          if (i==2){
+            $('.img_pr').attr('src', e.target.result);
+          }
+          if (i==3){
+            $('.img_p').attr('src', e.target.result);
+          }
+        }
+        reader.readAsDataURL(input.files[i]);
       }
-      reader.readAsDataURL(input.files[0]);
     }
   }
 

@@ -11,15 +11,16 @@ class Post < ApplicationRecord
   with_options presence: true do
     validates :image
   end
-
-
+  
+  serialize :leveleduser, Array
 
   def self.search(keyword)
-    where(["title like? OR content like?", "%#{keyword}%", "%#{keyword}%"])
+    where(["address like? OR content like?", "%#{keyword}%", "%#{keyword}%"])
   end
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+  
 
 end

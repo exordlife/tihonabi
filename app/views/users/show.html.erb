@@ -1,48 +1,262 @@
-<li>
-          <%= link_to "Tippy", root_path, class: "navbar-brand"%>
-        </li>
-<div class="container px-5 px-sm-0">
-  <div class="jumbotron">
-    <h4 class="display-5">マイページ</h4>
-    <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
-    
-    <hr class="my-4">
-    <p><%= image_tag @user.get_profile_image(50,500) %></p>
-    <strong>ユーザネーム</strong><br>
-    <strong><%= @user.name %></strong><br>
-    <br>
-    
-    <h4>レベル<%= @user.exp_sum.floor %></h4>
-    
-    <% if @user==current_user %>
-      <strong>メールアドレス</strong><br>
-      <strong><%= @user.email %></strong><br>
-      <div class="mt-3"><%= link_to "編集する", edit_user_path,class: "btn btn-outline-info" %></div>
-    <% end %>
+
+<div class="container-md  mt-5">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="tab_area display_none">
+        <label class="tab_label active" for="tab1">投稿</label>
+        <label class="tab_label" for="tab2">いいね</label>
+      </div>
+      <div class="panel_area col-12">
+      	<div id="panel1" class="tab_panel active">
+      	  <div class="row">
+      	     <% if @posts.count==0 %>
+                <div class="mt-5 ml-5">
+                  <strong>投稿はまだありません。</strong>
+                  <% if @user==current_user %>
+                  <strong><%= link_to "自慢写真をアップしましょう", new_post_path %></strong>
+                  <% end %>
+                </div>
+              <% end %>
+      	    <% @posts.each do |post| %>
+            <div class="col-lg-6 my-2">
+              <div class="card back-color2 mt-3 pt-3 imaging h-100">
+                <div class="d-flex mb-1 ml-3">
+                  <div>
+                    <%= link_to user_path(post.user) do %>
+                    <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+                  <% end %>
+                  </div>
+                  <strong class="ml-2 my-auto"><%= post.user.name %></strong>
+                </div>
+
+                <div class="d-flex mb-3 m-3">
+
+                </div>
+                  <div class="a">
+                    <% post.image.each do |image| %>
+                      <%= link_to post_path(post) do %>
+                        <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <div>
+                      <%= post.content %>
+                    </div>
+                    <%= link_to genre_path(post.genre) do %>
+                      <%= post.genre.name %>
+                    <% end %>
+                  </h5>
+                  <div class="text-right">
+                    <%= image_tag 'pin', size: "25x35" %>
+                    <%= post.address %>
+                  </div>
+                  <% if user_signed_in? %>
+                  <div class="d-flex justify-content-between">
+                    <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
+                    <%= render "favorites/favorites", post: post %>
+                    </div>
+                    <div></div>
+                    <div class="pull-right">
+                      <%= link_to post_path(post) do %>
+                        <%= image_tag 'modal', size: "45x35" %>
+                      <% end %>
+                      <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                    </div>
+
+                  </div>
+                    <% if @user==current_user %>
+                    <div class="text-right">
+                      <%= link_to "削除", post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' }%>
+                    </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+      	  </div>
+      	</div>
+      	<div id="panel2" class="tab_panel">
+      		<div class="row">
+      		  <% if @favorite_posts.count==0 %>
+                <div class="mt-lg-5 ml-lg-5">
+                  <strong>いいねした投稿はまだありません。</strong>
+                  <% if @user==current_user %>
+                  <% end %>
+                </div>
+              <% end %>
+      	    <% @favorite_posts.each do |post| %>
+            <div class="col-lg-6 my-2">
+              <div class="card back-color2 mt-3 pt-3 imaging h-100">
+                <div class="d-flex mb-1 ml-3">
+                  <%= link_to user_path(post.user) do %>
+                    <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+                  <% end %>
+                  <strong class="ml-2 my-auto"><%= post.user.name %></strong>
+                 </div>
+                <div class="d-flex mb-3 m-3">
+
+                </div>
+                  <div class="a">
+                    <% post.image.each do |image| %>
+                      <%= link_to post_path(post) do %>
+                        <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <div>
+                      <%= post.content %>
+                    </div>
+                    <%= link_to genre_path(post.genre) do %>
+                      <%= post.genre.name %>
+                    <% end %>
+                  </h5>
+                  <div class="text-right">
+                    <%= image_tag 'pin', size: "25x35" %>
+                    <%= post.address %>
+                  </div>
+                  <% if user_signed_in? %>
+                  <div class="d-flex justify-content-between">
+                    <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
+                    <%= render "favorites/favorites", post: post %>
+                    </div>
+                    <div></div>
+                    <div class="pull-right">
+                      <%= link_to post_path(post) do %>
+                        <%= image_tag 'modal', size: "45x35" %>
+                      <% end %>
+                      <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                    </div>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+      	  </div>
+      	</div>
+      </div>
+    </div>
+    <div class="col-4 display_none">
+      <div class="mb-3">
+         <%= image_tag @user.get_profile_image , class: "profile_img d-block mx-auto"%>
+      </div>
+
+
+      <div class="jumbotron back-color2 border">
+        <h4 class="display-5">マイページ</h4>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
+
+        <hr class="my-4">
+
+        <strong>ユーザネーム</strong>
+        <h4><%= @user.name %> Lv<%= @user.exp_sum.floor %> </h4>
+        <a href="#" data-toggle="modal" data-target="#examModal" data-backdrop="static">レベルを上げるには?</a>
+        <!-- ボタン・リンククリック後に表示される画面の内容 -->
+        <div class="modal fade" id="examModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5 class="modal-title">レベルを上げるには?</h5>
+              </div>
+
+              <div class="modal-body">
+                ①投稿する<br>
+                ②いいねをもらう<br>
+                ③投稿の近くまで行きマップからレベルアップする<br>
+
+                レベルアップしたらこんなにいいことが！？<br>
+                着せ替えができるようになる！
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <% if @user==current_user %>
+          <strong>メールアドレス</strong><br>
+          <h4><%= @user.email %></h4><br>
+          <div id="text-wrap">
+            <div class="show-text">
+            </div>
+            <div class="hide-text">
+            <%= form_with model: @user, url: user_path(@user) ,local:true do |f| %>
+              <h4>ニックネーム</h4>
+                <%= f.text_field :name %>
+              <h4>ProfileImage</h4>
+                <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png" %>
+              <%= f.submit '更新', class: "btn btn-outline-info mt-3"%>
+            <% end %>
+            </div>
+            <button class="readmore">編集する</button>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
   </div>
-  <h3>種類一覧</h3>
-   <p><%= link_to "全て", user_path(@user) %></p>
-  <% @genres.each do |genre| %>
-    <p><%= link_to genre.name, user_path(genre_id: genre.id) %></p>
-  <% end %>
- 
-  <% @posts.each do |post| %>
-    <%= link_to post_path(post) do %>
-      <% post.image.each do |image| %>
-        <%= image_tag image,size: "200x200" %>
-      <% end %>
-      <p><%= post.genre.name %></p>
-      <p>タイトル：<%= post.title %></p>
-      <p>説明：<%= post.content %></p>
-      <p>ユーザーネーム：<%= post.user.name %></p>
-      <% if post.user==current_user %>
-      <p><%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></p>
-      <% end %>
-    <% end %>
-  <% end %>
 </div>
 <% if current_user.id==1 %>
 <li>
   <%= link_to "ジャンル", genres_path, class: "navbar-brand"%>
 </li>
 <% end %>
+
+
+<script>
+
+  // オプションを指定してSkipprの実行
+$(document).on('turbolinks:load', function(){
+  $('.a').css({height: ''}).slick({
+    dots: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+
+  });
+});
+</script>
+
+<script>
+
+$(".tab_label").on("click",function(){
+	var $th = $(this).index();
+
+	$(".tab_label").removeClass("active");
+	$(".tab_panel").removeClass("active");
+	$(this).addClass("active");
+	$(".tab_panel").eq($th).addClass("active");
+});
+</script>
+
+
+<script>
+  $(function(){
+    $(".readmore").on("click", function() {
+        $(this).toggleClass("on-click");
+        $(".hide-text").slideToggle(1000);
+    });
+});
+</script>
+
+<style>
+@media screen and (max-width:425px) {
+  .display_none{
+  display:none;
+  }
+}
+.border{
+  border-radius: 10px;
+}
+
+</style>
