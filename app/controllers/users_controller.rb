@@ -36,6 +36,7 @@ class UsersController < ApplicationController
     @pre_exp=current_user.exp_sum
     @after_exp=@pre_exp+2
     current_user.update(exp_sum: @after_exp)
+    
   end
 
   private
