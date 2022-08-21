@@ -1,30 +1,159 @@
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Tippy</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <head>
+      <title>Tippy</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
 
-    <%= include_gon %>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-   
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <%= include_gon %>
+      <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  </head>
-  <body class="back-color">
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+      <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    </head>
+    <body class="back-color">
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container">
+
+            <% if user_signed_in? %>
+            <%= link_to root_path, class: "display_none" do%>
+              <%= image_tag 'Tippy' , size: "150x55"%>
+            <% end %>
+
+            <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
+              <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2 display_none" ,placeholder: "キーワード検索"%>
+              <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md display_none" do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+            <% end %>
+            <div class="display_none">
+              <%= link_to new_post_path ,class: "mr-0" do%>
+                <%= image_tag 'image', size: "70x70" %>
+              <% end %>
+            </div>
+            <div class="display_none mr-3">
+              <%= link_to user_path(current_user), class: "image" do %>
+                <%= image_tag 'image1', size: "70x70"%>
+              <% end %>
+            </div>
+            <div class="d-sm-none d-flex fixed-top py-3 pl-1 back-color">
+
+                <%= link_to root_path do%>
+                  <%= image_tag 'Tippy' , size: "90x38"%>
+                <% end %>
+
+                <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
+                  <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
+                  <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+                    <i class="fa fa-search"></i>
+                  <% end %>
+                <% end %>
+              </div>
+
+            </div>
+            <% else %>
+            <%= link_to root_path do%>
+              <%= image_tag 'Tippy' , size: "150x55"%>
+            <% end %>
+              <span class="d-flex mt-1">
+                <div class="mr-lg-5">
+                  <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-backdrop="static"><%= image_tag 'hatena', size: "50x50" %></button>
+                  <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Tippyとは？</h5>
+                        </div>
+                        <div class="modal-body">
+                          <p>地元の自慢できることや、旅行先で出会ったお気に入りの場所をみんなで共有するアプリ</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mr-lg-5">
+                  <%= link_to user_session_path ,class: "mr-0" do%>
+                    <%= image_tag 'login', size: "70x70" %>
+                  <% end %>
+                </div>
+            </span>
+            <% end %>
+          </div>
+      </nav>
+    </header>
+
+      <div class="height1"></div>
       <%= yield %>
+      <% if user_signed_in? %>
+       <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center bottom-nav  list-group-flush" style="background-color:#F8F8FF;">
+        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+          <%= link_to root_path do %>
+           <%= image_tag 'footer1', size: "28x25"%>
+          <% end %>
+        </button>
+        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+          <%= link_to new_post_path do %>
+          <%= image_tag 'footer2', size: "22x22" %>
+          <% end %>
+        </button>
+        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+          <%= link_to user_path(current_user) do %>
+          <%= image_tag 'footer3', size: "25x25" %>
+          <% end %>
+        </button>
+        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+          <%= link_to new_post_path do %>
+          <%= image_tag 'footer4', size: "25x25" %>
+          <% end %>
+        </button>
+        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+          <%= link_to user_path(current_user) do %>
+          <%= image_tag 'footer5', size: "25x25" %>
+          <% end %>
+        </button>
+      </ul>
+      <% end %>
     <footer>
       <div class="container mt-5">
         <div class="row">
-          <div class="mx-auto">
-            <p>CopyRight tippy.inc</p>
-          </div>
+          <br><br><br><br>
         </div>
       </div>
     </footer>
   </body>
 </html>
+
+
+
+<style>
+@media screen and (max-width:425px) {
+  .display_none{
+  display:none;
+  }
+}
+
+@media screen and (min-width:425px) {
+  .bottom-nav {
+    display:none;
+  }
+  .display_none2{
+  display:none;
+  }
+}
+</style>
+
+<style>
+  .height1{
+    height: 50px;
+  }
+</style>

@@ -1,5 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+.back-color{
+  background-color: #EDFFF6;
+}
+.back-color2{
+  background-color:	#DDFFFF;
+}
+.back-color3{
+  background-color:	#7FFFD4;
+}
+
+.image_size{
+  width: 90%;
+  height: 300px;
+  object-fit: contain;
+}
+
+.image_size2{
+  width: 600px;
+  height: 600px;
+  object-fit: contain;
+}
+
 
 .profile_img {
     border-radius: 50%;  /*角を丸くする指定*/
@@ -72,12 +94,77 @@
 }
 
 
-.tab_area label.active{background:#fff; color:#000;}
+.tab_area label.active{background:#90c9cc; color:#fff;}
 .tab_panel.active{display:block;}
-
-.tab_area{font-size:0; padding:0 55px;}
-.tab_area label{width:110px; display:inline-block; padding:14px 0 12px; color:#fff; background:#90c9cc; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity; border-top-left-radius:10px; border-top-right-radius:10px; vertical-align:bottom; transition:ease 0.2s; margin:10px 5px 0;}
+.tab_area{font-size:0; padding:0 30px;}
+.tab_area label{width:125px; display:inline-block; padding:14px 0 12px; color:#000; background:#fff; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity; border-top-left-radius:10px; border-top-right-radius:10px; vertical-align:bottom; transition:ease 0.2s; margin:10px 5px 0;}
 .tab_area label:hover{opacity:0.5;}
-.tab_panel{padding:80px 0; display:none;}
-.tab_panel p{font-size:14px; letter-spacing:1px; text-align:center;}
-.panel_area{background:#ffffff; border-bottom-right-radius:10px; border-bottom-left-radius:10px; border-top:8px solid #d7e9ea;}
+.tab_panel{padding:15px 0; display:none;}
+.panel_area{background:#ffffff; border-bottom-right-radius:10px; border-bottom-left-radius:10px; border-top:8px solid #d7e9ea; border-radius: 10px;}
+
+p {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    line-height: 2.5;
+    margin: 0;
+}
+
+
+
+.hide-text {
+    display: none;
+}
+
+
+button.readmore {
+    position: relative;
+    height: 80px;
+    width: 90px;
+    margin: 10px auto;
+    display: block;
+    background-color: transparent;
+    color: #666;
+    padding-bottom: 40px;
+    border: none;
+    outline: 0;
+    transition: .5s;
+    -erbkit-transition: .5s;
+}
+
+button.readmore::after {
+    content: " ";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-top: solid 3px #666;
+    border-right: solid 3px #666;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    right: 28px;
+    top: 25px;
+    transition: .5s;
+    -erbkit-transition: .5s;
+}
+
+button.readmore:hover::after {
+    top: 40px;
+}
+
+.on-click {
+    color: transparent!important;
+}
+
+.on-click {
+    transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+}
+
+
+.googlemap {
+border-radius: 30px;
+-webkit-border-radius: 30px;
+-moz-border-radius: 30px;
+}
+
+

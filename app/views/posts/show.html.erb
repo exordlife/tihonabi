@@ -1,111 +1,73 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
+<style>
+#map {
+  height: 300px;
+  width: 100%;
+}
 
-      <%= link_to root_path do%>
-        <%= image_tag 'Tippy' , size: "150x55"%>
-      <% end %>
-      <% if user_signed_in? %>
-      <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
-        <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
-        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
-          <i class="fa fa-search"></i>
-        <% end %>
-      <% end %>
-      <span class="d-flex">
-          <div class="mr-5">
-            <%= link_to new_post_path ,class: "mr-0" do%>
-              <%= image_tag 'image', size: "70x70" %>
-            <% end %>
-          </div>
-          <div class="mr-5">
-            <%= link_to user_path(current_user), class: "image" do %>
-              <%= image_tag 'image1', size: "70x70" %>
-            <% end %>
-          </div>
-          <div>
-            <%= link_to user_path(current_user), class: "image" do %>
-              <%= image_tag 'hatena', size: "70x70" %>
-            <% end %>
-          </div>
-      </span>
-      <% else %>
-        <li>
-          <%= link_to "Tippy", root_path, class: "navbar-brand"%>
-        </li>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path, class: "navbar-brand" %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path, class: "navbar-brand" %>
-        </li>
-      <% end %>
+</style>
+<div class="container">
+  <%= flash[:notice1] %>
+  <div id="text-wrap">
+    <div class="show-text">
     </div>
-  </nav>
+    <div class="hide-text">
+    <!--<div id='map' class="googlemap"></div>-->
+    </div>
+    <button class="readmore">地図</button>
+  </div>
 
-</header>
 
-
-<div class="container mt-5">
-  <div class="card back-color2 mt-3 pt-3 imaging h-100 d-flex">
+  <div class="card back-color2 pt-3 imaging h-100 d-flex">
     <div class="row">
-      <div class="col-7">
+      <div class="col-lg-7">
         <div class="a">
           <% @post.image.each do |image| %>
             <%= link_to post_path(@post) do %>
-              <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size2" %>
+              <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto img-fluid" %>
             <% end %>
           <% end %>
         </div>
       </div>
-      <div class="col-5">
+      <div class="col-lg-5">
         <div class="card-body">
           <div class="d-flex">
             <%= link_to user_path(@post.user) do %>
-              <%= image_tag @post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+              <%= image_tag @post.user.get_profile_image , class: "profile_img2 d-block mx-auto"%>
             <% end %>
             <strong class="ml-2  my-auto"><%= @post.user.name %></strong>
           </div>
           <h5 class="card-title">
-            <div>
+            <div class="mt-4">
               <%= @post.content %>
             </div>
             <%= link_to genre_path(@post.genre) do %>
               <%= @post.genre.name %>
             <% end %>
           </h5>
+          <div class="text-right mb-4">
+            <%= image_tag 'pin', size: "25x35" %>
+            <%= @post.address %>
+          </div>
           <% if user_signed_in? %>
-            <div class="favorite_buttons_<%= @post.id %> ml-2 mt-2">
+          <div class="d-flex justify-content-between">
+            <div class="favorite_buttons_<%= @post.id %> mt-2">
               <%= render "favorites/favorites", post: @post %>
             </div>
             <div class="form_table">
               <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
             </div>
+          </div>
             <div class="comments_table">
               <%= render "post_comments/comments", post: @post %>
             </div>
           <% end %>
-              
-              
         </div>
       </div>
     </div>
   </div>
+
 </div>
 
-        
-      
-<script>
-  // オプションを指定してSkipprの実行
-$(function() {
-    $('.a').slick({
-        dots: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
-    });
-
-});
-</script>
 
 
 <script>
@@ -119,3 +81,75 @@ $(function() {
 
 });
 </script>
+
+
+<script>
+  // オプションを指定してSkipprの実行
+$(function() {
+    $('.a').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+    });
+
+});
+
+
+</script>
+
+<script>
+  $(function(){
+    $(".readmore").on("click", function() {
+        $(this).toggleClass("on-click");
+        $(".hide-text").slideToggle(1000);
+    });
+});
+</script>
+
+<script>
+// let map
+
+// let marker = []; // マーカーを複数表示させたいので、配列化
+// let infoWindow = []; // 吹き出しを複数表示させたいので、配列化
+// const post = gon.post; // コントローラーで定義したインスタンス変数を変数に代入
+
+// function initMap(){
+
+//   // 現在位置の特定
+//   navigator.geolocation.getCurrentPosition(function (position){
+//     // LatLngに位置座標を代入
+//     LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+//     // mapの初期位置設定
+//     map = new google.maps.Map(document.getElementById('map'), {
+//       center: {lat: post.latitude, lng: post.longitude},
+//       //倍率はお好みで
+//       zoom: 8,
+
+//       mapTypeControl: false,
+//       mapId: '36c981c5b4a8e2b0',
+//       navigationControl: false,
+//       gestureHandling: "auto"
+
+
+//     });
+
+//     // forは繰り返し処理
+//     // 変数iを0と定義し、
+//     // その後gonで定義したstudios分繰り返し加える処理を行う
+//     marker = new google.maps.Marker({
+//       map: map,
+//       position: {
+//           // DBに保存してある、緯度・経度を呼び出す
+//         lat: post.latitude,
+//         lng: post.longitude
+//       }
+//     });
+
+
+//   });
+
+// }
+</script>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=<%#= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>-->
