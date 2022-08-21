@@ -131,6 +131,7 @@ GEM
     minitest (5.16.2)
     msgpack (1.5.4)
     multi_json (1.15.0)
+    mysql2 (0.5.4)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -150,8 +151,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     public_suffix (4.0.7)
-    puma (5.6.4)
-      nio4r (~> 2.0)
+    puma (3.12.6)
     racc (1.6.0)
     rack (2.2.4)
     rack-mini-profiler (2.3.4)
@@ -274,10 +274,11 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.3)
+  mysql2
   net-imap
   net-pop
   net-smtp
-  puma (~> 5.0)
+  puma (~> 3.11)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4)
   sass-rails (>= 6)
