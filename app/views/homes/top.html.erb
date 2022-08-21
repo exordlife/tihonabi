@@ -102,7 +102,7 @@ function initMap(){
 
       // 変数iを変数idに代入
       let id = posts[i]['id']
-      
+
       if(gon.user==posts[i].user_id){
         infoWindow[i] = new google.maps.InfoWindow({
           // contentで中身を指定
@@ -118,13 +118,13 @@ function initMap(){
             場所→${posts[i].address}
             </div>
             <div class="custom-info-item tel">
-            <a href='/congratulations'>詳細を見る</a>
+            <a href='/posts/${id}'>詳細を見る</a>
             </div>
         </div>`,
           //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
         });
       }
-      else if(dist<3&&gon.user!=posts[i].user_id){
+      else if(dist<3 && gon.user!=posts[i].user_id && !posts[i].leveleduser.includes(gon.user) && gon.user!=null){
         infoWindow[i] = new google.maps.InfoWindow({
           // contentで中身を指定
           // 今回は文字にリンクを貼り付けた形で表示
@@ -139,7 +139,7 @@ function initMap(){
             <a href='/posts/${id}'>詳細を見る</a>
             </div>
             <div class="custom-info-item google-map">
-            <a href='/congratulations'>レベルアップする</a>
+            <a href='/congratulationscreate/${id}'>レベルアップする</a>
             </div>
         </div>`,
           //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
@@ -193,7 +193,7 @@ function initMap(){
             <div class="card back-color2 mt-3 pt-3 imaging h-100">
               <div class="d-flex mb-1 ml-3">
                 <%= link_to user_path(post.user) do %>
-                  <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+                  <%= image_tag post.user.get_profile_image , class: "profile_img2 d-block mx-auto"%>
                 <% end %>
                 <strong class="ml-2  my-auto"><%= post.user.name %></strong>
 
@@ -249,7 +249,7 @@ function initMap(){
             <div class="card back-color2 mt-3 pt-3 imaging h-100">
               <div class="d-flex mb-1 ml-3">
                 <%= link_to user_path(post.user) do %>
-                  <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto "%>
+                  <%= image_tag post.user.get_profile_image , class: "profile_img2 d-block mx-auto "%>
                 <% end %>
                 <strong class="ml-2  my-auto"><%= post.user.name %></strong>
 

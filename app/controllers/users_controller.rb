@@ -32,12 +32,7 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user)
   end
 
-  def congratulations
-    @pre_exp=current_user.exp_sum
-    @after_exp=@pre_exp+2
-    current_user.update(exp_sum: @after_exp)
-    
-  end
+  
 
   private
   def user_params

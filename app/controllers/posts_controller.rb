@@ -39,9 +39,24 @@ class PostsController < ApplicationController
         @post.destroy
         redirect_to user_path(current_user)
     end
+    
+    def congratulationscreate
+        @post=Post.find(params[:id])
+        @post.leveleduser.push(current_user.id)
+        @post.save
+        @pre_exp=current_user.exp_sum
+        @after_exp=@pre_exp+2
+        current_user.update(exp_sum: @after_exp)
+        redirect_to congratulations_path
+    end
 
+    def congratulations
+        @pre_exp=current_user.exp_sum-2
+        @after_exp=current_user.exp_sum
+
+    end
     private
     def post_params
-        params.require(:post).permit(:content, :genre_id ,:address, :latitude, :longitude, image: [])
+        params.require(:post).permit(:content, :genre_id ,:address, :latitude, :leveleduser, :longitude, image: [])
     end
 end

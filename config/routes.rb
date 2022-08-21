@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:show, :edit, :update]
   resources :genres, only:[:index, :create, :destroy, :update, :edit, :show]
-  get 'congratulations' => 'users#congratulations'
+  get 'congratulationscreate/:id' => 'posts#congratulationscreate', as: 'congratulationscreate'
+  get 'congratulations' => 'posts#congratulations', as: 'congratulations'
 end

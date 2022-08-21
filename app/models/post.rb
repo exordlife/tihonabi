@@ -11,8 +11,8 @@ class Post < ApplicationRecord
   with_options presence: true do
     validates :image
   end
-
-
+  
+  serialize :leveleduser, Array
 
   def self.search(keyword)
     where(["address like? OR content like?", "%#{keyword}%", "%#{keyword}%"])
