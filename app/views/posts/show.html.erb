@@ -32,7 +32,7 @@
         <div class="card-body">
           <div class="d-flex">
             <%= link_to user_path(@post.user) do %>
-              <%= image_tag @post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+              <%= image_tag @post.user.get_profile_image , class: "profile_img2 d-block mx-auto"%>
             <% end %>
             <strong class="ml-2  my-auto"><%= @post.user.name %></strong>
           </div>
