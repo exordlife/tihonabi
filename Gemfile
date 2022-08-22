@@ -74,3 +74,5 @@ gem 'gon'
 gem 'geocoder'
 
 gem 'devise-i18n'
+
+gem "aws-sdk-s3", require: false #追記
