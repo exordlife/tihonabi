@@ -5,8 +5,18 @@
         <div class="col-lg-4 my-2">
           <div class="card back-color2 mt-3 pt-3 imaging h-100">
             <div class="d-flex mb-1 ml-3">
-              <%= link_to user_path(post.user) do %>
-                <%= image_tag post.user.get_profile_image , class: "profile_img2 d-block mx-auto"%>
+              <% if post.user.exp_sum<5 %>
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2_1 d-block mx-auto"%>
+                <% end %>
+              <% elsif post.user.exp_sum<10%>
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2_2 d-block mx-auto"%>
+                <% end %>
+              <% elsif%>
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2_3 d-block mx-auto"%>
+                <% end %>
               <% end %>
               <strong class="ml-2  my-auto"><%= post.user.name %></strong>
 

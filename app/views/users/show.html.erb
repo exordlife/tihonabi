@@ -1,5 +1,4 @@
-<div class="container-md  mt-5">
-
+<div class="container-md mt-5">
   <div class="row display_none">
     <div class="col-lg-8">
       <div class="tab_area display_none">
@@ -22,9 +21,19 @@
               <div class="card back-color2 mt-3 pt-3 imaging h-100">
                 <div class="d-flex mb-1 ml-3">
                   <div>
-                    <%= link_to user_path(post.user) do %>
-                    <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
-                  <% end %>
+                    <% if post.user.exp_sum<5 %>
+                      <%= link_to user_path(post.user) do %>
+                        <%= image_tag post.user.profile_image , class: "profile_img2_1 d-block mx-auto"%>
+                      <% end %>
+                    <% elsif post.user.exp_sum<10%>
+                      <%= link_to user_path(post.user) do %>
+                        <%= image_tag post.user.profile_image , class: "profile_img2_2 d-block mx-auto"%>
+                      <% end %>
+                    <% elsif%>
+                      <%= link_to user_path(post.user) do %>
+                        <%= image_tag post.user.profile_image , class: "profile_img2_3 d-block mx-auto"%>
+                      <% end %>
+                    <% end %>
                   </div>
                   <strong class="ml-2 my-auto"><%= post.user.name %></strong>
                 </div>
@@ -92,7 +101,7 @@
               <div class="card back-color2 mt-3 pt-3 imaging h-100">
                 <div class="d-flex mb-1 ml-3">
                   <%= link_to user_path(post.user) do %>
-                    <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+                    <%= image_tag post.user.profile_image , class: "profile_img2_1 d-block mx-auto"%>
                   <% end %>
                   <strong class="ml-2 my-auto"><%= post.user.name %></strong>
                  </div>
@@ -143,10 +152,20 @@
     </div>
     <div class="col-4 display_none">
       <div class="mb-3">
-         <%= image_tag @user.get_profile_image , class: "profile_img d-block mx-auto"%>
+        <% if @user.exp_sum<5 %>
+          <%= link_to user_path(@user) do %>
+            <%= image_tag @user.profile_image , class: "profile_img_1 d-block mx-auto"%>
+          <% end %>
+        <% elsif @user.exp_sum<10%>
+          <%= link_to user_path(@user) do %>
+            <%= image_tag @user.profile_image , class: "profile_img_2 d-block mx-auto"%>
+          <% end %>
+        <% elsif%>
+          <%= link_to user_path(@user) do %>
+            <%= image_tag @user.profile_image , class: "profile_img_3 d-block mx-auto"%>
+          <% end %>
+        <% end %>
       </div>
-
-
       <div class="jumbotron back-color2 border">
         <h4 class="display-5">マイページ</h4>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
@@ -207,19 +226,58 @@
     </div>
   </div>
   <div class="row display_none2">
+    <% if @user==current_user %>
+          <strong>メールアドレス</strong><br>
+          <h4><%= @user.email %></h4><br>
+          <div id="text-wrap">
+            <div class="show-text">
+            </div>
+            <div class="hide-text">
+            <%= form_with model: @user, url: user_path(@user) ,local:true do |f| %>
+              <h4>ニックネーム</h4>
+                <%= f.text_field :name %>
+              <h4>ProfileImage</h4>
+                <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png" %>
+              <%= f.submit '更新', class: "btn btn-outline-info mt-3"%>
+            <% end %>
+            </div>
+            <button class="readmore">編集する</button>
+          </div>
+
+        <% end %>
     <div class="col">
       <div>
+      <% if @user==current_user %>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
+      <% end %>
       </div>
     </div>
-    <div class="row">
+  </div>
+
+  <div class="row display_none2">
+    <% if @user==current_user %>
+      <strong>自分の投稿</strong>
+    <% elsif %>
+      <strong><%= @user.name %>さんの投稿</strong>
+    <% end %>
       <div class="col">
         <% @posts.each do |post| %>
         <div class="my-2">
           <div class="card back-color2 mt-3 pt-3 imaging h-100">
             <div class="d-flex mb-1 ml-3">
-              <%= link_to user_path(post.user) do %>
-                <%= image_tag post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+
+              <% if post.user.exp_sum<5 %>
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2_1 d-block mx-auto"%>
+                <% end %>
+              <% elsif post.user.exp_sum<10%>
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2_2 d-block mx-auto"%>
+                <% end %>
+              <% elsif%>
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2_3 d-block mx-auto"%>
+                <% end %>
               <% end %>
               <strong class="ml-2 my-auto"><%= post.user.name %></strong>
              </div>
@@ -265,7 +323,6 @@
         <% end %>
       </div>
     </div>
-  </div>
 </div>
 <% if current_user.id==1 %>
 <li>
