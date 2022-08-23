@@ -16,55 +16,109 @@
     <button class="readmore">地図</button>
   </div>
 
-
-  <div class="card back-color2 pt-3 imaging h-100 d-flex">
-    <div class="row">
-      <div class="col-lg-7">
-        <div class="a">
-          <% @post.image.each do |image| %>
-            <%= link_to post_path(@post) do %>
-              <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto img-fluid" %>
+  <div class="display_none">
+    <div class="card back-color2 pt-3 imaging h-100 d-flex ">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="a">
+            <% @post.image.each do |image| %>
+              <%= link_to post_path(@post) do %>
+                <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size2" %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
-      </div>
-      <div class="col-lg-5">
-        <div class="card-body">
-          <div class="d-flex">
-            <%= link_to user_path(@post.user) do %>
-              <%= image_tag @post.user.get_profile_image , class: "profile_img2 d-block mx-auto"%>
+        <div class="col-lg-5">
+          <div class="card-body">
+            <div class="d-flex">
+              <%= link_to user_path(@post.user) do %>
+                <%= image_tag @post.user.get_profile_image , class: "profile_img2 d-block mx-auto"%>
+              <% end %>
+              <strong class="ml-2  my-auto"><%= @post.user.name %></strong>
+            </div>
+            <h5 class="card-title">
+              <div class="mt-4">
+                <%= @post.content %>
+              </div>
+              <%= link_to genre_path(@post.genre) do %>
+                <%= @post.genre.name %>
+              <% end %>
+            </h5>
+            <div class="text-right mb-4">
+              <%= image_tag 'pin', size: "25x35" %>
+              <%= @post.address %>
+            </div>
+            <% if user_signed_in? %>
+            <div class="d-flex justify-content-between">
+              <div class="favorite_buttons_<%= @post.id %> mt-2">
+                <%= render "favorites/favorites", post: @post %>
+              </div>
+              <div class="form_table">
+                <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+              </div>
+            </div>
+              <div class="comments_table">
+                <%= render "post_comments/comments", post: @post %>
+              </div>
             <% end %>
-            <strong class="ml-2  my-auto"><%= @post.user.name %></strong>
           </div>
-          <h5 class="card-title">
-            <div class="mt-4">
-              <%= @post.content %>
-            </div>
-            <%= link_to genre_path(@post.genre) do %>
-              <%= @post.genre.name %>
-            <% end %>
-          </h5>
-          <div class="text-right mb-4">
-            <%= image_tag 'pin', size: "25x35" %>
-            <%= @post.address %>
-          </div>
-          <% if user_signed_in? %>
-          <div class="d-flex justify-content-between">
-            <div class="favorite_buttons_<%= @post.id %> mt-2">
-              <%= render "favorites/favorites", post: @post %>
-            </div>
-            <div class="form_table">
-              <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
-            </div>
-          </div>
-            <div class="comments_table">
-              <%= render "post_comments/comments", post: @post %>
-            </div>
-          <% end %>
         </div>
       </div>
     </div>
   </div>
+  <div class="display_none2">
+    <div class="row">
+      <div class="col">
+        <div class="my-2">
+          <div class="card back-color2 mt-3 pt-3 imaging h-100">
+            <div class="d-flex mb-1 ml-3">
+              <%= link_to user_path(@post.user) do %>
+                <%= image_tag @post.user.profile_image , class: "profile_img2 d-block mx-auto"%>
+              <% end %>
+              <strong class="ml-2 my-auto"><%= @post.user.name %></strong>
+             </div>
+            <div class="d-flex mb-3 m-3">
+            </div>
+              <div class="a">
+                <% @post.image.each do |image| %>
+                  <%= link_to post_path(@post) do %>
+                    <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                  <% end %>
+                <% end %>
+              </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <div>
+                  <%= @post.content %>
+                </div>
+                <%= link_to genre_path(@post.genre) do %>
+                  <%= @post.genre.name %>
+                <% end %>
+              </h5>
+              <div class="text-right">
+                <%= image_tag 'pin', size: "25x35" %>
+                <%= @post.address %>
+              </div>
+              <% if user_signed_in? %>
+                <div class="d-flex justify-content-between mt-3">
+                  <div class="favorite_buttons_<%= @post.id %> mt-2">
+                    <%= render "favorites/favorites", post: @post %>
+                  </div>
+                  <div class="form_table">
+                    <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+                  </div>
+                </div>
+                <div class="comments_table">
+                  <%= render "post_comments/comments", post: @post %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 </div>
 
@@ -105,6 +159,21 @@ $(function() {
     });
 });
 </script>
+
+<style>
+@media screen and (max-width:425px) {
+  .display_none{
+  display:none;
+  }
+}
+
+@media screen and (min-width:425px) {
+  .display_none2{
+  display:none;
+  }
+}
+
+</style>
 
 <script>
 // let map
