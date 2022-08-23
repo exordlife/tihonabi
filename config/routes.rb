@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  
+
   root 'homes#top'
   resources :posts, only: [:new, :create, :index, :show, :destroy] do
     resources :post_comments, only: [:create, :destroy]
@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :genres, only:[:index, :create, :destroy, :update, :edit, :show]
   get 'congratulationscreate/:id' => 'posts#congratulationscreate', as: 'congratulationscreate'
   get 'congratulations' => 'posts#congratulations', as: 'congratulations'
+  get 'yourheart' => 'users#yourheart', as: 'yourheart'
+  get 'ranking' => 'posts#ranking', as: 'ranking'
 end

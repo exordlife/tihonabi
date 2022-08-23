@@ -31,7 +31,6 @@ class PostsController < ApplicationController
           @new_post=Post.new
           redirect_to new_post_path
         end
-
     end
 
     def destroy
@@ -53,8 +52,12 @@ class PostsController < ApplicationController
     def congratulations
         @pre_exp=current_user.exp_sum-2
         @after_exp=current_user.exp_sum
-
     end
+    
+    def ranking
+        @favorite_sort=Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(12).pluck(:post_id))
+    end
+    
     private
     def post_params
         params.require(:post).permit(:content, :genre_id ,:address, :latitude, :leveleduser, :longitude, image: [])
