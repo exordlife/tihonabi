@@ -63,7 +63,7 @@
                   </div>
                   <% if user_signed_in? %>
                   <div class="d-flex justify-content-between">
-                    <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
+                    <div class="favorite_buttons_<%= post.id %> ml-2">
                     <%= render "favorites/favorites", post: post %>
                     </div>
                     <div></div>
@@ -76,9 +76,13 @@
 
                   </div>
                     <% if @user==current_user %>
-                    <div class="text-right">
-                      <%= link_to "削除", post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' }%>
-                    </div>
+                   
+                      <div class="text-right mt-3">
+                        <%= link_to post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' } do %>
+                          <%= image_tag 'trash', size: "35x35" %>
+                        <% end %>
+                      </div>
+                    
                     <% end %>
                   <% end %>
                 </div>
@@ -140,7 +144,7 @@
                   </div>
                   <% if user_signed_in? %>
                   <div class="d-flex justify-content-between">
-                    <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
+                    <div class="favorite_buttons_<%= post.id %> ml-2">
                     <%= render "favorites/favorites", post: post %>
                     </div>
                     <div></div>
@@ -151,6 +155,13 @@
                       <!-- ボタン・リンククリック後に表示される画面の内容 -->
                     </div>
                   </div>
+                  <% if @user==current_user %>
+                    <div class="text-right mt-3">
+                      <%= link_to post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' } do %>
+                        <%= image_tag 'trash', size: "35x35" %>
+                      <% end %>
+                    </div>
+                  <% end %>
                   <% end %>
                 </div>
               </div>
@@ -177,9 +188,14 @@
         <% end %>
       </div>
       <div class="jumbotron back-color2 border">
-        <h4 class="display-5">マイページ</h4>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
-
+        <% if @user==current_user %>
+          <h4 class="display-5">マイページ</h4>
+          <%= link_to destroy_user_session_path, method: :delete , class: "navbar-brand" do%>
+            <%= image_tag 'logout', size: "70x70" %>
+          <% end %>
+        <% elsif %>
+          <h4 class="display-5">プロフィール</h4>
+        <% end %>
         <hr class="my-4">
 
         <strong>ユーザネーム</strong>
@@ -247,9 +263,10 @@
         <h4><%= @user.email %></h4>
       </div>
       <div>
-      <% if @user==current_user %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
-      <% end %>
+      <%= link_to destroy_user_session_path, method: :delete , class: "navbar-brand" do%>
+          <%= image_tag 'logout', size: "50x50" %>
+        <% end %>
+    
       </div>
       <% end %>
     </div>
@@ -259,8 +276,8 @@
           <%= image_tag @user.get_profile_image , class: "profile_img3_1 d-block mx-auto"%>
         <% end %>
       <% elsif @user.exp_sum<10%>
-        <%= link_to user_path(user) do %>
-          <%= image_tag @post.user.get_profile_image , class: "profile_img3_2 d-block mx-auto"%>
+        <%= link_to user_path(@user) do %>
+          <%= image_tag @user.get_profile_image , class: "profile_img3_2 d-block mx-auto"%>
         <% end %>
       <% elsif%>
         <%= link_to user_path(@user) do %>
@@ -269,7 +286,7 @@
       <% end %>
     </div>
   </div>
-  <div class="row">
+  <div class="row display_none2">
     <div class="col">
       <div id="text-wrap">
         <div class="show-text">
@@ -283,7 +300,9 @@
           <%= f.submit '更新', class: "btn btn-outline-info mt-3"%>
         <% end %>
         </div>
-        <button class="readmore">編集する</button>
+        <% if @user==current_user %>
+        <button class="readmore">編集</button>
+        <% end %>
       </div>
     </div>
     
@@ -339,7 +358,7 @@
               </div>
               <% if user_signed_in? %>
               <div class="d-flex justify-content-between">
-                <div class="favorite_buttons_<%= post.id %> ml-2 mt-2">
+                <div class="favorite_buttons_<%= post.id %> ml-2">
                 <%= render "favorites/favorites", post: post %>
                 </div>
                 <div></div>
@@ -350,8 +369,17 @@
                   <!-- ボタン・リンククリック後に表示される画面の内容 -->
                 </div>
               </div>
+              <% if @user==current_user %>
+                <div class="text-right mt-3">
+                  <%= link_to post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' } do %>
+                    <%= image_tag 'trash', size: "35x35" %>
+                  <% end %>
+                </div>
               <% end %>
+              <% end %>
+              
             </div>
+            
           </div>
         </div>
         <% end %>
@@ -363,7 +391,13 @@
   <%= link_to "ジャンル", genres_path, class: "navbar-brand"%>
 </li>
 <% end %>
-
+<footer>
+  <div class="container mt-5">
+    <div class="row">
+      <br><br><br><br>
+    </div>
+  </div>
+</footer>
 
 <script>
 

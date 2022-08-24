@@ -49,7 +49,7 @@
                 <% end %>
 
                 <%= form_with url: posts_path, method: :get, local: true, class: "d-flex search-status col-md-4 col-md-offset-4" do |f| %>
-                  <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "キーワード検索"%>
+                  <%= f.text_field :keyword, value: @keyword ,class: "form-control me-2" ,placeholder: "場所名やキーワード"%>
                   <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
                     <i class="fa fa-search"></i>
                   <% end %>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="mr-lg-5">
                   <%= link_to user_session_path ,class: "mr-0" do%>
-                    <%= image_tag 'login', size: "70x70" %>
+                    <%= image_tag 'enter', size: "70x70" %>
                   <% end %>
                 </div>
             </span>
@@ -98,12 +98,12 @@
       <%= yield %>
       <% if user_signed_in? %>
        <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center bottom-nav  list-group-flush" style="background-color:#F8F8FF;">
-        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+        <button class="nav-link mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
           <%= link_to root_path do %>
            <%= image_tag 'footer1', size: "28x25"%>
           <% end %>
         </button>
-        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+        <button class="nav-link mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
           <%= link_to yourheart_path do %>
           <%= image_tag 'footer2', size: "22x22" %>
           <% end %>
