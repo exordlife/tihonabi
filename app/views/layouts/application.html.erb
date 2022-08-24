@@ -44,7 +44,7 @@
             </div>
             <div class="d-sm-none d-flex fixed-top py-3 pl-1 back-color">
 
-                <%= link_to root_path do%>
+                <%= link_to root_path do %>
                   <%= image_tag 'Tippy' , size: "90x38"%>
                 <% end %>
 
@@ -91,8 +91,10 @@
           </div>
       </nav>
     </header>
-
-      <div class="height1"></div>
+      <% if request.url.include?("/users/sign") %>
+      <% elsif %>
+        <div class="height1"></div>
+      <% end %>
       <%= yield %>
       <% if user_signed_in? %>
        <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center bottom-nav  list-group-flush" style="background-color:#F8F8FF;">
@@ -123,13 +125,7 @@
         </button>
       </ul>
       <% end %>
-    <footer>
-      <div class="container mt-5">
-        <div class="row">
-          <br><br><br><br>
-        </div>
-      </div>
-    </footer>
+    
   </body>
 </html>
 

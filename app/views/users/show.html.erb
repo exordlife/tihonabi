@@ -238,19 +238,6 @@
   <div class="row display_none2">
     <div class="col">
       <div>
-        <% if @user.exp_sum<5 %>
-          <%= link_to user_path(@user) do %>
-            <%= image_tag @user.get_profile_image , class: "profile_img2_1 d-block mx-auto"%>
-          <% end %>
-        <% elsif @user.exp_sum<10%>
-          <%= link_to user_path(user) do %>
-            <%= image_tag @post.user.get_profile_image , class: "profile_img2_2 d-block mx-auto"%>
-          <% end %>
-        <% elsif%>
-          <%= link_to user_path(@user) do %>
-            <%= image_tag @user.get_profile_image , class: "profile_img2_3 d-block mx-auto"%>
-          <% end %>
-        <% end %>
         <h4><%= @user.name %></h4>
         <h4> Lv<%= @user.exp_sum.floor %> </h4>
       </div>
@@ -264,6 +251,26 @@
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
       <% end %>
       </div>
+      <% end %>
+    </div>
+    <div class="col">
+      <% if @user.exp_sum<5 %>
+        <%= link_to user_path(@user) do %>
+          <%= image_tag @user.get_profile_image , class: "profile_img3_1 d-block mx-auto"%>
+        <% end %>
+      <% elsif @user.exp_sum<10%>
+        <%= link_to user_path(user) do %>
+          <%= image_tag @post.user.get_profile_image , class: "profile_img3_2 d-block mx-auto"%>
+        <% end %>
+      <% elsif%>
+        <%= link_to user_path(@user) do %>
+          <%= image_tag @user.get_profile_image , class: "profile_img3_3 d-block mx-auto"%>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
       <div id="text-wrap">
         <div class="show-text">
         </div>
@@ -278,9 +285,8 @@
         </div>
         <button class="readmore">編集する</button>
       </div>
-      <% end %>
-      
     </div>
+    
   </div>
   <div class="row display_none2">
     <% if @user==current_user %>

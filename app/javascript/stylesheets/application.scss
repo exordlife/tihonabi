@@ -1,13 +1,19 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 .back-color{
-  background-color: #EDFFF6;
+  background-color: #E3FEF1;
 }
 .back-color2{
   background-color:	#DDFFFF;
 }
 .back-color3{
   background-color:	#7FFFD4;
+}
+
+.background-image{
+  background-image: url("/images/background.png");
+  background-repeat: repeat;
+  background-size: cover;
 }
 
 .image_size{
@@ -68,6 +74,29 @@
     width: 35px;  /*横幅*/
     height: 35px;  /*縦幅*/
     padding: 3px;
+    background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+}
+
+.profile_img3_1 {
+    border-radius: 50%;  /*角を丸くする指定*/
+    width: 120px;  /*横幅*/
+    height: 120px;  /*縦幅*/
+    padding: 7px;
+    background: black;
+}
+
+.profile_img3_2 {
+    border-radius: 50%;  /*角を丸くする指定*/
+    width: 120px;  /*横幅*/
+    height: 120px;  /*縦幅*/
+    padding: 7px;
+    background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+}
+.profile_img3_3 {
+    border-radius: 50%;  /*角を丸くする指定*/
+    width: 120px;  /*横幅*/
+    height: 120px;  /*縦幅*/
+    padding: 7px;
     background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
 }
 
