@@ -236,34 +236,52 @@
     </div>
   </div>
   <div class="row display_none2">
-    <% if @user==current_user %>
-          <strong>メールアドレス</strong><br>
-          <h4><%= @user.email %></h4><br>
-          <div id="text-wrap">
-            <div class="show-text">
-            </div>
-            <div class="hide-text">
-            <%= form_with model: @user, url: user_path(@user) ,local:true do |f| %>
-              <h4>ニックネーム</h4>
-                <%= f.text_field :name %>
-              <h4>ProfileImage</h4>
-                <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png" %>
-              <%= f.submit '更新', class: "btn btn-outline-info mt-3"%>
-            <% end %>
-            </div>
-            <button class="readmore">編集する</button>
-          </div>
-
-        <% end %>
     <div class="col">
+      <div>
+        <% if @user.exp_sum<5 %>
+          <%= link_to user_path(@user) do %>
+            <%= image_tag @user.get_profile_image , class: "profile_img2_1 d-block mx-auto"%>
+          <% end %>
+        <% elsif @user.exp_sum<10%>
+          <%= link_to user_path(user) do %>
+            <%= image_tag @post.user.get_profile_image , class: "profile_img2_2 d-block mx-auto"%>
+          <% end %>
+        <% elsif%>
+          <%= link_to user_path(@user) do %>
+            <%= image_tag @user.get_profile_image , class: "profile_img2_3 d-block mx-auto"%>
+          <% end %>
+        <% end %>
+        <h4><%= @user.name %></h4>
+        <h4> Lv<%= @user.exp_sum.floor %> </h4>
+      </div>
+      <% if @user==current_user %>
+      <div>
+        <strong>メールアドレス</strong>
+        <h4><%= @user.email %></h4>
+      </div>
       <div>
       <% if @user==current_user %>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "navbar-brand"%>
       <% end %>
       </div>
+      <div id="text-wrap">
+        <div class="show-text">
+        </div>
+        <div class="hide-text">
+        <%= form_with model: @user, url: user_path(@user) ,local:true do |f| %>
+          <h4>ニックネーム</h4>
+            <%= f.text_field :name %>
+          <h4>ProfileImage</h4>
+            <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png" %>
+          <%= f.submit '更新', class: "btn btn-outline-info mt-3"%>
+        <% end %>
+        </div>
+        <button class="readmore">編集する</button>
+      </div>
+      <% end %>
+      
     </div>
   </div>
-
   <div class="row display_none2">
     <% if @user==current_user %>
       <strong>自分の投稿</strong>
