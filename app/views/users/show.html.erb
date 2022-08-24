@@ -308,12 +308,13 @@
     
   </div>
   <div class="row display_none2">
-    <% if @user==current_user %>
-      <strong>自分の投稿</strong>
-    <% elsif %>
-      <strong><%= @user.name %>さんの投稿</strong>
-    <% end %>
+    
       <div class="col">
+        <% if @user==current_user %>
+          <strong>自分の投稿</strong>
+        <% elsif %>
+          <strong><%= @user.name %>さんの投稿</strong>
+        <% end %>
         <% @posts.each do |post| %>
         <div class="my-2">
           <div class="card back-color2 mt-3 pt-3 imaging h-100">
