@@ -8,33 +8,27 @@
 
 </style>
 
-
 <div class="container px-5 px-sm-0 mt-5 mb-5">
-
-
     <%= form_with model: @new_post do |f| %>
       <div class="d-lg-flex justify-content-evenly">
-
         <div class="img_prever col-lg-4 ml-lg-5">
-          <div class="ml-3">
-            <%= flash[:notice2] %>
-          </div>
-          <strong class="ml-3">最大4枚まで投稿できます</strong>
-         <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
-
-          <div class="d-flex justify-content-start">
-            <%= image_tag 'cameraA', size: "250x250", onClick: "$('.img_field').click()", class: 'img_prev img_size'%>
-            <%= image_tag 'cameraB', size: "245x250", onClick: "$('.img_field').click()",  class: 'img_pre img_size'%>
-          </div>
-          <div class="d-flex justify-content-start">
-            <%= image_tag 'cameraC', size: "250x250", onClick: "$('.img_field').click()", class: 'img_pr img_size'%>
-            <%= image_tag 'cameraD', size: "250x250", onClick: "$('.img_field').click()",  class: 'img_p img_size'%>
+          <div>
+            <div class="ml-4">
+              <%= flash[:notice2] %>
+            </div>
+            <strong class="ml-4">最大4枚まで投稿できます</strong>
+            <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
+            <div class="d-flex justify-content-start">
+              <%= image_tag 'cameraA', size: "260x260", onClick: "$('.img_field').click()", class: 'img_prev img_size'%>
+              <%= image_tag 'cameraB', size: "260x260", onClick: "$('.img_field').click()",  class: 'img_pre img_size'%>
+            </div>
+            <div class="d-flex justify-content-start">
+              <%= image_tag 'cameraC', size: "260x260", onClick: "$('.img_field').click()", class: 'img_pr img_size'%>
+              <%= image_tag 'cameraD', size: "260x260", onClick: "$('.img_field').click()",  class: 'img_p img_size'%>
+            </div>
           </div>
         </div>
-
-
         <div class="col-lg-2"></div>
-
         <div class="col-lg-5">
           <div class="my-3">
             <div class="field mt-3">
@@ -49,7 +43,6 @@
               例1)渋谷駅<br>
               例2)東京都墨田区押上1-1-2<br>
               例3)別府温泉
-
             </div>
             <%= f.text_field :address , :class => "form-control" %>
             </div>
@@ -61,11 +54,7 @@
           <div class="d-grid gap-2">
             <%= f.submit '投稿',class: "btn btn-outline-info"%>
           </div>
-
-          </div>
-
         </div>
-
       </div>
     <% end %>
 
