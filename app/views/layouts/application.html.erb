@@ -16,7 +16,13 @@
       <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
       <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     </head>
+    <% if !user_signed_in? %>
     <body class="back-color">
+    <% elsif current_user.back==1 %>
+    <body class="back-color">
+    <% elsif current_user.back==2 %>
+    <body class="back-color4">
+    <% end %>
       <header>
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container">
@@ -125,7 +131,7 @@
         </button>
       </ul>
       <% end %>
-    
+
   </body>
 </html>
 

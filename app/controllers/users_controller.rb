@@ -31,14 +31,23 @@ class UsersController < ApplicationController
     flash[:notice1] ="更新しました"
     redirect_to user_path(current_user)
   end
-  
+
   def yourheart
     @user=current_user
     favorites= Favorite.where(user_id: @user.id).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
   end
 
-  
+  def kisekae
+    @user=current_user
+    redirect_to user_path(current_user)
+    if @user.back==1
+      current_user.update(back: 2)
+    elsif
+      current_user.update(back: 1)
+    end
+  end
+
 
   private
   def user_params

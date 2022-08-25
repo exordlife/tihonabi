@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get 'congratulations' => 'posts#congratulations', as: 'congratulations'
   get 'yourheart' => 'users#yourheart', as: 'yourheart'
   get 'ranking' => 'posts#ranking', as: 'ranking'
+  get 'kisekae'=> 'users#kisekae', as: 'kisekae'
 end
