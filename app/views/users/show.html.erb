@@ -296,14 +296,7 @@
     <div class="col">
       <div class="d-flex ml-2 mt-3">
         <p class="level_head align-items-end">Lv.</p>
-        <% if @user.exp_sum<5 %>
-          <strong class="level1"><%= @user.exp_sum.floor %></strong>
-        <% elsif @user.exp_sum<10%>
-          <strong class="level2"><%= @user.exp_sum.floor %></strong>
-        <% elsif%>
-          <strong class="level3"><%= @user.exp_sum.floor %></strong>
-        <% end %>
-
+          <strong class="level"><%= @user.exp_sum.floor %></strong>
         <div class="ml-2">
           <% if @user==current_user && @user.exp_sum>5 %>
             <% if @user.back==1 %>
@@ -517,16 +510,7 @@ $(".tab_label").on("click",function(){
     color: black;
     font-size:35px;
 }
-
-.level1 {
-    color: black;
-    font-size:50px;
-}
-.level2 {
-    color: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    font-size:50px;
-}
-.level3 {
+.level {
   font: bold 59px / 1 Verdana, Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   background: linear-gradient(to right, #f00 0%, #f80 14.28%, #dd0 28.56%, #0d0 42.85%, #0dd 57.14%, #00f 71.42%, #e0e 85.71%, #f00 100%) 0% center / 200% auto;
@@ -538,7 +522,7 @@ $(".tab_label").on("click",function(){
 }
 
 /* 背景の横位置をズラす */
-@keyframes level3 {
+@keyframes level {
   to { background-position-x: 200%; }
 }
 
