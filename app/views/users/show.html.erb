@@ -190,12 +190,25 @@
       <div class="jumbotron back-color2 border">
         <% if @user==current_user %>
           <h4 class="display-5">マイページ</h4>
+
           <%= link_to destroy_user_session_path, method: :delete , class: "navbar-brand" do%>
             <%= image_tag 'logout', size: "70x70" %>
           <% end %>
         <% elsif %>
           <h4 class="display-5">プロフィール</h4>
         <% end %>
+        <% if @user==current_user && @user.exp_sum>5 %>
+        <strong>着せ替え</strong>
+        <% if @user.back==1 %>
+          <%= link_to kisekae_path, data: { confirm: '着せ替えしますか？' }  do%>
+            <%= image_tag 'kisekae_blue', size: "35x28" %>
+          <% end %>
+        <% elsif %>
+          <%= link_to kisekae_path, data: { confirm: '着せ替えしますか？' }  do%>
+            <%= image_tag 'kisekae_green', size: "35x28" %>
+          <% end %>
+        <% end %>
+      <% end %>
         <hr class="my-4">
 
         <strong>ユーザネーム</strong>
@@ -264,8 +277,14 @@
       </div>
       <% if @user==current_user && @user.exp_sum>5 %>
         <strong>着せ替え</strong>
-        <%= link_to kisekae_path, data: { confirm: '着せ替えしますか？' }  do%>
-          <%= image_tag 'trash', size: "35x35" %>
+        <% if @user.back==1 %>
+          <%= link_to kisekae_path, data: { confirm: '着せ替えしますか？' }  do%>
+            <%= image_tag 'kisekae_blue', size: "35x28" %>
+          <% end %>
+        <% elsif %>
+          <%= link_to kisekae_path, data: { confirm: '着せ替えしますか？' }  do%>
+            <%= image_tag 'kisekae_green', size: "35x28" %>
+          <% end %>
         <% end %>
       <% end %>
       <div>
