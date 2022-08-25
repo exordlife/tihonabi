@@ -332,9 +332,8 @@ function initMap(){
 
 <script>
   // オプションを指定してSkipprの実行
-window.addEventListener('load', function(){
 
-  $(function() {
+$(document).on('turbolinks:load', function(){
       $('.a').slick({
           dots: true,
           autoplay: true,
