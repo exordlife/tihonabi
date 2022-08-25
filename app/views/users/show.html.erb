@@ -210,28 +210,23 @@
         <% end %>
       <% end %>
         <hr class="my-4">
-
         <strong>ユーザネーム</strong>
-        <h4><%= @user.name %> Lv<%= @user.exp_sum.floor %> </h4>
+        <h4><%= @user.name %> Lv.<%= @user.exp_sum.floor %> </h4>
         <a href="#" data-toggle="modal" data-target="#examModal" data-backdrop="static">レベルを上げるには?</a>
         <!-- ボタン・リンククリック後に表示される画面の内容 -->
         <div class="modal fade" id="examModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-
               <div class="modal-header">
                 <h5 class="modal-title">レベルを上げるには?</h5>
               </div>
-
               <div class="modal-body">
                 ①投稿する<br>
                 ②いいねをもらう<br>
                 ③投稿の近くまで行きマップからレベルアップする<br>
-
                 レベルアップしたらこんなにいいことが！？<br>
                 着せ替えができるようになる！
               </div>
-
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
               </div>
@@ -241,7 +236,6 @@
         <br>
         <br>
         <br>
-
         <% if @user==current_user %>
           <strong>メールアドレス</strong><br>
           <h4><%= @user.email %></h4><br>
@@ -258,40 +252,32 @@
             <% end %>
             </div>
             <div>
-
             <%= link_to destroy_user_session_path, method: :delete , class: "navbar-brand" do%>
                 <%= image_tag 'logout', size: "50x50" %>
               <% end %>
-
             </div>
             <button class="readmore">編集する</button>
           </div>
-
         <% end %>
       </div>
     </div>
   </div>
   <div class="row display_none2">
-    <div class="col">
-      <div>
-        <h4><%= @user.name %></h4>
-        <h4>Lv<%= @user.exp_sum.floor %> </h4>
-      </div>
-
-      <% if @user==current_user && @user.exp_sum>5 %>
-        <strong>着せ替え</strong>
-        <% if @user.back==1 %>
-          <%= link_to kisekae_path, data: { confirm: '着せ替えしますか？' }  do%>
-            <%= image_tag 'kisekae_blue', size: "35x28" %>
-          <% end %>
-        <% elsif %>
-          <%= link_to kisekae_path, data: { confirm: '着せ替えしますか？' }  do%>
-            <%= image_tag 'kisekae_green', size: "35x28" %>
-          <% end %>
-        <% end %>
-      <% end %>
-
+    <div class="col d-flex align-items-center ml-4">
+      <strong class="name"><%= @user.name %></strong>
     </div>
+    <div class="col">
+
+      <% if @user=current_user %>
+      <div class="text-right">
+        <%= link_to destroy_user_session_path, method: :delete , class: "navbar-brand" do%>
+          <%= image_tag 'logout', size: "45x45" %>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row mt-4">
     <div class="col">
       <% if @user.exp_sum<5 %>
         <%= link_to user_path(@user) do %>
@@ -307,32 +293,50 @@
         <% end %>
       <% end %>
     </div>
-  </div>
-  <div class="row">
     <div class="col">
+      <div class="d-flex ml-2 mt-3">
+        <p class="level_head align-items-end">Lv.</p>
+        <% if @user.exp_sum<5 %>
+          <strong class="level1"><%= @user.exp_sum.floor %></strong>
+        <% elsif @user.exp_sum<10%>
+          <strong class="level2"><%= @user.exp_sum.floor %></strong>
+        <% elsif%>
+          <strong class="level3"><%= @user.exp_sum.floor %></strong>
+        <% end %>
+
+        <div class="ml-2">
+          <% if @user==current_user && @user.exp_sum>5 %>
+            <% if @user.back==1 %>
+              <%= link_to kisekae_path, data: { confirm: '着せ替えしますか？' }  do%>
+                <%= image_tag 'kisekae_blue', size: "35x28" %>
+              <% end %>
+            <% elsif %>
+              <%= link_to kisekae_path, data: { confirm: '着せ替えしますか？' }  do%>
+                <%= image_tag 'kisekae_green', size: "35x28" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
       <a href="#" data-toggle="modal" data-target="#exaModal" data-backdrop="static">レベルを上げるには?</a>
         <!-- ボタン・リンククリック後に表示される画面の内容 -->
         <div class="modal fade" id="exaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-
               <div class="modal-header">
                 <h5 class="modal-title">レベルを上げるには?</h5>
               </div>
-
               <div class="modal-body">
                 <div>
                   ①投稿する<br>
                   ②いいねをもらう<br>
-                  ③投稿の近く（3キロ以内)まで行きマップからレベルアップボタンを押す<br>
+                  ③投稿の近く(3キロ以内)まで行き、マップからレベルアップボタンを押す<br>
                 </div>
-
-                <br><br><br>
+                <br><br>
                 <strong>レベルアップしたらこんなにいいことが！？</strong>
-
-                <%= image_tag 'kisekae_blue', size: "35x28" %>着せ替えができるようになる！
+                <div>①レベル5以上で<%= image_tag 'kisekae_blue', size: "35x28" %>着せ替えができる！</div>
+                <div>②アイコンの枠が豪華になる!</div>
               </div>
-
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
               </div>
@@ -340,58 +344,42 @@
           </div>
         </div>
     </div>
-    <div class="col">
-      <% if @user=current_user %>
-      <div class="text-right">
-        <%= link_to destroy_user_session_path, method: :delete , class: "navbar-brand" do%>
-          <%= image_tag 'logout', size: "45x45" %>
-        <% end %>
-      </div>
-      <% end %>
-    </div>
   </div>
-  <div class="row display_none2">
+  <div class="row display_none2 mt-3">
     <div class="col">
-      <% if @user==current_user %>
-      <div>
-        <h5>メールアドレス</h5>
-        <h5><%= @user.email %></h5>
-      </div>
-      <% end %>
-
-      <div id="text-wrap">
         <div class="show-text">
         </div>
         <div class="hide-text">
         <%= form_with model: @user, url: user_path(@user) ,local:true do |f| %>
           <h4>ニックネーム</h4>
             <%= f.text_field :name %>
+          <% if @user==current_user %>
+          <div>
+            <h5>メールアドレス</h5>
+            <h5><%= @user.email %></h5>
+          </div>
+          <% end %>
           <h4>プロフィール画像</h4>
             <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png" %>
           <%= f.submit '更新', class: "btn btn-outline-info mt-3"%>
         <% end %>
         </div>
         <% if @user==current_user %>
-        <button class="readmore">編集</button>
+        <button class="readmore"></button>
         <% end %>
       </div>
-    </div>
-
   </div>
   <div class="row display_none2">
-
       <div class="col">
         <% if @user==current_user %>
           <strong>自分の投稿</strong>
         <% elsif %>
           <strong><%= @user.name %>さんの投稿</strong>
         <% end %>
-
         <% @posts.each do |post| %>
         <div class="my-2">
           <div class="card back-color2 mt-3 pt-3 imaging h-100">
             <div class="d-flex mb-1 ml-3">
-
               <% if post.user.exp_sum<5 %>
                 <%= link_to user_path(post.user) do %>
                   <%= image_tag post.user.get_profile_image , class: "profile_img2_1 d-block mx-auto"%>
@@ -450,9 +438,7 @@
                 </div>
               <% end %>
               <% end %>
-
             </div>
-
           </div>
         </div>
         <% end %>
@@ -471,7 +457,6 @@
     </div>
   </div>
 </footer>
-
 <script>
 
   // オプションを指定してSkipprの実行
@@ -522,6 +507,39 @@ $(".tab_label").on("click",function(){
 
 .border{
   border-radius: 10px;
+}
+.name {
+   color: black;
+    font-size:35px;
+}
+
+.level_head {
+    color: black;
+    font-size:35px;
+}
+
+.level1 {
+    color: black;
+    font-size:50px;
+}
+.level2 {
+    color: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    font-size:50px;
+}
+.level3 {
+  font: bold 59px / 1 Verdana, Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #f00 0%, #f80 14.28%, #dd0 28.56%, #0d0 42.85%, #0dd 57.14%, #00f 71.42%, #e0e 85.71%, #f00 100%) 0% center / 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: level3 4s linear infinite;
+}
+
+/* 背景の横位置をズラす */
+@keyframes level3 {
+  to { background-position-x: 200%; }
 }
 
 </style>
