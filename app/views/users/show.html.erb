@@ -257,6 +257,13 @@
               <%= f.submit '更新', class: "btn btn-outline-info mt-3"%>
             <% end %>
             </div>
+            <div>
+
+            <%= link_to destroy_user_session_path, method: :delete , class: "navbar-brand" do%>
+                <%= image_tag 'logout', size: "50x50" %>
+              <% end %>
+
+            </div>
             <button class="readmore">編集する</button>
           </div>
 
@@ -268,13 +275,9 @@
     <div class="col">
       <div>
         <h4><%= @user.name %></h4>
-        <h4> Lv<%= @user.exp_sum.floor %> </h4>
+        <h4>Lv<%= @user.exp_sum.floor %> </h4>
       </div>
-      <% if @user==current_user %>
-      <div>
-        <strong>メールアドレス</strong>
-        <h4><%= @user.email %></h4>
-      </div>
+
       <% if @user==current_user && @user.exp_sum>5 %>
         <strong>着せ替え</strong>
         <% if @user.back==1 %>
@@ -287,13 +290,7 @@
           <% end %>
         <% end %>
       <% end %>
-      <div>
-      <%= link_to destroy_user_session_path, method: :delete , class: "navbar-brand" do%>
-          <%= image_tag 'logout', size: "50x50" %>
-        <% end %>
 
-      </div>
-      <% end %>
     </div>
     <div class="col">
       <% if @user.exp_sum<5 %>
@@ -311,8 +308,57 @@
       <% end %>
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <a href="#" data-toggle="modal" data-target="#exaModal" data-backdrop="static">レベルを上げるには?</a>
+        <!-- ボタン・リンククリック後に表示される画面の内容 -->
+        <div class="modal fade" id="exaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5 class="modal-title">レベルを上げるには?</h5>
+              </div>
+
+              <div class="modal-body">
+                <div>
+                  ①投稿する<br>
+                  ②いいねをもらう<br>
+                  ③投稿の近く（3キロ以内)まで行きマップからレベルアップボタンを押す<br>
+                </div>
+
+                <br><br><br>
+                <strong>レベルアップしたらこんなにいいことが！？</strong>
+
+                <%= image_tag 'kisekae_blue', size: "35x28" %>着せ替えができるようになる！
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col">
+      <% if @user=current_user %>
+      <div class="text-right">
+        <%= link_to destroy_user_session_path, method: :delete , class: "navbar-brand" do%>
+          <%= image_tag 'logout', size: "45x45" %>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
   <div class="row display_none2">
     <div class="col">
+      <% if @user==current_user %>
+      <div>
+        <h5>メールアドレス</h5>
+        <h5><%= @user.email %></h5>
+      </div>
+      <% end %>
+
       <div id="text-wrap">
         <div class="show-text">
         </div>
@@ -340,6 +386,7 @@
         <% elsif %>
           <strong><%= @user.name %>さんの投稿</strong>
         <% end %>
+
         <% @posts.each do |post| %>
         <div class="my-2">
           <div class="card back-color2 mt-3 pt-3 imaging h-100">
