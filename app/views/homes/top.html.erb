@@ -1,4 +1,3 @@
-
 <div class="container-md">
   <div class="d-flex  justify-content-between">
     <h2>map</h2>
@@ -32,6 +31,7 @@
   height: 600px;
   width: 100%;
 }
+
 .image_size{
   width: 90%;
   height: 300px;
@@ -179,14 +179,78 @@ function initMap(){
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&libraries=geometry&callback=initMap" async defer></script>
+    <div class="display_none2 mt-4">
+      <strong>新しい投稿</strong>
+    </div>
+    <div class="row display_none2">
 
+      <% @posts.each do |post| %>
+        <div class="col-lg-4 my-2">
+          <div class="card back-color2 mt-3 pt-3 imaging h-100">
+            <div class="d-flex mb-1 ml-3">
+              <% if post.user.exp_sum<5 %>
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2_1 d-block mx-auto"%>
+                <% end %>
+              <% elsif post.user.exp_sum<10%>
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2_2 d-block mx-auto"%>
+                <% end %>
+              <% elsif%>
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.profile_image , class: "profile_img2_3 d-block mx-auto"%>
+                <% end %>
+              <% end %>
+              <strong class="ml-2  my-auto"><%= post.user.name %></strong>
+            </div>
+            <div class="d-flex mb-3 m-3">
+            </div>
+              <div class="a">
+                <% post.image.each do |image| %>
+                  <%= link_to post_path(post) do %>
+                    <%= image_tag image, width: '90%', height: '90%', class: "d-block mx-auto image_size" %>
+                  <% end %>
+                <% end %>
+              </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <div>
+                  <%= post.content %>
+                </div>
+                <%= link_to genre_path(post.genre) do %>
+                  <%= post.genre.name %>
+                <% end %>
+              </h5>
+              <div class="text-right mb-3">
+                <%= image_tag 'pin', size: "25x35" %>
+                <%= post.address %>
+              </div>
+              <% if user_signed_in? %>
+              <div class="d-flex justify-content-between">
+                <div class="favorite_buttons_<%= post.id %> ml-2">
+                <%= render "favorites/favorites", post: post %>
+                </div>
+                <div></div>
+                <div class="pull-right">
+                  <%= link_to post_path(post) do %>
+                    <%= image_tag 'modal', size: "45x35" %>
+                  <% end %>
+                  <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+          </div>
+        <% end %>
+      </div>
     <div class="tab_area display_none">
       <label class="tab_label active" for="tab1">新しい順</label>
       <% if user_signed_in? %>
       <label class="tab_label" for="tab2">いいねランキング</label>
       <% end %>
     </div>
-    <div class="panel_area col-12">
+    <div class="panel_area col-12 display_none">
       <div id="panel1" class="tab_panel active">
         <div class="row">
         <% @posts.each do |post| %>
@@ -207,10 +271,8 @@ function initMap(){
                   <% end %>
                 <% end %>
                 <strong class="ml-2  my-auto"><%= post.user.name %></strong>
-
               </div>
               <div class="d-flex mb-3 m-3">
-
               </div>
                 <div class="a">
                   <% post.image.each do |image| %>
@@ -273,10 +335,8 @@ function initMap(){
                 <% end %>
               <% end %>
                 <strong class="ml-2  my-auto"><%= post.user.name %></strong>
-
               </div>
               <div class="d-flex mb-3 m-3">
-
               </div>
                 <div class="a">
                   <% post.image.each do |image| %>
@@ -330,7 +390,6 @@ function initMap(){
   </div>
 </footer>
 
-
 <script>
   // オプションを指定してSkipprの実行
 window.addEventListener('load', function(){
@@ -341,7 +400,6 @@ window.addEventListener('load', function(){
           autoplay: true,
           autoplaySpeed: 5000,
       });
-
   });
 })
 </script>
