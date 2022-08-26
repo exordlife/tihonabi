@@ -48,137 +48,137 @@
 
 
 <script>
-let map
+// let map
 
-let marker = []; // マーカーを複数表示させたいので、配列化
-let infoWindow = []; // 吹き出しを複数表示させたいので、配列化
-const posts = gon.posts; // コントローラーで定義したインスタンス変数を変数に代入
+// let marker = []; // マーカーを複数表示させたいので、配列化
+// let infoWindow = []; // 吹き出しを複数表示させたいので、配列化
+// const posts = gon.posts; // コントローラーで定義したインスタンス変数を変数に代入
 
-function initMap(){
+// function initMap(){
 
-  // 現在位置の特定
-  navigator.geolocation.getCurrentPosition(function (position){
-    // LatLngに位置座標を代入
-    LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+//   // 現在位置の特定
+//   navigator.geolocation.getCurrentPosition(function (position){
+//     // LatLngに位置座標を代入
+//     LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-    // mapの初期位置設定
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: LatLng,
-      //倍率はお好みで
-      zoom: 7,
-      mapTypeControl: false,
-      mapId: '36c981c5b4a8e2b0',
-      navigationControl: false,
-      gestureHandling: "auto"
-    });
+//     // mapの初期位置設定
+//     map = new google.maps.Map(document.getElementById('map'), {
+//       center: LatLng,
+//       //倍率はお好みで
+//       zoom: 7,
+//       mapTypeControl: false,
+//       mapId: '36c981c5b4a8e2b0',
+//       navigationControl: false,
+//       gestureHandling: "auto"
+//     });
 
-    // var marker1 = new google.maps.Marker({
-    //   map : map,             // 対象の地図オブジェクト
-    //   position : LatLng  // 緯度・経度
-    // });
+//     // var marker1 = new google.maps.Marker({
+//     //   map : map,             // 対象の地図オブジェクト
+//     //   position : LatLng  // 緯度・経度
+//     // });
 
-    // map.setCenterで地図が初期位置に移動
-    map.setCenter(LatLng);
+//     // map.setCenterで地図が初期位置に移動
+//     map.setCenter(LatLng);
 
-    // forは繰り返し処理
-    // 変数iを0と定義し、
-    // その後gonで定義したstudios分繰り返し加える処理を行う
-    for (let i = 0; i < posts.length; i++){
-      // studios[i]は変数iのユーザーを取得している
-      marker[i] = new google.maps.Marker({
-        map: map,
-        position: {
-          // DBに保存してある、緯度・経度を呼び出す
-          lat: posts[i].latitude,
-          lng: posts[i].longitude
-        }
-      });
-      var result = String(posts[i].latitude);
-      var result2 = String(posts[i].longitude);
-      var pos = [
-        LatLng,
-        new google.maps.LatLng(result, result2)
-      ];
-			var dist = google.maps.geometry.spherical.computeLength(pos)/1000;
+//     // forは繰り返し処理
+//     // 変数iを0と定義し、
+//     // その後gonで定義したstudios分繰り返し加える処理を行う
+//     for (let i = 0; i < posts.length; i++){
+//       // studios[i]は変数iのユーザーを取得している
+//       marker[i] = new google.maps.Marker({
+//         map: map,
+//         position: {
+//           // DBに保存してある、緯度・経度を呼び出す
+//           lat: posts[i].latitude,
+//           lng: posts[i].longitude
+//         }
+//       });
+//       var result = String(posts[i].latitude);
+//       var result2 = String(posts[i].longitude);
+//       var pos = [
+//         LatLng,
+//         new google.maps.LatLng(result, result2)
+//       ];
+// 			var dist = google.maps.geometry.spherical.computeLength(pos)/1000;
 
-      // 変数iを変数idに代入
-      let id = posts[i]['id']
+//       // 変数iを変数idに代入
+//       let id = posts[i]['id']
 
-      if(gon.user==posts[i].user_id){
-        infoWindow[i] = new google.maps.InfoWindow({
-          // contentで中身を指定
-          // 今回は文字にリンクを貼り付けた形で表示
-          content: `<div class="custom-info">
-            <div class="custom-info-item name">
-             あなたの投稿です。
-            </div>
-            <strong class="custom-info-item name">
-            ${posts[i].content}
-            </strong>
-            <div class="custom-info-item address">
-            場所→${posts[i].address}
-            </div>
-            <div class="custom-info-item tel">
-            <a href='/posts/${id}' data-turbolinks="false">詳細を見る</a>
-            </div>
-        </div>`,
-          //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
-        });
-      }
-      else if(dist<3 && gon.user!=posts[i].user_id && !posts[i].leveleduser.includes(gon.user) && gon.user!=null){
-        infoWindow[i] = new google.maps.InfoWindow({
-          // contentで中身を指定
-          // 今回は文字にリンクを貼り付けた形で表示
-          content: `<div class="custom-info">
-            <strong class="custom-info-item name">
-            ${posts[i].content}
-            </strong>
-            <div class="custom-info-item address">
-            場所→${posts[i].address}
-            </div>
-            <div class="custom-info-item tel">
-            <a href='/posts/${id}' data-turbolinks="false">詳細を見る</a>
-            </div>
-            <div class="custom-info-item google-map">
-            <a href='/congratulationscreate/${id}'>レベルアップする</a>
-            </div>
-        </div>`,
-          //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
-        });
-      }
-      else{
-        infoWindow[i] = new google.maps.InfoWindow({
-          // contentで中身を指定
-          // 今回は文字にリンクを貼り付けた形で表示
-          content: `<div class="custom-info">
-            <strong class="custom-info-item name">
-            ${posts[i].content}
-            </strong>
-            <div class="custom-info-item address">
-            場所→${posts[i].address}
-            </div>
-            <div class="custom-info-item tel">
-            <a href='/posts/${id}' data-turbolinks="false">詳細を見る</a>
-            </div>
-        </div>`,
-          //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
-        });
-      }
+//       if(gon.user==posts[i].user_id){
+//         infoWindow[i] = new google.maps.InfoWindow({
+//           // contentで中身を指定
+//           // 今回は文字にリンクを貼り付けた形で表示
+//           content: `<div class="custom-info">
+//             <div class="custom-info-item name">
+//             あなたの投稿です。
+//             </div>
+//             <strong class="custom-info-item name">
+//             ${posts[i].content}
+//             </strong>
+//             <div class="custom-info-item address">
+//             場所→${posts[i].address}
+//             </div>
+//             <div class="custom-info-item tel">
+//             <a href='/posts/${id}' data-turbolinks="false">詳細を見る</a>
+//             </div>
+//         </div>`,
+//           //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
+//         });
+//       }
+//       else if(dist<3 && gon.user!=posts[i].user_id && !posts[i].leveleduser.includes(gon.user) && gon.user!=null){
+//         infoWindow[i] = new google.maps.InfoWindow({
+//           // contentで中身を指定
+//           // 今回は文字にリンクを貼り付けた形で表示
+//           content: `<div class="custom-info">
+//             <strong class="custom-info-item name">
+//             ${posts[i].content}
+//             </strong>
+//             <div class="custom-info-item address">
+//             場所→${posts[i].address}
+//             </div>
+//             <div class="custom-info-item tel">
+//             <a href='/posts/${id}' data-turbolinks="false">詳細を見る</a>
+//             </div>
+//             <div class="custom-info-item google-map">
+//             <a href='/congratulationscreate/${id}'>レベルアップする</a>
+//             </div>
+//         </div>`,
+//           //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
+//         });
+//       }
+//       else{
+//         infoWindow[i] = new google.maps.InfoWindow({
+//           // contentで中身を指定
+//           // 今回は文字にリンクを貼り付けた形で表示
+//           content: `<div class="custom-info">
+//             <strong class="custom-info-item name">
+//             ${posts[i].content}
+//             </strong>
+//             <div class="custom-info-item address">
+//             場所→${posts[i].address}
+//             </div>
+//             <div class="custom-info-item tel">
+//             <a href='/posts/${id}' data-turbolinks="false">詳細を見る</a>
+//             </div>
+//         </div>`,
+//           //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
+//         });
+//       }
 
-      // infoWindowは吹き出し
+//       // infoWindowは吹き出し
 
-      // markerがクリックされた時、
-      marker[i].addListener("click", function(){
-        // infoWindowを表示
-        infoWindow[i].open(map, marker[i]);
-      });
-    }
-  });
+//       // markerがクリックされた時、
+//       marker[i].addListener("click", function(){
+//         // infoWindowを表示
+//         infoWindow[i].open(map, marker[i]);
+//       });
+//     }
+//   });
 
-}
+// }
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&libraries=geometry&callback=initMap" async defer></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=<%#= ENV['GOOGLE_MAP_API_KEY'] %>&libraries=geometry&callback=initMap" async defer></script>-->
     <div class="display_none2 mt-4">
       <strong>新しい投稿</strong>
     </div>

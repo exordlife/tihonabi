@@ -10,7 +10,7 @@
       	  <div class="row">
       	     <% if @posts.count==0 %>
                 <div class="mt-5 ml-5">
-                  <strong>投稿はまだありません。</strong>
+                  <strong>投稿はまだありません</strong>
                   <% if @user==current_user %>
                   <strong><%= link_to "自慢写真をアップしましょう", new_post_path %></strong>
                   <% end %>
@@ -308,6 +308,9 @@
                 <%= image_tag 'kisekae_green', size: "35x28" %>
               <% end %>
             <% end %>
+          <% elsif %>
+                <%= image_tag 'kisekae', size: "35x28" %>
+                <div>Lv.5から</div>
           <% end %>
         </div>
       </div>
@@ -365,7 +368,12 @@
   <div class="row display_none2">
       <div class="col">
         <% if @user==current_user %>
-          <strong>自分の投稿</strong>
+          <% if @user.posts.count==0 %>
+            <strong>投稿はまだありません</strong>
+          <% elsif %>
+            <strong>自分の投稿</strong>
+          <% end %>
+
         <% elsif %>
           <strong><%= @user.name %>さんの投稿</strong>
         <% end %>
@@ -508,7 +516,7 @@ $(".tab_label").on("click",function(){
 
 .level_head {
     color: black;
-    font-size:35px;
+    font-size:32px;
 }
 .level {
   font: bold 59px / 1 Verdana, Helvetica, Arial, sans-serif;
