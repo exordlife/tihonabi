@@ -1,12 +1,5 @@
-<style>
 
-@media screen and (min-width:425px) {
 
-  .display_none2{
-  display:none;
-  }
-}
-</style>
 <!DOCTYPE html>
 <html>
     <head>
@@ -114,7 +107,7 @@
       <% end %>
       <%= yield %>
       <% if user_signed_in? %>
-       <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center bottom-nav  list-group-flush" style="background-color:#F8F8FF;">
+       <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center display_none2 list-group-flush" style="background-color:#F8F8FF;">
         <button class="nav-link mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
           <%= link_to root_path , data: {"turbolinks" => false} do %>
            <%= image_tag 'footer1', size: "28x25"%>
@@ -146,24 +139,6 @@
   </body>
 </html>
 
-
-
-<style>
-@media screen and (max-width:425px) {
-  .display_none{
-  display:none;
-  }
-}
-
-@media screen and (min-width:425px) {
-  .bottom-nav {
-    display:none;
-  }
-  .display_none2{
-  display:none;
-  }
-}
-</style>
 
 <style>
   .height1{

@@ -277,7 +277,7 @@
       <% end %>
     </div>
   </div>
-  <div class="row mt-4">
+  <div class="row mt-4 display_none2">
     <div class="col">
       <% if @user.exp_sum<5 %>
         <%= link_to user_path(@user) do %>
@@ -341,7 +341,7 @@
         </div>
     </div>
   </div>
-  <div class="row display_none2 mt-3">
+  <div class="row mt-3  display_none2">
     <div class="col">
         <div class="show-text">
         </div>
@@ -494,17 +494,6 @@ $(".tab_label").on("click",function(){
 </script>
 
 <style>
-@media screen and (max-width:425px) {
-  .display_none{
-  display:none;
-  }
-}
-
-@media screen and (min-width:425px) {
-  .display_none2{
-  display:none;
-  }
-}
 
 .border{
   border-radius: 10px;

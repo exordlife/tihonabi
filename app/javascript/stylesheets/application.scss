@@ -237,3 +237,15 @@ border-radius: 30px;
 }
 
 
+@media screen and (min-width:425px) {
+
+  .display_none2{
+  display:none;
+  }
+}
+
+@media screen and (max-width:425px) {
+  .display_none{
+  display:none;
+  }
+}
