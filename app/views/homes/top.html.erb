@@ -109,17 +109,17 @@ function initMap(){
           // contentで中身を指定
           // 今回は文字にリンクを貼り付けた形で表示
           content: `<div class="custom-info">
-            <div class="custom-info-item name">
-            あなたの投稿です。
+            <div class="name">
+             あなたの投稿です。
             </div>
-            <strong class="custom-info-item name">
+            <strong class="custom-info-item content">
             ${posts[i].content}
             </strong>
             <div class="custom-info-item address">
             場所→${posts[i].address}
             </div>
             <div class="custom-info-item tel">
-            <a href='/posts/${id}' data-turbolinks="false">詳細を見る</a>
+            <a href='/posts/${id}' data-turbolinks="false" class="atag">投稿をみる</a>
             </div>
         </div>`,
           //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
@@ -130,17 +130,17 @@ function initMap(){
           // contentで中身を指定
           // 今回は文字にリンクを貼り付けた形で表示
           content: `<div class="custom-info">
-            <strong class="custom-info-item name">
+            <strong class="custom-info-item content">
             ${posts[i].content}
             </strong>
             <div class="custom-info-item address">
             場所→${posts[i].address}
             </div>
             <div class="custom-info-item tel">
-            <a href='/posts/${id}' data-turbolinks="false">詳細を見る</a>
+            <a href='/posts/${id}' data-turbolinks="false" class="atag">投稿をみる</a>
             </div>
             <div class="custom-info-item google-map">
-            <a href='/congratulationscreate/${id}'>レベルアップする</a>
+            <a href='/congratulationscreate/${id}' class="btn-sf-like">レベルアップ</a>
             </div>
         </div>`,
           //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`
@@ -151,14 +151,14 @@ function initMap(){
           // contentで中身を指定
           // 今回は文字にリンクを貼り付けた形で表示
           content: `<div class="custom-info">
-            <strong class="custom-info-item name">
+            <strong class="custom-info-item content">
             ${posts[i].content}
             </strong>
             <div class="custom-info-item address">
             場所→${posts[i].address}
             </div>
             <div class="custom-info-item tel">
-            <a href='/posts/${id}' data-turbolinks="false">詳細を見る</a>
+            <a href='/posts/${id}' data-turbolinks="false" class="atag">投稿をみる</a>
             </div>
         </div>`,
           //content: `<a href='/posts/${id}'>${posts[i].content}</a><br><a href='/posts/${id}'>${posts[i].content}</a>`

@@ -240,6 +240,43 @@ border-radius: 30px;
 -moz-border-radius: 30px;
 }
 
+//マップの中身
+.name{
+    font-size: 9px;
+    color: red;
+    font-weight:bold;
+}
+
+.content{
+    font-size: 15px;
+    color: #003314;
+    font-weight:bold;
+}
+
+.atag{
+    font-size: 19px;
+}
+
+.btn-sf-like {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  text-decoration: none;
+  color: #FFF;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.73);
+  padding: 0.3em 0.5em;
+  background: #00bcd4;
+  border-top: solid 3px #00a3d4;
+  border-bottom: solid 3px #00a3d4;
+  transition: .4s;
+  border-radius: 5px;
+}
+
+.btn-sf-like:hover {
+  text-shadow: -6px 0px 15px rgba(255, 255, 240, 0.83),
+               6px 0px 15px rgba(255, 255, 240, 0.83);
+}
+
 
 @media screen and (min-width:425px) {
 
