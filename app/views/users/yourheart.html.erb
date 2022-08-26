@@ -11,7 +11,11 @@
     <div class="col">
       <% @favorite_posts.each do |post| %>
       <div class="my-2">
-        <div class="card back-color2 mt-3 pt-3 imaging h-100">
+        <% if current_user.back==1 %>
+          <div class="card back-color2 mt-3 pt-3 imaging h-100">
+          <% elsif current_user.back==2 %>
+          <div class="card back-color5 mt-3 pt-3 imaging h-100">
+          <% end %>
           <div class="d-flex mb-1 ml-3">
              <% if post.user.exp_sum<5 %>
                 <%= link_to user_path(post.user) do %>

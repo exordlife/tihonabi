@@ -50,8 +50,11 @@
               <% end %>
             </div>
             <div class="display_none2">
+              <% if current_user.back==1 %>
               <div class="d-flex fixed-top py-3 pl-1 back-color">
-
+              <% elsif current_user.back==2 %>
+              <div class="d-flex fixed-top py-3 pl-1 back-color4">
+              <% end %>
                 <%= link_to root_path do %>
                   <%= image_tag 'Tippy' , size: "90x38", data: {"turbolinks" => false}%>
                 <% end %>
@@ -107,35 +110,65 @@
       <% end %>
       <%= yield %>
       <% if user_signed_in? %>
-       <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center display_none2 list-group-flush" style="background-color:#F8F8FF;">
-        <button class="nav-link mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
-          <%= link_to root_path , data: {"turbolinks" => false} do %>
-           <%= image_tag 'footer1', size: "28x25"%>
-          <% end %>
-        </button>
-        <button class="nav-link mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
-          <%= link_to yourheart_path do %>
-          <%= image_tag 'footer2', size: "22x22" %>
-          <% end %>
-        </button>
-        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
-          <%= link_to ranking_path do %>
-          <%= image_tag 'footer3', size: "25x25" %>
-          <% end %>
-        </button>
-        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
-          <%= link_to new_post_path do %>
-          <%= image_tag 'footer4', size: "25x25" %>
-          <% end %>
-        </button>
-        <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
-          <%= link_to user_path(current_user) do %>
-          <%= image_tag 'footer5', size: "25x25" %>
-          <% end %>
-        </button>
-      </ul>
-      <% end %>
+        <% if current_user.back==1 %>
+        <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center display_none2 list-group-flush" style="background-color:#F8F8FF;">
+          <button class="nav-link mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+            <%= link_to root_path , data: {"turbolinks" => false} do %>
+             <%= image_tag 'footer1', size: "28x25"%>
+            <% end %>
+          </button>
+          <button class="nav-link mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+            <%= link_to yourheart_path do %>
+            <%= image_tag 'footer2', size: "22x22" %>
+            <% end %>
+          </button>
+          <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+            <%= link_to ranking_path do %>
+            <%= image_tag 'footer3', size: "25x25" %>
+            <% end %>
+          </button>
+          <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+            <%= link_to new_post_path do %>
+            <%= image_tag 'footer4', size: "25x25" %>
+            <% end %>
+          </button>
+          <button class="mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
+            <%= link_to user_path(current_user) do %>
+            <%= image_tag 'footer5', size: "25x25" %>
+            <% end %>
+          </button>
+        </ul>
+        <% elsif current_user.back==2 %>
+        <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center display_none2 list-group-flush" style="background-color:#D4E0FF;">
+          <button class="nav-link mx-auto list-group-item list-group-item-action" style="background-color:#D4E0FF;">
+            <%= link_to root_path , data: {"turbolinks" => false} do %>
+             <%= image_tag 'footer1', size: "28x25"%>
+            <% end %>
+          </button>
+          <button class="nav-link mx-auto list-group-item list-group-item-action" style="background-color:#D4E0FF;">
+            <%= link_to yourheart_path do %>
+            <%= image_tag 'footer2', size: "22x22" %>
+            <% end %>
+          </button>
+          <button class="mx-auto list-group-item list-group-item-action" style="background-color:#D4E0FF;">
+            <%= link_to ranking_path do %>
+            <%= image_tag 'footer3', size: "25x25" %>
+            <% end %>
+          </button>
+          <button class="mx-auto list-group-item list-group-item-action" style="background-color:#D4E0FF;">
+            <%= link_to new_post_path do %>
+            <%= image_tag 'footer4', size: "25x25" %>
+            <% end %>
+          </button>
+          <button class="mx-auto list-group-item list-group-item-action" style="background-color:#D4E0FF;">
+            <%= link_to user_path(current_user) do %>
+            <%= image_tag 'footer5', size: "25x25" %>
+            <% end %>
+          </button>
+        </ul>
+        <% end %>
 
+      <% end %>
   </body>
 </html>
 

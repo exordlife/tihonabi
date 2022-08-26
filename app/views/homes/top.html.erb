@@ -186,7 +186,13 @@
 
       <% @posts.each do |post| %>
         <div class="col-lg-4 my-2">
+          <% if !user_signed_in? %>
           <div class="card back-color2 mt-3 pt-3 imaging h-100">
+          <% elsif current_user.back==1 %>
+          <div class="card back-color2 mt-3 pt-3 imaging h-100">
+          <% elsif current_user.back==2 %>
+          <div class="card back-color5 mt-3 pt-3 imaging h-100">
+          <% end %>
             <div class="d-flex mb-1 ml-3">
               <% if post.user.exp_sum<5 %>
                 <%= link_to user_path(post.user) do %>
@@ -246,6 +252,7 @@
           </div>
         <% end %>
       </div>
+    
     <div class="tab_area display_none">
       <label class="tab_label active" for="tab1">新しい順</label>
       <% if user_signed_in? %>
@@ -257,7 +264,13 @@
         <div class="row">
         <% @posts.each do |post| %>
           <div class="col-lg-4 my-2">
-            <div class="card back-color2 mt-3 pt-3 imaging h-100">
+            <% if !user_signed_in? %>
+              <div class="card back-color2 mt-3 pt-3 imaging h-100">
+              <% elsif current_user.back==1 %>
+              <div class="card back-color2 mt-3 pt-3 imaging h-100">
+              <% elsif current_user.back==2 %>
+              <div class="card back-color5 mt-3 pt-3 imaging h-100">
+              <% end %>
               <div class="d-flex mb-1 ml-3">
                 <% if post.user.exp_sum<5 %>
                   <%= link_to user_path(post.user) do %>
@@ -323,7 +336,13 @@
         <div class="row">
         <% @favorite_sort.each do |post| %>
           <div class="col-lg-4 my-2">
+            <% if !user_signed_in? %>
             <div class="card back-color2 mt-3 pt-3 imaging h-100">
+            <% elsif current_user.back==1 %>
+            <div class="card back-color2 mt-3 pt-3 imaging h-100">
+            <% elsif current_user.back==2 %>
+            <div class="card back-color5 mt-3 pt-3 imaging h-100">
+            <% end %>
               <div class="d-flex mb-1 ml-3">
               <% if post.user.exp_sum<5 %>
                 <%= link_to user_path(post.user) do %>
