@@ -279,7 +279,7 @@
     </div>
     <div class="col-1">
 
-      <% if @user=current_user %>
+      <% if @user==current_user %>
       <div class="text-right">
         <%= link_to destroy_user_session_path, method: :delete , class: "navbar-brand" do%>
           <%= image_tag 'logout', size: "45x45" %>

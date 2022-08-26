@@ -193,7 +193,7 @@
           <% elsif current_user.back==2 %>
           <div class="card back-color5 mt-3 pt-3 imaging h-100">
           <% end %>
-            <div class="d-flex mb-1 ml-3">
+            <div class="d-flex ml-3">
               <% if post.user.exp_sum<5 %>
                 <%= link_to user_path(post.user) do %>
                   <%= image_tag post.user.profile_image , class: "profile_img2_1 d-block mx-auto"%>
