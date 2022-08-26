@@ -23,25 +23,33 @@
               <% elsif current_user.back==2 %>
               <div class="card back-color5 mt-3 pt-3 imaging h-100">
               <% end %>
-                <div class="d-flex mb-1 ml-3">
-                  <div>
-                    <% if post.user.exp_sum<5 %>
-                      <%= link_to user_path(post.user) do %>
-                        <%= image_tag post.user.get_profile_image , class: "profile_img2_1 d-block mx-auto"%>
-                      <% end %>
-                    <% elsif post.user.exp_sum<10%>
-                      <%= link_to user_path(post.user) do %>
-                        <%= image_tag post.user.get_profile_image , class: "profile_img2_2 d-block mx-auto"%>
-                      <% end %>
-                    <% elsif%>
-                      <%= link_to user_path(post.user) do %>
-                        <%= image_tag post.user.get_profile_image , class: "profile_img2_3 d-block mx-auto"%>
-                      <% end %>
+                <div class="d-flex mb-1 mx-3 justify-content-between">
+                <div class="d-flex">
+                  <% if post.user.exp_sum<5 %>
+                    <%= link_to user_path(post.user) do %>
+                      <%= image_tag post.user.get_profile_image , class: "profile_img2_1 d-block mx-auto"%>
                     <% end %>
-                  </div>
+                  <% elsif post.user.exp_sum<10%>
+                    <%= link_to user_path(post.user) do %>
+                      <%= image_tag post.user.get_profile_image , class: "profile_img2_2 d-block mx-auto"%>
+                    <% end %>
+                  <% elsif%>
+                    <%= link_to user_path(post.user) do %>
+                      <%= image_tag post.user.get_profile_image , class: "profile_img2_3 d-block mx-auto"%>
+                    <% end %>
+                  <% end %>
                   <strong class="ml-2 my-auto"><%= post.user.name %></strong>
                 </div>
-
+  
+                <div class="pull-right">
+                  <% if @user==current_user %>
+                    <%= link_to post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' } do %>
+                      <%= image_tag 'trash', size: "35x35", class: "pull-right"%>
+                    <% end %>
+                <% end %>
+                </div>
+  
+              </div>
                 <div class="d-flex mb-3 m-3">
 
                 </div>
@@ -79,15 +87,7 @@
                     </div>
 
                   </div>
-                    <% if @user==current_user %>
-
-                      <div class="text-right mt-3">
-                        <%= link_to post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' } do %>
-                          <%= image_tag 'trash', size: "35x35" %>
-                        <% end %>
-                      </div>
-
-                    <% end %>
+                  
                   <% end %>
                 </div>
               </div>
@@ -111,7 +111,8 @@
               <% elsif current_user.back==2 %>
               <div class="card back-color5 mt-3 pt-3 imaging h-100">
               <% end %>
-                <div class="d-flex mb-1 ml-3">
+                <div class="d-flex mb-1 mx-3 justify-content-between">
+                <div class="d-flex">
                   <% if post.user.exp_sum<5 %>
                     <%= link_to user_path(post.user) do %>
                       <%= image_tag post.user.get_profile_image , class: "profile_img2_1 d-block mx-auto"%>
@@ -126,10 +127,17 @@
                     <% end %>
                   <% end %>
                   <strong class="ml-2 my-auto"><%= post.user.name %></strong>
-                 </div>
-                <div class="d-flex mb-3 m-3">
-
                 </div>
+  
+                <div class="pull-right">
+                  <% if @user==current_user %>
+                    <%= link_to post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' } do %>
+                      <%= image_tag 'trash', size: "35x35", class: "pull-right"%>
+                    <% end %>
+                <% end %>
+                </div>
+  
+              </div>
                   <div class="a">
                     <% post.image.each do |image| %>
                       <%= link_to post_path(post) do %>
@@ -163,13 +171,7 @@
                       <!-- ボタン・リンククリック後に表示される画面の内容 -->
                     </div>
                   </div>
-                  <% if @user==current_user %>
-                    <div class="text-right mt-3">
-                      <%= link_to post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' } do %>
-                        <%= image_tag 'trash', size: "35x35" %>
-                      <% end %>
-                    </div>
-                  <% end %>
+                  
                   <% end %>
                 </div>
               </div>
@@ -393,24 +395,34 @@
               <% elsif current_user.back==2 %>
               <div class="card back-color5 mt-3 pt-3 imaging h-100">
               <% end %>
-            <div class="d-flex mb-1 ml-3">
-              <% if post.user.exp_sum<5 %>
-                <%= link_to user_path(post.user) do %>
-                  <%= image_tag post.user.get_profile_image , class: "profile_img2_1 d-block mx-auto"%>
+              <div class="d-flex mb-1 mx-3 justify-content-between">
+                <div class="d-flex">
+                  <% if post.user.exp_sum<5 %>
+                    <%= link_to user_path(post.user) do %>
+                      <%= image_tag post.user.get_profile_image , class: "profile_img2_1 d-block mx-auto"%>
+                    <% end %>
+                  <% elsif post.user.exp_sum<10%>
+                    <%= link_to user_path(post.user) do %>
+                      <%= image_tag post.user.get_profile_image , class: "profile_img2_2 d-block mx-auto"%>
+                    <% end %>
+                  <% elsif%>
+                    <%= link_to user_path(post.user) do %>
+                      <%= image_tag post.user.get_profile_image , class: "profile_img2_3 d-block mx-auto"%>
+                    <% end %>
+                  <% end %>
+                  <strong class="ml-2 my-auto"><%= post.user.name %></strong>
+                </div>
+  
+                <div class="pull-right">
+                  <% if @user==current_user %>
+                    <%= link_to post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' } do %>
+                      <%= image_tag 'trash', size: "35x35", class: "pull-right"%>
+                    <% end %>
                 <% end %>
-              <% elsif post.user.exp_sum<10%>
-                <%= link_to user_path(post.user) do %>
-                  <%= image_tag post.user.get_profile_image , class: "profile_img2_2 d-block mx-auto"%>
-                <% end %>
-              <% elsif%>
-                <%= link_to user_path(post.user) do %>
-                  <%= image_tag post.user.get_profile_image , class: "profile_img2_3 d-block mx-auto"%>
-                <% end %>
-              <% end %>
-              <strong class="ml-2 my-auto"><%= post.user.name %></strong>
-             </div>
-            <div class="d-flex mb-3 m-3">
-            </div>
+                </div>
+  
+              </div>
+
               <div class="a">
                 <% post.image.each do |image| %>
                   <%= link_to post_path(post) do %>
@@ -444,13 +456,7 @@
                   <!-- ボタン・リンククリック後に表示される画面の内容 -->
                 </div>
               </div>
-              <% if @user==current_user %>
-                <div class="text-right mt-3">
-                  <%= link_to post_path(post), method: :delete , data: { confirm: '本当に削除しますか？' } do %>
-                    <%= image_tag 'trash', size: "35x35" %>
-                  <% end %>
-                </div>
-              <% end %>
+
               <% end %>
             </div>
           </div>
