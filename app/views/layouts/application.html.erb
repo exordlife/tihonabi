@@ -1,26 +1,12 @@
 <style>
-@media screen and (max-width:425px) {
-  .display_none{
-  display:none;
-  }
-}
 
 @media screen and (min-width:425px) {
-  .bottom-nav {
-    display:none;
-  }
+
   .display_none2{
   display:none;
   }
 }
 </style>
-
-<style>
-  .height1{
-    height: 50px;
-  }
-</style>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -70,7 +56,8 @@
                 <%= image_tag 'image1', size: "70x70"%>
               <% end %>
             </div>
-            <div class="display_none2 d-flex fixed-top py-3 pl-1 back-color">
+            <div class="display_none2">
+              <div class="d-flex fixed-top py-3 pl-1 back-color">
 
                 <%= link_to root_path do %>
                   <%= image_tag 'Tippy' , size: "90x38", data: {"turbolinks" => false}%>
@@ -83,6 +70,8 @@
                   <% end %>
                 <% end %>
               </div>
+            </div>
+
 
             </div>
             <% else %>
@@ -127,7 +116,7 @@
       <% if user_signed_in? %>
        <ul class="fixed-bottom w-100 shadow-lg list-unstyled list-group list-group-horizontal text-center bottom-nav  list-group-flush" style="background-color:#F8F8FF;">
         <button class="nav-link mx-auto list-group-item list-group-item-action" style="background-color:#EDFFF6;">
-          <%= link_to root_path, data: {"turbolinks" => false} do %>
+          <%= link_to root_path , data: {"turbolinks" => false} do %>
            <%= image_tag 'footer1', size: "28x25"%>
           <% end %>
         </button>
@@ -159,4 +148,25 @@
 
 
 
+<style>
+@media screen and (max-width:425px) {
+  .display_none{
+  display:none;
+  }
+}
 
+@media screen and (min-width:425px) {
+  .bottom-nav {
+    display:none;
+  }
+  .display_none2{
+  display:none;
+  }
+}
+</style>
+
+<style>
+  .height1{
+    height: 50px;
+  }
+</style>

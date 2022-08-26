@@ -296,7 +296,7 @@
     <div class="col">
       <div class="d-flex ml-2 mt-3">
         <p class="level_head align-items-end">Lv.</p>
-          <strong class="level"><%= @user.exp_sum.floor %></strong>
+        <strong class="level"><%= @user.exp_sum.floor %></strong>
         <div class="ml-2">
           <% if @user==current_user && @user.exp_sum>5 %>
             <% if @user.back==1 %>
