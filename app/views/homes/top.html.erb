@@ -34,7 +34,9 @@
     </div>
     <% end %>
   </div>
-  <% if current_user.back==1 %>
+  <% if !user_signed_in? %>
+  <div id='map' class="googlemap mb-3 shadow"></div>
+  <% elsif current_user.back==1 %>
   <div id='map' class="googlemap mb-3 shadow"></div>
   <% elsif current_user.back==2 %>
   <div id='map' class="googlemap2 mb-3 shadow"></div>
