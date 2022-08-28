@@ -5,22 +5,26 @@
 }
 
 </style>
-<div class="container">
+<div class="container mt-3">
   <%= flash[:notice1] %>
   <div id="text-wrap">
     <div class="show-text">
     </div>
     <div class="hide-text">
-    <div id='map' class="googlemap"></div>
+    <% if current_user.back==1 %>
+    <div id='map' class="googlemap mb-3 shadow"></div>
+    <% elsif current_user.back==2 %>
+    <div id='map' class="googlemap2 mb-3 shadow"></div>
+    <% end %>
     </div>
     <button class="readmore">マップ</button>
   </div>
 
   <div class="display_none">
     <% if current_user.back==1 %>
-    <div class="card back-color2 pt-3 imaging h-100 d-flex">
+    <div class="card back-color2 pt-3 imaging h-100 d-flex shadow">
     <% elsif current_user.back==2 %>
-    <div class="card back-color5 pt-3 imaging h-100 d-flex">
+    <div class="card back-color5 pt-3 imaging h-100 d-flex shadow">
     <% end %>
       <div class="row">
         <div class="col-lg-7">
@@ -87,9 +91,9 @@
       <div class="col">
         <div class="my-2">
           <% if current_user.back==1 %>
-          <div class="card back-color2 mt-3 pt-3 imaging h-100">
+          <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
           <% elsif current_user.back==2 %>
-          <div class="card back-color5 mt-3 pt-3 imaging h-100">
+          <div class="card back-color5 mt-3 pt-3 imaging h-100 shadow">
           <% end %>
             <div class="d-flex mb-1 ml-3">
               <% if @post.user.exp_sum<5 %>

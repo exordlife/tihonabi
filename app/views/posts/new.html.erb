@@ -6,6 +6,7 @@
   }
 }
 
+
 </style>
 
 <div class="container px-5 px-sm-0 mt-2 mb-5">
@@ -45,16 +46,29 @@
             <div class="ml-4">
               <%= flash[:notice2] %>
             </div>
+            <% if current_user.back==1 %>
             <strong class="ml-4">最大4枚まで投稿できます</strong>
             <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
             <div class="d-flex justify-content-start">
-              <%= image_tag 'cameraA', size: "260x260", onClick: "$('.img_field').click()", class: 'img_prev img_size'%>
-              <%= image_tag 'cameraB', size: "260x260", onClick: "$('.img_field').click()",  class: 'img_pre img_size'%>
+              <%= image_tag 'cameraA', size: "200x200", onClick: "$('.img_field').click()", class: 'img_prev img_size'%>
+              <%= image_tag 'cameraB', size: "200x200", onClick: "$('.img_field').click()",  class: 'img_pre img_size'%>
             </div>
             <div class="d-flex justify-content-start">
-              <%= image_tag 'cameraC', size: "260x260", onClick: "$('.img_field').click()", class: 'img_pr img_size'%>
-              <%= image_tag 'cameraD', size: "260x260", onClick: "$('.img_field').click()",  class: 'img_p img_size'%>
+              <%= image_tag 'cameraC', size: "200x200", onClick: "$('.img_field').click()", class: 'img_pr img_size'%>
+              <%= image_tag 'cameraD', size: "200x200", onClick: "$('.img_field').click()",  class: 'img_p img_size'%>
             </div>
+            <% elsif current_user.back==2 %>
+            <strong class="ml-4">最大4枚まで投稿できます</strong>
+            <%= f.file_field :image, multiple: true, class: 'img_field', style: 'display:none;', accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
+            <div class="d-flex justify-content-start">
+              <%= image_tag 'cameraA_2', size: "200x200", onClick: "$('.img_field').click()", class: 'img_prev img_size'%>
+              <%= image_tag 'cameraB_2', size: "200x200", onClick: "$('.img_field').click()",  class: 'img_pre img_size'%>
+            </div>
+            <div class="d-flex justify-content-start">
+              <%= image_tag 'cameraC_2', size: "200x200", onClick: "$('.img_field').click()", class: 'img_pr img_size'%>
+              <%= image_tag 'cameraD_2', size: "200x200", onClick: "$('.img_field').click()",  class: 'img_p img_size'%>
+            </div>
+            <% end %>
           </div>
         </div>
         <div class="col-lg-2"></div>

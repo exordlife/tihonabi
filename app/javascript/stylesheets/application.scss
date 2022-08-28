@@ -238,6 +238,13 @@ button.readmore:hover::after {
 border-radius: 30px;
 -webkit-border-radius: 30px;
 -moz-border-radius: 30px;
+border: solid 5px #66bb6a;
+}
+.googlemap2 {
+border-radius: 30px;
+-webkit-border-radius: 30px;
+-moz-border-radius: 30px;
+border: solid 5px #839EFF;
 }
 
 //マップの中身
@@ -281,6 +288,12 @@ border-radius: 30px;
 .shadow {
   box-shadow: 10px 10px 15px -10px;
 }
+
+.text-shadow{
+   text-shadow:1px 2px 2px #513c3c;
+}
+
+
 
 @media screen and (min-width:425px) {
 

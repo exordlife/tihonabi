@@ -4,9 +4,9 @@
         <% @posts.each do |post| %>
         <div class="col-lg-4 my-2">
             <% if current_user.back==1 %>
-              <div class="card back-color2 mt-3 pt-3 imaging h-100">
+              <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
               <% elsif current_user.back==2 %>
-              <div class="card back-color5 mt-3 pt-3 imaging h-100">
+              <div class="card back-color5 mt-3 pt-3 imaging h-100 shadow">
               <% end %>
               <div class="d-flex mb-1 ml-3">
               <% if post.user.exp_sum<5 %>

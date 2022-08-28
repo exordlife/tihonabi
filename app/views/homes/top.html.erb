@@ -34,8 +34,12 @@
     </div>
     <% end %>
   </div>
+  <% if current_user.back==1 %>
+  <div id='map' class="googlemap mb-3 shadow"></div>
+  <% elsif current_user.back==2 %>
+  <div id='map' class="googlemap2 mb-3 shadow"></div>
+  <% end %>
 
-  <div id='map' class="googlemap mb-3"></div>
 
 <style>
 #map {
@@ -193,8 +197,8 @@ function initMap(){
     <div class="display_none2 mt-4">
       <strong class="top_name">新しい投稿</strong>
     </div>
-    <div>
-    <%= link_to "全て", ranking_path %>
+    <div class="display_none2 mt-2 text-right top_genre">
+    <%= link_to "全て", root_path %>
       <% Genre.all.each do |genre| %>
         <%= link_to genre.name[0,1], root_path(genre_id: genre.id), data: {"turbolinks" => false} %>
       <% end %>
@@ -204,11 +208,11 @@ function initMap(){
       <% @posts.each do |post| %>
         <div class="col-lg-4 my-2">
           <% if !user_signed_in? %>
-          <div class="card back-color2 mt-3 pt-3 imaging h-100">
+          <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
           <% elsif current_user.back==1 %>
-          <div class="card back-color2 mt-3 pt-3 imaging h-100">
+          <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
           <% elsif current_user.back==2 %>
-          <div class="card back-color5 mt-3 pt-3 imaging h-100">
+          <div class="card back-color5 mt-3 pt-3 imaging h-100 shadow">
           <% end %>
             <div class="d-flex ml-3">
               <% if post.user.exp_sum<5 %>
@@ -282,11 +286,11 @@ function initMap(){
         <% @posts.each do |post| %>
           <div class="col-lg-4 my-2">
             <% if !user_signed_in? %>
-              <div class="card back-color2 mt-3 pt-3 imaging h-100">
+              <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
               <% elsif current_user.back==1 %>
-              <div class="card back-color2 mt-3 pt-3 imaging h-100">
+              <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
               <% elsif current_user.back==2 %>
-              <div class="card back-color5 mt-3 pt-3 imaging h-100">
+              <div class="card back-color5 mt-3 pt-3 imaging h-100 shadow">
               <% end %>
               <div class="d-flex mb-1 ml-3">
                 <% if post.user.exp_sum<5 %>
@@ -354,11 +358,11 @@ function initMap(){
         <% @favorite_sort.each do |post| %>
           <div class="col-lg-4 my-2">
             <% if !user_signed_in? %>
-            <div class="card back-color2 mt-3 pt-3 imaging h-100">
+            <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
             <% elsif current_user.back==1 %>
-            <div class="card back-color2 mt-3 pt-3 imaging h-100">
+            <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
             <% elsif current_user.back==2 %>
-            <div class="card back-color5 mt-3 pt-3 imaging h-100">
+            <div class="card back-color5 mt-3 pt-3 imaging h-100 shadow">
             <% end %>
               <div class="d-flex mb-1 ml-3">
               <% if post.user.exp_sum<5 %>
@@ -462,6 +466,10 @@ $(".tab_label").on("click",function(){
 .top_name {
    color: black;
     font-size:20px;
+}
+.top_genre {
+   color: black;
+    font-size:18px;
 }
 
 </style>
