@@ -11,7 +11,9 @@
     <div class="show-text">
     </div>
     <div class="hide-text">
-    <% if current_user.back==1 %>
+    <% if !user_signed_in? %>
+    <div id='map' class="googlemap mb-3 shadow"></div>
+    <% elsif current_user.back==1 %>
     <div id='map' class="googlemap mb-3 shadow"></div>
     <% elsif current_user.back==2 %>
     <div id='map' class="googlemap2 mb-3 shadow"></div>
@@ -21,7 +23,9 @@
   </div>
 
   <div class="display_none">
-    <% if current_user.back==1 %>
+    <% if !user_signed_in? %>
+    <div class="card back-color2 pt-3 imaging h-100 d-flex shadow">
+    <% elsif current_user.back==1 %>
     <div class="card back-color2 pt-3 imaging h-100 d-flex shadow">
     <% elsif current_user.back==2 %>
     <div class="card back-color5 pt-3 imaging h-100 d-flex shadow">
@@ -90,10 +94,12 @@
     <div class="row">
       <div class="col">
         <div class="my-2">
-          <% if current_user.back==1 %>
-          <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
+          <% if !user_signed_in? %>
+          <div class="card back-color2 pt-3 imaging h-100 d-flex shadow">
+          <% elsif current_user.back==1 %>
+          <div class="card back-color2 pt-3 imaging h-100 d-flex shadow">
           <% elsif current_user.back==2 %>
-          <div class="card back-color5 mt-3 pt-3 imaging h-100 shadow">
+          <div class="card back-color5 pt-3 imaging h-100 d-flex shadow">
           <% end %>
             <div class="d-flex mb-1 ml-3">
               <% if @post.user.exp_sum<5 %>
