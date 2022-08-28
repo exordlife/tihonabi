@@ -1,5 +1,8 @@
 <div class="container-md  mt-5">
-  <strong class="ranking_name">ランキング(いいね数)</strong>
+  <div>
+    <strong class="ranking_name">ランキング</strong>
+    <%= image_tag 'heart1', size: "25x22" %>
+  </div>
   <div class="display_none2 mt-2 text-right ranking_genre">
     <%= link_to "全て", ranking_path %>
     <% Genre.all.each do |genre| %>
@@ -7,18 +10,18 @@
     <% end %>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col bg-white mt-2 mx-2 rounded">
 
       <% @favorite_sort.each_with_index do |post, i| %>
-      <div class="my-4">
+      <div class="mb-5 mt-3">
         <% if i==0 %>
-        <div><strong class="ranking_name"><%= i+1 %>位</strong><%= image_tag 'footer3', size: "25x20" %></div>
+        <div class="text-center"><%= image_tag 'kin', size: "65x45" %></div>
         <% elsif i==1 %>
-        <div><%= i+1 %>位<%= image_tag 'footer3', size: "25x25" %></div>
+        <div class="text-center"><%= image_tag 'gin', size: "65x45" %></div>
         <% elsif i==2 %>
-        <div><%= i+1 %>位<%= image_tag 'footer3', size: "25x25" %></div>
+        <div class="text-center"><%= image_tag 'dou', size: "65x45" %></div>
         <% elsif %>
-        <div><%= i+1 %>位</div>
+        <div class="text-center"><strong class="ranking_name"><%= i+1 %>位</strong></div>
         <% end %>
         <% if current_user.back==1 %>
           <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
@@ -118,4 +121,7 @@ $(document).on('turbolinks:load', function(){
     font-size:18px;
 }
 
+.white-color{
+  backgroud-color: white;
+}
 </style>
