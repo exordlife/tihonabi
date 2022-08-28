@@ -200,7 +200,7 @@ function initMap(){
       <strong class="top_name">新しい投稿</strong>
     </div>
     <div class="display_none2 mt-2 text-right top_genre">
-    <%= link_to "全て", root_path %>
+    <%= link_to "全て", root_path, data: {"turbolinks" => false} %>
       <% Genre.all.each do |genre| %>
         <%= link_to genre.name[0,1], root_path(genre_id: genre.id), data: {"turbolinks" => false} %>
       <% end %>
@@ -248,8 +248,10 @@ function initMap(){
                 <div>
                   <%= post.content %>
                 </div>
+                <% if user_signed_in? %>
                 <%= link_to genre_path(post.genre) do %>
                   <%= post.genre.name %>
+                <% end %>
                 <% end %>
               </h5>
               <div class="text-right mb-3">
@@ -326,8 +328,10 @@ function initMap(){
                   <div>
                     <%= post.content %>
                   </div>
+                  <% if user_signed_in? %>
                   <%= link_to genre_path(post.genre) do %>
                     <%= post.genre.name %>
+                  <% end %>
                   <% end %>
                 </h5>
                 <div class="text-right mb-3">
