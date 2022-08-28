@@ -191,7 +191,7 @@ function initMap(){
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&libraries=geometry&callback=initMap" async defer></script>
     <div class="display_none2 mt-4">
-      <strong>新しい投稿</strong>
+      <strong class="top_name">新しい投稿</strong>
     </div>
     <div class="row display_none2">
 
@@ -450,3 +450,12 @@ $(".tab_label").on("click",function(){
 	$(".tab_panel").eq($th).addClass("active");
 });
 </script>
+
+<style>
+
+.top_name {
+   color: black;
+    font-size:20px;
+}
+
+</style>

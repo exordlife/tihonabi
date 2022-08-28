@@ -8,7 +8,36 @@
 
 </style>
 
-<div class="container px-5 px-sm-0 mt-5 mb-5">
+<div class="container px-5 px-sm-0 mt-2 mb-5">
+  <div class="text-right"><button type="button" class="btn" data-toggle="modal" data-target="#Mod" data-backdrop="static"><%= image_tag 'hatena', size: "40x40" %></button></div>
+
+    <!-- ボタン・リンククリック後に表示される画面の内容 -->
+    <div class="modal fade" id="Mod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">投稿例</h5>
+          </div>
+          <div class="modal-body">
+            <p>※あくまでも例です
+            </p>
+           <br><br><br>
+            <div class="d-flex justify-content-center">
+            </div>
+             <br>
+            <div class="d-flex justify-content-center">
+
+              <%= image_tag '1', size: "120x200" %>
+              <%= image_tag '2', size: "120x200" %>
+              <%= image_tag '3', size: "120x200" %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <%= form_with model: @new_post do |f| %>
       <div class="d-lg-flex justify-content-evenly">
         <div class="img_prever col-lg-4 ml-lg-5">

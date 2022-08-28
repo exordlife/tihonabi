@@ -277,6 +277,10 @@ border-radius: 30px;
                6px 0px 15px rgba(255, 255, 240, 0.83);
 }
 
+//影
+.shadow {
+  box-shadow: 10px 10px 15px -10px;
+}
 
 @media screen and (min-width:425px) {
 

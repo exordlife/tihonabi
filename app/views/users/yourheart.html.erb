@@ -5,14 +5,14 @@
         <strong>いいねした投稿はまだありません。</strong>
       </div>
     <% elsif %>
-      <strong>あなたがいいねした投稿</strong>
+      <strong class="heart_name">あなたがいいねした投稿</strong>
     <% end %>
   <div class="row">
     <div class="col">
       <% @favorite_posts.each do |post| %>
       <div class="my-2">
         <% if current_user.back==1 %>
-          <div class="card back-color2 mt-3 pt-3 imaging h-100">
+          <div class="card back-color2 mt-3 pt-3 imaging h-100 shadow">
           <% elsif current_user.back==2 %>
           <div class="card back-color5 mt-3 pt-3 imaging h-100">
           <% end %>
@@ -96,3 +96,11 @@ $(document).on('turbolinks:load', function(){
   });
 });
 </script>
+<style>
+
+.heart_name {
+   color: black;
+    font-size:20px;
+}
+
+</style>
