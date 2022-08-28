@@ -193,6 +193,12 @@ function initMap(){
     <div class="display_none2 mt-4">
       <strong class="top_name">新しい投稿</strong>
     </div>
+    <div>
+    <%= link_to "全て", ranking_path %>
+      <% Genre.all.each do |genre| %>
+        <%= link_to genre.name[0,1], root_path(genre_id: genre.id), data: {"turbolinks" => false} %>
+      <% end %>
+    </div>
     <div class="row display_none2">
 
       <% @posts.each do |post| %>
