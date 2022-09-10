@@ -3,13 +3,13 @@
     <div class="row d-lg-flex pt-5">
       <div class="col-lg-6 d-lg-flex align-items-center">
           <div class="mr-lg-5 mb-3">
-            <%= image_tag 'Tippylogo', class:"img-fluid back-color" %>
+            <%= image_tag 'Tippy_logo', class:"img-fluid back-color" %>
           </div>
       </div>
-  
+
       <div class="col-lg-5">
         <div class="d-flex justify-content-center">
-          <%= image_tag 'Sign in', size:"120x50", class: "back-color"%>
+          <strong class="back-color">サインイン</strong><br />
         </div>
         <div class="d-flex justify-content-center">
           <div>
@@ -18,12 +18,12 @@
                 <strong>メールアドレス</strong><br />
                 <%= f.email_field :email, :class => "form-control" %>
               </div>
-  
+
               <div class="field mt-3">
                 <strong>パスワード</strong><br/>
                 <%= f.password_field :password, autocomplete: "current-password", :class => "form-control" %>
               </div>
-  
+
               <div class="actions mt-3 back-color">
                 <%= f.submit "ログイン" ,class: "btn btn-outline-success"%>
               </div>
